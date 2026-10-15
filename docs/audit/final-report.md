@@ -15,7 +15,7 @@ there.
 
 **Verdict: CONDITIONALLY READY** — the code is production-ready. Public launch waits on owner
 items: email delivery (Resend + domain), the arcaisys.com domain, legal decisions and review,
-copy approval, and product screenshots (see `docs/owner-checklist.md`).
+copy and approval of the published copy (see `docs/owner-checklist.md`).
 
 ## B. Architecture
 

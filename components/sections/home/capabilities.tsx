@@ -25,7 +25,15 @@ export function Capabilities() {
         className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-3"
       >
         {capabilities.map((capability, i) => (
-          <li key={capability.title} className="flex flex-col gap-4 bg-surface p-8 md:p-10">
+          <li
+            key={capability.title}
+            className="relative flex flex-col gap-4 bg-surface p-8 transition-colors duration-(--dur-base) hover:bg-surface-alt md:p-10"
+          >
+            <span
+              data-cap-line
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-px bg-[image:var(--brand-gradient)]"
+            />
             <span aria-hidden className="font-mono text-label text-accent tabular-nums">
               {String(i + 1).padStart(2, "0")}
             </span>

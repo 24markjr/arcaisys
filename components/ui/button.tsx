@@ -32,7 +32,7 @@ export function ButtonLink({
   return (
     <Link
       className={cn(
-        "group inline-flex h-12 items-center gap-3 rounded-[3px] px-6 text-small font-semibold tracking-[-0.005em]",
+        "group inline-flex h-12 items-center gap-3 rounded-[3px] px-6 text-small font-semibold tracking-[-0.005em] whitespace-nowrap",
         "transition-[background-color,border-color,color] duration-(--dur-fast) ease-out-expo",
         variants[variant],
         className,

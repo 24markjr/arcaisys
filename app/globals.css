@@ -252,6 +252,7 @@
 .motion-pending [data-reveal="stagger"] > *,
 .motion-pending [data-reveal-lines],
 .motion-pending [data-ascent],
+.motion-pending [data-converge],
 .motion-pending [data-sweep] {
   opacity: 0;
 }

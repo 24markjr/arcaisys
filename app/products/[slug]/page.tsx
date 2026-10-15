@@ -6,7 +6,6 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { intro } from "@/lib/motion";
 import { getProduct, products } from "@/content/products";
 import type { ProductStatus } from "@/content/types";
-import { ProductTile } from "@/components/brand/product-tile";
 import { ProductLogo, productPlate } from "@/components/brand/product-logo";
 import { cn } from "@/lib/cn";
 import { ButtonLink } from "@/components/ui/button";
@@ -17,7 +16,7 @@ import { Pending } from "@/components/ui/pending";
 import { Section } from "@/components/ui/section";
 import { Tagline } from "@/components/ui/tagline";
 import { ClosingCta } from "@/components/sections/closing-cta";
-import { ProductGallery } from "@/components/sections/product-gallery";
+import { ProductLineup } from "@/components/sections/product-lineup";
 import { PageTransition } from "@/components/motion/page-transition";
 
 /**
@@ -54,8 +53,6 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
   const product = getProduct(slug);
   if (!product) notFound();
 
-  const index = products.indexOf(product);
-  const next = products[(index + 1) % products.length]!;
   const status = statusLabel[product.status];
 
   return (
@@ -175,27 +172,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         </Grid>
       </Section>
 
-      <Section>
-        <Eyebrow index="04">In use</Eyebrow>
-        <div data-reveal className="mt-12">
-          <ProductGallery product={product} />
-        </div>
-      </Section>
-
-      <Section tone="alt" spacing="compact">
-        <Link href={`/products/${next.slug}`} className="group flex items-center justify-between gap-6">
-          <span>
-            <span className="font-mono text-label text-ink-muted uppercase">Next product</span>
-            <span className="mt-3 block text-h2 font-semibold">
-              <span className="link-underline pb-1">{next.name}</span>
-            </span>
-          </span>
-          <ProductTile
-            product={next}
-            className="size-16 transition-transform duration-(--dur-base) ease-out-expo group-hover:-rotate-3 md:size-20"
-          />
-        </Link>
-      </Section>
+      <ProductLineup current={product.slug} />
 
       <ClosingCta title={`Talk to us about ${product.name}.`} interest={product.slug} />
     </PageTransition>

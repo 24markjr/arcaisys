@@ -44,6 +44,8 @@ for (const width of widths) {
       window.scrollTo(0, 0);
     });
     await page.waitForLoadState("networkidle");
+    // Let scroll-triggered reveals finish so captures show the settled layout.
+    await page.waitForTimeout(Number(process.env.SETTLE ?? 0));
     const broken = await page.evaluate(() =>
       [...document.images].filter((img) => img.complete && img.naturalWidth === 0).map((img) => img.src),
     );

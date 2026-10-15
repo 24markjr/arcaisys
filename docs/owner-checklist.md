@@ -71,19 +71,11 @@ confirm or correct, in particular:
   It names no clients, numbers or certifications. Add any only if they are verifiable.
 - **Direction** (About page): growing RestoQR and bringing the other three into production.
 
-## 5. 🟠 Product screenshots
+## 5. ✅ Product screenshots — not needed
 
-Every product page has framed placeholders labelled "Screenshots to come".
-
-For each of RestoQR, PACS, Hospio and Meridian:
-
-- **1 primary** screenshot, 16:10, at least 2400 px wide (e.g. 2880 × 1800).
-- **Up to 2 detail** screenshots (any size, ideally 4:3).
-- Real product screens with **realistic but fake data** — never real patient, guest or customer
-  data. For PACS and Hospio this matters legally.
-- A one-line description of what each image shows (used as alt text for accessibility).
-
-Put them in `content-source/products/<product>/` (or send them), and they will be added.
+Decision (15 Oct 2026): the site presents products through information only. The screenshot
+slots were removed. If screenshots are wanted later, the `screenshots` field in
+`content/products.ts` still exists.
 
 ## 6. 🟠 Turn on analytics in Vercel
 

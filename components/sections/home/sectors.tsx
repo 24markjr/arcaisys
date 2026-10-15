@@ -24,7 +24,7 @@ export function Sectors({ index = "04" }: { index?: string }) {
 
       <div
         data-reveal="stagger"
-        className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line md:grid-cols-3"
+        className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line lg:grid-cols-3"
       >
         {sectors.map((sector) => {
           const items = sector.products
@@ -33,7 +33,7 @@ export function Sectors({ index = "04" }: { index?: string }) {
           return (
             <article
               key={sector.name.text}
-              className="flex flex-col justify-between gap-10 bg-surface p-8 md:min-h-[20rem] md:p-10"
+              className="flex flex-col justify-between gap-10 bg-surface p-8 md:p-10 lg:min-h-80"
             >
               <div>
                 <h3 className="text-h3 font-semibold">

@@ -45,7 +45,7 @@ for (const p of products) {
   }
   if (p.status === "unknown") missing.push(`products.${p.slug}.status`);
   if (p.capabilities.length === 0) missing.push(`products.${p.slug}.capabilities`);
-  if (p.screenshots.length === 0) missing.push(`products.${p.slug}.screenshots`);
+  // Screenshots are optional (decision 2026-10-15: information only, no product screenshots).
   if (!p.confirmed) drafts.push(`products.${p.slug}: not yet confirmed by Arcaisys`);
   for (const shot of p.screenshots) {
     if (!existsSync(new URL(`../public${shot.src}`, import.meta.url)))

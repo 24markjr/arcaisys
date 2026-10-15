@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { pageMetadata } from "@/lib/seo";
 import { aboutCopy, brand, companyFacts, pillars } from "@/content/company";
-import { products } from "@/content/products";
 import { Grid } from "@/components/ui/container";
 import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -28,8 +27,6 @@ export default function AboutPage() {
     { label: "Founded", value: companyFacts.founded ?? <Pending need="Founding date" /> },
     { label: "Headquarters", value: companyFacts.location ?? <Pending need="City, country" /> },
     { label: "Markets", value: companyFacts.markets },
-    { label: "Sectors", value: <Copy field={aboutCopy.sectorsFact} /> },
-    { label: "Products", value: products.map((p) => p.name).join(", ") },
   ];
 
   return (
@@ -71,7 +68,7 @@ export default function AboutPage() {
         </Grid>
         <ol
           data-reveal="stagger"
-          className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line md:grid-cols-3"
+          className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line lg:grid-cols-3"
         >
           {pillars.map((pillar, i) => (
             <li key={pillar.title} className="flex flex-col gap-4 bg-surface-alt p-8 md:p-10">

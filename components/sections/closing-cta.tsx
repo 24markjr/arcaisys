@@ -23,13 +23,13 @@ export function ClosingCta({ title = "Start a conversation.", interest }: Closin
           the label never sits on the stroke. */}
       <Container className="relative pt-[max(9rem,calc(15vw+3.5rem))] pb-24 md:pb-32">
         <Grid className="gap-y-10">
-          <div className="col-span-4 md:col-span-8">
+          <div className="col-span-4 md:col-span-12 lg:col-span-8">
             <Eyebrow tone="inverse">Contact</Eyebrow>
             <Heading size="display" className="mt-8">
               {title}
             </Heading>
           </div>
-          <div data-reveal className="col-span-4 flex flex-col justify-end gap-8 md:col-span-4">
+          <div data-reveal className="col-span-4 flex flex-col justify-end gap-8 md:col-span-8 lg:col-span-4">
             <p className="text-ink-inverse-soft">
               <Copy field={homeCopy.ctaLine} />
             </p>

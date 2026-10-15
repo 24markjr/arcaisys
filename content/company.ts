@@ -195,7 +195,7 @@ export const sectors = [
 ];
 
 export const aboutCopy = {
-  headline: final("About headline", brand.statement),
+  headline: final("About headline", "Software for work that can't stop."),
   lead: final(
     "About lead",
     "Arcaisys is an AI-powered software company building complete operating systems for industries where work has to run on time, every time.",
@@ -206,13 +206,12 @@ export const aboutCopy = {
   ),
   story: final(
     "Company story",
-    "Arcaisys was founded in Mumbai on 4 March 2026 with a simple observation: the industries that most need dependable software are often served by tools that are fragmented, dated or built for a slide deck rather than a shift. Staff re-enter the same information in three places, managers learn about problems too late, and new AI features add risk instead of removing it.",
+    "Arcaisys began with a simple observation: the industries that most need dependable software are often served by tools that are fragmented, dated or built for a slide deck rather than a shift. Staff re-enter the same information in three places, managers learn about problems too late, and new AI features add risk instead of removing it.",
   ),
   story2: final(
     "Company story, second paragraph",
     "We build the other way round. Each product starts from the real workflow, unites every role on one live system, and uses AI only where its output can be verified. It is why our core principle is simple: if we can't verify it, we don't ship it.",
   ),
-  sectorsFact: final("Sectors", "Hospitality, healthcare and software engineering"),
   direction: final(
     "Direction",
     "RestoQR is live today. Our focus now is to grow it, and to bring PACS, Hospio and Meridian from development into production — held to the same standard of verification, and serving clients across India and internationally.",

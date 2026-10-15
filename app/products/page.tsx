@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
-import Image from "next/image";
 import { productsCopy } from "@/content/company";
 import { products } from "@/content/products";
 import { ArrowLink } from "@/components/ui/button";
@@ -13,7 +12,6 @@ import { ClosingCta } from "@/components/sections/closing-cta";
 import { cn } from "@/lib/cn";
 import { ArrowUpRight } from "lucide-react";
 import { StatusBadge } from "@/components/ui/status-badge";
-import { ProductFrame, FrameSkeleton } from "@/components/brand/product-frame";
 import { ProductLogo, productPlate } from "@/components/brand/product-logo";
 import { PageTransition } from "@/components/motion/page-transition";
 
@@ -41,42 +39,22 @@ export default function ProductsPage() {
           >
             <Container className="py-20 md:py-28">
               <Grid className="items-center gap-y-12">
-                <ProductFrame
-                  label={product.name}
-                  data-reveal=""
-                  className={cn("col-span-4 md:col-span-6", reversed && "md:order-last md:col-start-7")}
-                  bodyClassName="aspect-[16/10]"
-                >
-                  {product.screenshots[0] ? (
-                    <Image
-                      src={product.screenshots[0].src}
-                      width={product.screenshots[0].width}
-                      height={product.screenshots[0].height}
-                      alt={product.screenshots[0].alt}
-                      sizes="(min-width: 768px) 45vw, 90vw"
-                      className="h-full w-full object-cover object-top"
-                    />
-                  ) : (
-                    <>
-                      <FrameSkeleton />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div
-                          data-parallax="0.12"
-                          className={cn(
-                            "flex w-[46%] items-center justify-center rounded-[3px] border border-line p-[5%] shadow-[0_1px_0_var(--line)]",
-                            productPlate(product),
-                          )}
-                        >
-                          <ProductLogo
-                            product={product}
-                            sizes="(min-width: 768px) 20vw, 40vw"
-                            className="h-auto w-full"
-                          />
-                        </div>
-                      </div>
-                    </>
+                <div
+                  data-reveal
+                  className={cn(
+                    "col-span-4 flex aspect-[4/3] items-center justify-center rounded-[3px] border border-line p-10 md:col-span-6 md:p-16",
+                    productPlate(product),
+                    reversed && "md:order-last md:col-start-7",
                   )}
-                </ProductFrame>
+                >
+                  <div data-parallax="0.12" className="w-[62%] max-w-80">
+                    <ProductLogo
+                      product={product}
+                      sizes="(min-width: 768px) 30vw, 60vw"
+                      className="h-auto w-full"
+                    />
+                  </div>
+                </div>
                 <div
                   data-reveal
                   className={cn("col-span-4 md:col-span-5", reversed ? "md:col-start-1" : "md:col-start-8")}

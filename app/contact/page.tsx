@@ -28,7 +28,7 @@ export default function ContactPage() {
 
       <Section>
         <Grid className="gap-y-16">
-          <aside className="col-span-4 space-y-10 md:col-span-4">
+          <aside className="col-span-4 grid content-start gap-10 sm:grid-cols-2 md:col-span-12 lg:col-span-4 lg:grid-cols-1">
             <div>
               <Eyebrow>Email</Eyebrow>
               <p className="mt-4 flex flex-wrap items-center gap-x-2 text-lead font-medium">
@@ -101,7 +101,7 @@ export default function ContactPage() {
             </div>
           </aside>
 
-          <div data-reveal className="col-span-4 md:col-span-7 md:col-start-6">
+          <div data-reveal className="col-span-4 md:col-span-12 lg:col-span-7 lg:col-start-6">
             {/* The fallback is the same form without ?interest= pre-selection. */}
             <Suspense fallback={<ContactForm />}>
               <ContactFormWithParams />

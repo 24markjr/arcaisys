@@ -10,8 +10,8 @@ export function Approach({ index = "04" }: { index?: string }) {
   return (
     <Section tone="alt">
       <Grid className="gap-y-14">
-        <div className="col-span-4 md:col-span-5">
-          <div className="md:sticky md:top-[calc(var(--header-h)+3rem)]">
+        <div className="col-span-4 md:col-span-12 lg:col-span-5">
+          <div className="lg:sticky lg:top-[calc(var(--header-h)+3rem)]">
             <Eyebrow index={index}>Approach</Eyebrow>
             <Heading className="mt-8">{homeCopy.approachHeading}</Heading>
             <p data-reveal className="mt-6 max-w-[38ch] text-ink-soft">
@@ -25,7 +25,7 @@ export function Approach({ index = "04" }: { index?: string }) {
             </figure>
           </div>
         </div>
-        <ol data-reveal="stagger" className="col-span-4 md:col-span-6 md:col-start-7">
+        <ol data-reveal="stagger" className="col-span-4 md:col-span-12 lg:col-span-6 lg:col-start-7">
           {homeCopy.principles.map((principle, i) => (
             <li
               key={principle.title.need}
