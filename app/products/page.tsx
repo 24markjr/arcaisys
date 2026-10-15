@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { productsCopy } from "@/content/company";
 import { products } from "@/content/products";
@@ -10,15 +11,17 @@ import { Tagline } from "@/components/ui/tagline";
 import { PageHeader } from "@/components/sections/page-header";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { cn } from "@/lib/cn";
+import { PageTransition } from "@/components/motion/page-transition";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Products",
   description: "Hospio, Meridian, PACS and RestoQR — the Arcaisys product portfolio.",
-};
+  path: "/products",
+});
 
 export default function ProductsPage() {
   return (
-    <>
+    <PageTransition>
       <PageHeader
         eyebrow="Products"
         title="Four products, one company."
@@ -35,6 +38,7 @@ export default function ProductsPage() {
             <Container className="py-20 md:py-28">
               <Grid className="items-center gap-y-12">
                 <div
+                  data-reveal
                   className={cn(
                     "col-span-4 flex aspect-[4/3] items-center justify-center rounded-[3px] border border-line bg-white p-10 md:col-span-6 md:p-16",
                     reversed && "md:order-last md:col-start-7",
@@ -46,10 +50,12 @@ export default function ProductsPage() {
                     height={product.logo.height}
                     alt={product.logo.alt}
                     sizes="(min-width: 768px) 40vw, 80vw"
+                    data-parallax="0.12"
                     className="h-auto max-h-full w-auto max-w-[70%] object-contain"
                   />
                 </div>
                 <div
+                  data-reveal
                   className={cn("col-span-4 md:col-span-5", reversed ? "md:col-start-1" : "md:col-start-8")}
                 >
                   <p className="font-mono text-label text-ink-muted tabular-nums">
@@ -71,6 +77,6 @@ export default function ProductsPage() {
       })}
 
       <ClosingCta />
-    </>
+    </PageTransition>
   );
 }

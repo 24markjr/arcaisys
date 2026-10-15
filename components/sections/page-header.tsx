@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Container, Grid } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
+import { intro } from "@/lib/motion";
 
 type PageHeaderProps = {
   eyebrow: string;
@@ -19,14 +20,26 @@ export function PageHeader({ eyebrow, title, lead, aside, children }: PageHeader
       <Container>
         <Grid className="items-end gap-y-12">
           <div className={aside ? "col-span-4 md:col-span-7" : "col-span-4 md:col-span-10"}>
-            <Eyebrow>{eyebrow}</Eyebrow>
-            <Heading as="h1" size="h1" className="mt-8">
+            <Eyebrow intro={0}>{eyebrow}</Eyebrow>
+            <Heading as="h1" size="h1" intro={1} className="mt-8">
               {title}
             </Heading>
-            {lead ? <div className="mt-8 max-w-[44ch] text-lead text-ink-soft">{lead}</div> : null}
-            {children ? <div className="mt-10">{children}</div> : null}
+            {lead ? (
+              <div {...intro(2)} className="mt-8 max-w-[44ch] text-lead text-ink-soft">
+                {lead}
+              </div>
+            ) : null}
+            {children ? (
+              <div {...intro(3)} className="mt-10">
+                {children}
+              </div>
+            ) : null}
           </div>
-          {aside ? <div className="col-span-4 md:col-span-5">{aside}</div> : null}
+          {aside ? (
+            <div {...intro(2)} className="col-span-4 md:col-span-5">
+              {aside}
+            </div>
+          ) : null}
         </Grid>
       </Container>
     </header>

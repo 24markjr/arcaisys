@@ -42,7 +42,7 @@ export function SiteFooter() {
             © {siteConfig.copyrightYear}{" "}
             {companyFacts.legalName ?? <Pending need="Registered company name (B4)">Arcaisys</Pending>}
           </p>
-          <p className="flex gap-6">
+          <p className="flex flex-wrap gap-x-6 gap-y-2">
             {companyFacts.contactEmail ? (
               <a href={`mailto:${companyFacts.contactEmail}`} className="link-underline">
                 {companyFacts.contactEmail}
@@ -50,6 +50,11 @@ export function SiteFooter() {
             ) : (
               <Pending need="Public contact email (G1)" />
             )}
+            {companyFacts.phone ? (
+              <a href={companyFacts.phoneHref} className="link-underline">
+                {companyFacts.phone}
+              </a>
+            ) : null}
             {companyFacts.linkedin ? (
               <a
                 href={companyFacts.linkedin}

@@ -10,7 +10,9 @@ import { cn } from "@/lib/cn";
  * the logo's amber → red → ember gradient. <RibbonLine> is the ribbon alone,
  * for section transitions and calls to action.
  *
- * Paths carry `data-draw` / `data-ribbon` hooks for the Phase 6 motion pass.
+ * Motion hooks (read by components/motion/motion-root.tsx): `data-ascent` on the
+ * graphic, `data-draw` lines draw in, `data-fade` marks fade, `data-ribbon` sweeps,
+ * `data-chevron` settles; `data-sweep` on the ribbon line.
  */
 
 /** Tapered ribbon: upper edge out, lower edge back, meeting in points at both ends. */
@@ -28,6 +30,7 @@ export function AscentGraphic({ className }: { className?: string }) {
 
   return (
     <svg
+      data-ascent
       viewBox="0 0 1000 820"
       fill="none"
       aria-hidden
@@ -48,18 +51,18 @@ export function AscentGraphic({ className }: { className?: string }) {
       </defs>
 
       {/* Faceted plane — the left leg of the A, as a faint warm wash */}
-      <path d="M610 40 L 215 720 L 330 720 Z" fill={`url(#${facet})`} />
+      <path data-fade d="M610 40 L 215 720 L 330 720 Z" fill={`url(#${facet})`} />
 
       {/* Construction lines: the A */}
       <g stroke="var(--line-strong)" strokeWidth="1" vectorEffect="non-scaling-stroke">
         <path data-draw d="M610 40 L 170 798" />
         <path data-draw d="M610 40 L 990 694" />
-        <path data-draw d="M610 230 L 495 428" strokeDasharray="3 5" />
+        <path data-fade d="M610 230 L 495 428" strokeDasharray="3 5" />
         <path data-draw d="M20 772 Q 500 700 1000 772" />
       </g>
 
       {/* Drafting marks at the apex */}
-      <g stroke="var(--ink-muted)" strokeWidth="1" vectorEffect="non-scaling-stroke">
+      <g data-fade stroke="var(--ink-muted)" strokeWidth="1" vectorEffect="non-scaling-stroke">
         <circle cx="610" cy="40" r="5" fill="var(--surface)" />
         <path d="M580 92 A 60 60 0 0 0 640 92" strokeDasharray="2 4" />
       </g>
@@ -76,7 +79,7 @@ export function AscentGraphic({ className }: { className?: string }) {
       <path data-ribbon d={RIBBON} fill={`url(#${grad})`} />
 
       {/* The floating chevron from the mark */}
-      <path d="M842 420 L 878 393 L 912 452 Z" fill="var(--brand-deep)" />
+      <path data-chevron d="M842 420 L 878 393 L 912 452 Z" fill="var(--brand-deep)" />
     </svg>
   );
 }
@@ -87,6 +90,7 @@ export function RibbonLine({ className }: { className?: string }) {
   const grad = `${id}-grad`;
   return (
     <svg
+      data-sweep
       viewBox="0 0 1600 240"
       preserveAspectRatio="none"
       fill="none"

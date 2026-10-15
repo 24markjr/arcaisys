@@ -8,6 +8,7 @@ import { Container, Grid } from "@/components/ui/container";
 import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { cn } from "@/lib/cn";
+import { intro } from "@/lib/motion";
 
 export function HomeHero() {
   return (
@@ -15,14 +16,16 @@ export function HomeHero() {
       <Container className="relative pt-14 md:pt-24">
         <Grid className="gap-y-14">
           <div className="relative z-10 col-span-4 md:col-span-7 md:pb-24">
-            <Eyebrow index="00">Arcaisys</Eyebrow>
-            <h1 className="mt-8 text-display font-semibold">
+            <Eyebrow index="00" intro={0}>
+              Arcaisys
+            </Eyebrow>
+            <h1 {...intro(1, "headline")} className="mt-8 text-display font-semibold">
               <Copy field={homeCopy.heroHeadline} />
             </h1>
-            <p className="mt-8 max-w-[40ch] text-lead text-ink-soft">
+            <p {...intro(3)} className="mt-8 max-w-[40ch] text-lead text-ink-soft">
               <Copy field={homeCopy.heroLead} />
             </p>
-            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
+            <div {...intro(4)} className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
               <ButtonLink href="/products">Explore the products</ButtonLink>
               <ArrowLink href="/contact">Start a conversation</ArrowLink>
             </div>
@@ -38,7 +41,7 @@ export function HomeHero() {
       <div className="relative border-t border-line bg-surface">
         <Container>
           {/* Negative margin so the first column's text aligns with the page gutter. */}
-          <ul className="-mx-5 grid grid-cols-2 md:grid-cols-4">
+          <ul data-reveal="stagger" className="-mx-5 grid grid-cols-2 md:grid-cols-4">
             {products.map((product, i) => (
               <li
                 key={product.slug}

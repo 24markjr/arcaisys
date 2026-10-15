@@ -27,7 +27,7 @@ export function ClosingCta({ title = "Start a conversation.", interest }: Closin
               {title}
             </Heading>
           </div>
-          <div className="col-span-4 flex flex-col justify-end gap-8 md:col-span-4">
+          <div data-reveal className="col-span-4 flex flex-col justify-end gap-8 md:col-span-4">
             <p className="text-ink-inverse-soft">
               <Copy field={homeCopy.ctaLine} />
             </p>

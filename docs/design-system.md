@@ -57,6 +57,26 @@ gradient, and the floating chevron is kept. Used in the hero and on the 404 page
 alone (`RibbonLine`) opens every closing CTA. Paths carry `data-draw` / `data-ribbon` hooks for
 the Phase 6 animation.
 
+## Motion (Phase 6)
+
+One vocabulary, two engines, never both on the same element.
+
+| Layer             | Engine                                                        | What moves                                                                                                                                                                |
+| ----------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Opening sequence  | CSS (`[data-intro]`)                                          | Header (first load), hero and page-header eyebrow → headline (rises through a mask) → lead → actions, 90 ms apart. Starts on the first frame; never waits for JavaScript. |
+| Scroll reveals    | GSAP + ScrollTrigger (`data-reveal`, `data-reveal="stagger"`) | Blocks fade and rise 24 px once, batched so neighbours stagger.                                                                                                           |
+| Section headlines | GSAP SplitText (`data-reveal-lines`)                          | Line-by-line masked reveal, once. Real text stays in the DOM for screen readers.                                                                                          |
+| Signature graphic | GSAP + DrawSVG (`data-ascent`)                                | Construction lines draw, ribbon sweeps bottom-left to top-right, chevron settles; gentle drift on scroll (wide screens).                                                  |
+| Closing ribbon    | GSAP (`data-sweep`)                                           | Sweeps in once when the closing panel arrives.                                                                                                                            |
+| Product imagery   | GSAP (`data-parallax`)                                        | Subtle vertical parallax, wide screens only.                                                                                                                              |
+| Page transitions  | React `<ViewTransition>`                                      | Old page fades out (160 ms), new page fades and rises in (380 ms). Header stays still.                                                                                    |
+| Hovers, menu      | CSS                                                           | Arrow nudge, underline wipe, tile tilt; mobile menu fades in with staggered links.                                                                                        |
+
+Rules: only transform, opacity and clip-path animate. `components/motion/motion-root.tsx` is the
+single GSAP controller, mounted inside each page (after it hydrates) and fully reverted on
+navigation. With `prefers-reduced-motion`, nothing moves and nothing is ever hidden. If
+JavaScript fails, a 2.5 s fallback reveals everything.
+
 ## Motion tokens (implemented in Phase 6)
 
 Ease-out `cubic-bezier(0.22, 1, 0.36, 1)`, ease-in-out `cubic-bezier(0.65, 0, 0.35, 1)`;

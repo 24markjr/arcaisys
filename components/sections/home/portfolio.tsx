@@ -17,7 +17,7 @@ export function Portfolio() {
         </div>
         <div className="col-span-4 md:col-span-6">
           <Heading>Four products, one company.</Heading>
-          <p className="mt-6 max-w-[46ch] text-ink-soft">
+          <p data-reveal className="mt-6 max-w-[46ch] text-ink-soft">
             <Copy field={homeCopy.portfolioIntro} />
           </p>
         </div>

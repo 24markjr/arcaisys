@@ -18,6 +18,7 @@ npm run check        # typecheck + lint + formatting check
 npm run format       # format all files
 npm run content:audit  # list content still missing or awaiting approval
 npm run test:form    # end-to-end contact form tests (after npm run build)
+node scripts/test-motion.mjs http://localhost:3000   # motion + navigation checks (server running)
 node scripts/screenshot.mjs http://localhost:3000 screenshots   # visual QA + overflow check (uses installed Chrome)
 ```
 
@@ -48,10 +49,11 @@ must not be filled with invented text. Items with `confirmed: false` are not yet
 - Phase 1 — foundation: done
 - Phase 2 — design system: done — review at `/styleguide` (`docs/design-system.md`)
 - Phase 3 — sitemap, architecture and page structure: done (`docs/sitemap.md`)
-- Phase 4 — core build: done — working contact form (needs email credentials, see `.env.example`)
-- Phase 5 — content integration: structure done; **waiting for Arcaisys content** — see
-  `docs/content-guide.md` and run `npm run content:audit`
-- Phase 6 — motion: next
+- Phase 4 — core build: done — working contact form
+- Phase 5 — content integration: structure done; contact details added; **company and product
+  copy still to come** — see `docs/content-guide.md` and run `npm run content:audit`
+- Phase 6 — motion: done (`docs/design-system.md` → Motion)
+- Phase 7 — SEO and launch readiness: done — **deploy and launch steps in `docs/deployment.md`**
 
 Striped markers on the site are content still needed from Arcaisys.
 

@@ -1,5 +1,6 @@
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
+import { intro as introProps } from "@/lib/motion";
 
 const sizes = {
   display: "text-display font-semibold",
@@ -12,10 +13,23 @@ type HeadingProps = ComponentProps<"h2"> & {
   /** Semantic level — chosen for document outline, independent of visual size. */
   as?: "h1" | "h2" | "h3" | "h4";
   size?: keyof typeof sizes;
+  /** Reveal line by line on scroll (see components/motion/motion-root.tsx). */
+  reveal?: boolean;
+  /** Part of the opening sequence (CSS mask rise at this step) instead of a scroll reveal. */
+  intro?: number;
 };
 
-export function Heading({ as: Tag = "h2", size = "h2", className, ...props }: HeadingProps) {
-  return <Tag className={cn(sizes[size], className)} {...props} />;
+export function Heading({
+  as: Tag = "h2",
+  size = "h2",
+  reveal = true,
+  intro,
+  className,
+  ...props
+}: HeadingProps) {
+  const motion =
+    intro !== undefined ? introProps(intro, "headline") : reveal ? { "data-reveal-lines": "" } : {};
+  return <Tag {...motion} className={cn(sizes[size], className)} {...props} />;
 }
 
 export function Lead({ className, ...props }: ComponentProps<"p">) {

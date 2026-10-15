@@ -1,11 +1,12 @@
 import { Container } from "@/components/ui/container";
 import { Wireframe } from "@/components/ui/wireframe";
 import { PageHeader } from "./page-header";
+import { PageTransition } from "@/components/motion/page-transition";
 
 /** Shared shell for legal pages. Text must come from Arcaisys — never generated. */
 export function LegalPage({ title, needs }: { title: string; needs: string[] }) {
   return (
-    <>
+    <PageTransition>
       <PageHeader eyebrow="Legal" title={title} />
       <Container className="py-20 md:py-28">
         <Wireframe
@@ -20,6 +21,6 @@ export function LegalPage({ title, needs }: { title: string; needs: string[] }) 
           </ul>
         </Wireframe>
       </Container>
-    </>
+    </PageTransition>
   );
 }

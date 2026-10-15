@@ -12,6 +12,7 @@ import { Heading } from "@/components/ui/heading";
 import { Pending } from "@/components/ui/pending";
 import { Section } from "@/components/ui/section";
 import { Tagline } from "@/components/ui/tagline";
+import { PageTransition } from "@/components/motion/page-transition";
 
 export const metadata: Metadata = {
   title: "Styleguide",
@@ -93,7 +94,7 @@ function Block({ index, title, children }: { index: string; title: string; child
 
 export default function StyleguidePage() {
   return (
-    <>
+    <PageTransition>
       <header className="border-b border-line">
         <Container className="py-16 md:py-24">
           <Eyebrow>Internal — not linked from the site</Eyebrow>
@@ -340,6 +341,6 @@ export default function StyleguidePage() {
           Striped markers flag everything not yet supplied or approved. None may remain at launch.
         </p>
       </Block>
-    </>
+    </PageTransition>
   );
 }

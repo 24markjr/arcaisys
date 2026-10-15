@@ -11,7 +11,7 @@ import { Tagline } from "@/components/ui/tagline";
  */
 export function ProductIndex({ products }: { products: Product[] }) {
   return (
-    <ol className="border-t border-line-strong">
+    <ol data-reveal="stagger" className="border-t border-line-strong">
       {products.map((product, i) => (
         <li key={product.slug} className="border-b border-line-strong">
           <Link

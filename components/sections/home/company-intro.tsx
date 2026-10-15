@@ -14,10 +14,10 @@ export function CompanyIntro() {
           <Eyebrow index="01">Company</Eyebrow>
         </div>
         <div className="col-span-4 md:col-span-9">
-          <p className="text-h2 font-medium text-ink">
+          <p data-reveal-lines className="text-h2 font-medium text-ink">
             <Copy field={homeCopy.intro} />
           </p>
-          <ArrowLink href="/about" className="mt-12">
+          <ArrowLink href="/about" data-reveal className="mt-12">
             About Arcaisys
           </ArrowLink>
         </div>

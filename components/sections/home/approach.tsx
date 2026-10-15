@@ -22,7 +22,7 @@ export function Approach({ index = "03" }: { index?: string }) {
             </p>
           </div>
         </div>
-        <ol className="col-span-4 md:col-span-6 md:col-start-7">
+        <ol data-reveal="stagger" className="col-span-4 md:col-span-6 md:col-start-7">
           {homeCopy.principles.map((principle, i) => (
             <li
               key={principle.title.need}

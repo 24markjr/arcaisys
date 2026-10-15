@@ -35,7 +35,18 @@ Generated into `public/brand/` (originals in `logos/` are untouched):
 - `restoqr-logo.png` — white background removed
 - `app/icon.png`, `app/apple-icon.png`, `app/favicon.ico` — from the Arcaisys mark
 
-## 2. What the files confirm
+## 2. What is confirmed
+
+Supplied by Arcaisys on 2026-10-15:
+
+| Fact          | Value                                                                                                                            |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Domain        | arcaisys.com                                                                                                                     |
+| Enquiry email | pm.teams@arcaisys.com                                                                                                            |
+| Phone         | +91 91378 15600                                                                                                                  |
+| Address       | G1603, Samarth Garden, Bhandup (W), Mumbai 400078, Maharashtra (spelling of "Bhandup" corrected from "Bhnadup" — please confirm) |
+
+From the logo files:
 
 | Fact                                               | Source        |
 | -------------------------------------------------- | ------------- |

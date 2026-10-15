@@ -19,7 +19,8 @@ export function Tagline({ text, accent = "var(--brand-red)", className }: Taglin
     .filter(Boolean);
 
   return (
-    <p className={cn("text-label font-semibold tracking-[0.22em] uppercase", className)} aria-label={text}>
+    <p className={cn("text-label font-semibold tracking-[0.22em] uppercase", className)}>
+      <span className="sr-only">{text}</span>
       {words.map((word, i) => (
         <span key={word} aria-hidden>
           {word}

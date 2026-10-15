@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/lib/seo";
+import { intro } from "@/lib/motion";
 import { getProduct, products } from "@/content/products";
 import type { ProductStatus } from "@/content/types";
 import { ProductTile } from "@/components/brand/product-tile";
@@ -14,6 +16,14 @@ import { Section } from "@/components/ui/section";
 import { Tagline } from "@/components/ui/tagline";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { ProductGallery } from "@/components/sections/product-gallery";
+import { PageTransition } from "@/components/motion/page-transition";
+
+/**
+ * Every product page is prerendered (generateStaticParams), so a navigation fetches a
+ * static payload. The page reads `params` outside <Suspense>, which the instant-navigation
+ * check flags; blocking briefly on that static payload is the intended behaviour here.
+ */
+export const instant = false;
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
@@ -23,10 +33,11 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
   const { slug } = await params;
   const product = getProduct(slug);
   if (!product) return {};
-  return {
+  return pageMetadata({
     title: product.name,
     description: product.summary ?? `${product.name} — ${product.tagline} A product by Arcaisys.`,
-  };
+    path: `/products/${product.slug}`,
+  });
 }
 
 const statusLabel: Record<ProductStatus, string | null> = {
@@ -46,7 +57,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
   const status = statusLabel[product.status];
 
   return (
-    <>
+    <PageTransition>
       <header className="border-b border-line">
         <Container className="pt-10 pb-20 md:pt-14 md:pb-28">
           <nav aria-label="Breadcrumb" className="font-mono text-label text-ink-muted uppercase">
@@ -65,12 +76,14 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
           <Grid className="mt-14 items-center gap-y-12 md:mt-20">
             <div className="col-span-4 md:col-span-6">
-              <h1 className="text-display font-semibold">{product.name}</h1>
+              <h1 {...intro(0, "headline")} className="text-display font-semibold">
+                {product.name}
+              </h1>
               <Tagline text={product.tagline} accent={product.accent} className="mt-6 text-ink-soft" />
-              <p className="mt-10 max-w-[40ch] text-lead text-ink-soft">
+              <p {...intro(2)} className="mt-10 max-w-[40ch] text-lead text-ink-soft">
                 {product.summary ?? <Pending need={`${product.name} one-sentence description`} />}
               </p>
-              <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-small">
+              <dl {...intro(3)} className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-small">
                 <div>
                   <dt className="font-mono text-label text-ink-muted uppercase">Category</dt>
                   <dd className="mt-2 font-semibold">{product.category ?? <Pending need="Category" />}</dd>
@@ -82,7 +95,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                   </dd>
                 </div>
               </dl>
-              <div className="mt-12 flex flex-wrap gap-4">
+              <div {...intro(4)} className="mt-12 flex flex-wrap gap-4">
                 <ButtonLink
                   href={`/contact?interest=${product.slug}`}
                 >{`Enquire about ${product.name}`}</ButtonLink>
@@ -93,7 +106,10 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 ) : null}
               </div>
             </div>
-            <div className="col-span-4 flex aspect-square items-center justify-center rounded-[3px] border border-line bg-surface-alt p-12 md:col-span-5 md:col-start-8">
+            <div
+              {...intro(2)}
+              className="col-span-4 flex aspect-square items-center justify-center rounded-[3px] border border-line bg-surface-alt p-12 md:col-span-5 md:col-start-8"
+            >
               <Image
                 src={product.logo.src}
                 width={product.logo.width}
@@ -131,7 +147,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             <Eyebrow index="03">Capabilities</Eyebrow>
             <Heading className="mt-8">What it does.</Heading>
           </div>
-          <ul className="col-span-4 md:col-span-7 md:col-start-6">
+          <ul data-reveal="stagger" className="col-span-4 md:col-span-7 md:col-start-6">
             {product.capabilities.length > 0
               ? product.capabilities.map((capability) => (
                   <li key={capability} className="border-t border-line-strong py-6 text-lead">
@@ -149,7 +165,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
       <Section>
         <Eyebrow index="04">In use</Eyebrow>
-        <div className="mt-12">
+        <div data-reveal className="mt-12">
           <ProductGallery product={product} />
         </div>
       </Section>
@@ -170,6 +186,6 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
       </Section>
 
       <ClosingCta title={`Talk to us about ${product.name}.`} interest={product.slug} />
-    </>
+    </PageTransition>
   );
 }

@@ -51,7 +51,7 @@ export function MobileMenu({ items, cta }: MobileMenuProps) {
         ref={dialogRef}
         onClose={() => setOpen(false)}
         aria-label="Site menu"
-        className="m-0 h-dvh max-h-none w-full max-w-none bg-surface p-0 text-ink backdrop:bg-transparent open:flex open:flex-col"
+        className="menu-panel m-0 h-dvh max-h-none w-full max-w-none bg-surface p-0 text-ink backdrop:bg-transparent open:flex open:flex-col"
       >
         <div className="flex h-(--header-h) items-center justify-end px-(--gutter)">
           <button

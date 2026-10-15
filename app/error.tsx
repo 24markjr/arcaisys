@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, RotateCw } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { MotionRoot } from "@/components/motion/motion-root";
 
 export default function Error({ error, retry }: { error: Error & { digest?: string }; retry: () => void }) {
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function Error({ error, retry }: { error: Error & { digest?: stri
           <p className="mt-12 font-mono text-label text-ink-muted">Reference: {error.digest}</p>
         ) : null}
       </Container>
+      <MotionRoot />
     </section>
   );
 }

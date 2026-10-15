@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Manrope } from "next/font/google";
 import { siteConfig } from "@/lib/site";
+import { organizationJsonLd } from "@/lib/seo";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { JsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
 
 // One family for headings and body (geometric, like the wordmark) plus a mono
@@ -22,12 +24,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: siteConfig.name,
+    default: `${siteConfig.name} — ${siteConfig.tagline}`,
     template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  // Keep search engines out until content is approved and the domain confirmed.
-  robots: { index: false, follow: false },
+  applicationName: siteConfig.name,
+  openGraph: {
+    type: "website",
+    siteName: siteConfig.name,
+    locale: "en_IN",
+    url: "/",
+  },
+  twitter: { card: "summary_large_image" },
+  // Indexing stays off until launch: set SITE_INDEXABLE=true in production (docs/deployment.md).
+  robots: siteConfig.indexable ? { index: true, follow: true } : { index: false, follow: false },
+  formatDetection: { telephone: false, address: false, email: false },
 };
 
 export const viewport: Viewport = {
@@ -35,10 +46,26 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
+/**
+ * Runs before first paint: marks the document so revealable content starts
+ * hidden (no flash of final state before the entrance). Skipped entirely for
+ * reduced motion. The timeout is a safety net — if scripts never run, content
+ * is shown anyway.
+ */
+const motionBootstrap = `(function(){try{var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('motion-pending');setTimeout(function(){d.classList.remove('motion-pending')},2500)}catch(e){}})();`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang={siteConfig.locale} className={`${manrope.variable} ${geistMono.variable} antialiased`}>
+    <html
+      lang={siteConfig.locale}
+      className={`${manrope.variable} ${geistMono.variable} antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: motionBootstrap }} />
+      </head>
       <body className="flex min-h-dvh flex-col bg-surface text-ink">
+        <JsonLd data={organizationJsonLd()} />
         <SiteHeader />
         <main id="main" className="flex-1">
           {children}

@@ -15,12 +15,25 @@ function copy(need: string, text: string | null = null, approved = false): CopyF
   return { need, text, approved };
 }
 
-/** Company facts. null = not yet supplied (shown as Pending). */
+/** Company facts. null = not yet supplied (shown as Pending). Supplied by Arcaisys 2026-10-15. */
 export const companyFacts = {
   legalName: null as string | null, // B4
   founded: null as string | null, // B2
-  location: null as string | null, // B3
-  contactEmail: null as string | null, // G1
+  location: "Mumbai, India" as string | null, // B3
+  contactEmail: "pm.teams@arcaisys.com" as string | null, // G1
+  /** Shown as written; `phoneHref` is the dialable form. */
+  phone: "+91 91378 15600" as string | null, // G2
+  phoneHref: "tel:+919137815600",
+  /** Postal address, one line per entry. */
+  address: ["G1603, Samarth Garden", "Bhandup (W)", "Mumbai 400078", "Maharashtra, India"] as string[] | null, // G3
+  /** Same address, structured for search engines (keep in sync with `address`). */
+  postalAddress: {
+    streetAddress: "G1603, Samarth Garden, Bhandup (W)",
+    addressLocality: "Mumbai",
+    postalCode: "400078",
+    addressRegion: "Maharashtra",
+    addressCountry: "IN",
+  },
   linkedin: null as string | null, // G4
 };
 

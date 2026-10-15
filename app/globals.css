@@ -183,3 +183,121 @@
     outline-offset: 2px;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Motion (driven by components/motion/motion-root.tsx)
+ * ------------------------------------------------------------------------- */
+
+/* Before hydration only: make what is about to be revealed transparent, so it doesn't
+   flash in its final state first. Opacity (not visibility) keeps links focusable.
+   Removed by MotionRoot, or after 2.5s as a fallback. */
+.motion-pending [data-reveal]:not([data-reveal="stagger"]),
+.motion-pending [data-reveal="stagger"] > *,
+.motion-pending [data-reveal-lines],
+.motion-pending [data-ascent],
+.motion-pending [data-sweep] {
+  opacity: 0;
+}
+
+/* Opening sequence: hero and page-header content animate in pure CSS, from the first
+   frame and without waiting for JavaScript (keeps Largest Contentful Paint fast).
+   The header plays once, on first load, because the layout persists across pages. */
+[data-intro] {
+  animation: intro-rise 900ms var(--ease-out) both;
+  animation-delay: calc(var(--intro-i, 0) * 90ms + 60ms);
+}
+[data-intro="headline"] {
+  animation-name: intro-unmask;
+  animation-duration: 1100ms;
+}
+[data-site-header] {
+  animation: intro-fade 500ms var(--ease-out) both;
+}
+@keyframes intro-rise {
+  from {
+    opacity: 0;
+    translate: 0 20px;
+  }
+}
+@keyframes intro-unmask {
+  from {
+    clip-path: inset(0 0 100% 0);
+    translate: 0 0.4em;
+  }
+  to {
+    clip-path: inset(-20% -5% -20% -5%);
+    translate: 0 0;
+  }
+}
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+}
+
+/* Page transitions: React <ViewTransition> (components/motion/page-transition.tsx).
+   Old page fades out quickly; new page fades in and rises slightly. Header stays put. */
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-old(.page-exit) {
+  animation: 160ms var(--ease-in-out) both vt-fade reverse;
+}
+::view-transition-new(.page-enter) {
+  animation: 380ms var(--ease-out) 80ms both vt-rise;
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-rise {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+/* Mobile menu: panel fades in, links rise in sequence. */
+dialog[open].menu-panel {
+  animation: menu-in 320ms var(--ease-out) both;
+}
+dialog[open].menu-panel li {
+  animation: menu-item-in 520ms var(--ease-out) both;
+}
+dialog[open].menu-panel li:nth-child(2) {
+  animation-delay: 60ms;
+}
+dialog[open].menu-panel li:nth-child(3) {
+  animation-delay: 120ms;
+}
+@keyframes menu-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}

@@ -21,7 +21,10 @@ export function Sectors() {
         </div>
       </Grid>
 
-      <div className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line md:grid-cols-2">
+      <div
+        data-reveal="stagger"
+        className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line md:grid-cols-2"
+      >
         {sectors.map((sector) => {
           const items = sector.products
             .map((slug) => getProduct(slug))

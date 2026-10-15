@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import type { ReactNode } from "react";
 import { aboutCopy, companyFacts } from "@/content/company";
 import { products } from "@/content/products";
@@ -11,11 +12,13 @@ import { Section } from "@/components/ui/section";
 import { PageHeader } from "@/components/sections/page-header";
 import { Approach } from "@/components/sections/home/approach";
 import { ClosingCta } from "@/components/sections/closing-cta";
+import { PageTransition } from "@/components/motion/page-transition";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About",
   description: "Who Arcaisys is, why the company exists and how it builds software.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   // Facts table: each value is either supplied or explicitly pending.
@@ -28,7 +31,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <>
+    <PageTransition>
       <PageHeader
         eyebrow="About"
         title={<Copy field={aboutCopy.headline} />}
@@ -87,6 +90,6 @@ export default function AboutPage() {
       </Section>
 
       <ClosingCta />
-    </>
+    </PageTransition>
   );
 }
