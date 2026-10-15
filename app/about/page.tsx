@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { pageMetadata } from "@/lib/seo";
-import { aboutCopy, brand, companyFacts, pillars } from "@/content/company";
+import { aboutCopy, brand, pillars } from "@/content/company";
 import { Grid } from "@/components/ui/container";
 import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
-import { Pending } from "@/components/ui/pending";
 import { Section } from "@/components/ui/section";
 import { Tagline } from "@/components/ui/tagline";
 import { PageHeader } from "@/components/sections/page-header";
@@ -22,13 +20,6 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function AboutPage() {
-  const facts: { label: string; value: ReactNode }[] = [
-    { label: "Company", value: companyFacts.legalName ?? <Pending need="Registered legal name" /> },
-    { label: "Founded", value: companyFacts.founded ?? <Pending need="Founding date" /> },
-    { label: "Headquarters", value: companyFacts.location ?? <Pending need="City, country" /> },
-    { label: "Markets", value: companyFacts.markets },
-  ];
-
   return (
     <PageTransition>
       <PageHeader
@@ -82,31 +73,12 @@ export default function AboutPage() {
         </ol>
       </Section>
 
-      <Section>
-        <Grid className="gap-y-10">
-          <div className="col-span-4 md:col-span-3">
-            <Eyebrow index="03">At a glance</Eyebrow>
-          </div>
-          <dl className="col-span-4 md:col-span-9">
-            {facts.map((fact) => (
-              <div
-                key={fact.label}
-                className="grid grid-cols-1 gap-2 border-t border-line-strong py-6 sm:grid-cols-3 sm:gap-8"
-              >
-                <dt className="font-mono text-label text-ink-muted uppercase">{fact.label}</dt>
-                <dd className="text-lead font-medium sm:col-span-2">{fact.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </Grid>
-      </Section>
-
-      <Sectors index="04" />
+      <Sectors index="03" />
 
       <Section tone="alt">
         <Grid className="gap-y-10">
           <div className="col-span-4 md:col-span-3">
-            <Eyebrow index="05">Direction</Eyebrow>
+            <Eyebrow index="04">Direction</Eyebrow>
           </div>
           <div className="col-span-4 md:col-span-7">
             <Heading>Where we are going.</Heading>

@@ -55,6 +55,8 @@ export function MotionRoot() {
             SplitText.create(el, {
               type: "lines",
               mask: "lines",
+              // Masks get "split-line-mask", padded in globals.css so descenders aren't clipped.
+              linesClass: "split-line",
               // Keep the real text in place for assistive tech; "auto" would put
               // aria-label on elements like <p>, where it is not allowed.
               aria: "none",
@@ -65,7 +67,7 @@ export function MotionRoot() {
                 if (played) return;
                 played = true;
                 const tween = gsap.from(self.lines, {
-                  yPercent: 110,
+                  yPercent: 130,
                   duration: duration.slow,
                   stagger: 0.09,
                   ease: ease.out,

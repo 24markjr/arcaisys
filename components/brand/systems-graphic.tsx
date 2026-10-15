@@ -1,9 +1,9 @@
 import { useId } from "react";
 import { cn } from "@/lib/cn";
 
-/** The everyday tools a business juggles — across all three sectors. */
-const TOOLS = ["Orders", "Kitchen", "Billing", "Records", "Imaging", "Code"];
-const NODE_W = 92;
+/** The disconnected tools and hand-offs teams run on today (see homeCopy.intro). */
+const TOOLS = ["Spreadsheets", "Paper files", "Phone calls", "Chat groups", "Billing app", "Manual reports"];
+const NODE_W = 132;
 const NODE_H = 28;
 const TOP = 22;
 const GAP = 44;
@@ -13,7 +13,7 @@ const linkPath = (i: number) => {
   const y = TOP + i * GAP + NODE_H / 2;
   const x1 = 16 + NODE_W;
   const x2 = HUB.x - HUB.r;
-  return `M${x1} ${y} C ${x1 + 80} ${y}, ${x2 - 70} ${HUB.y}, ${x2} ${HUB.y}`;
+  return `M${x1} ${y} C ${x1 + 60} ${y}, ${x2 - 50} ${HUB.y}, ${x2} ${HUB.y}`;
 };
 
 /**
@@ -30,7 +30,7 @@ export function SystemsGraphic({ className }: { className?: string }) {
       viewBox="0 0 400 290"
       fill="none"
       role="img"
-      aria-label="Separate tools — orders, kitchen, billing, records, imaging, code — connected into one Arcaisys system"
+      aria-label="Disconnected tools — spreadsheets, paper files, phone calls, chat groups, a billing app and manual reports — replaced by one Arcaisys system"
       className={cn("h-auto w-full overflow-visible", className)}
     >
       <defs>

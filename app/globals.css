@@ -257,6 +257,13 @@
   opacity: 0;
 }
 
+/* Line-reveal masks clip their line; headings have tight leading, so pad the mask to keep
+   descenders (g, y, p) visible, and cancel the padding so line spacing is unchanged. */
+.split-line-mask {
+  padding-block: 0.08em 0.2em;
+  margin-block: -0.08em -0.2em;
+}
+
 /* Opening sequence: hero and page-header content animate in pure CSS, from the first
    frame and without waiting for JavaScript (keeps Largest Contentful Paint fast).
    The header plays once, on first load, because the layout persists across pages. */
