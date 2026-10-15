@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/*
+ * Arcaisys design tokens.
+ * Colour values are sampled from the supplied logo files (see docs/brand-notes.md).
+ * Phase 1 values — refined and approved in Phase 2 via /styleguide.
+ */
+:root {
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-alt: #faf9f7;
+  --surface-sunken: #f3f1ee;
+  --line: #eae7e3;
+  --line-strong: #d9d5cf;
+
+  /* Ink — tinted toward the navy shared by the product logos (#0E1B2E) */
+  --ink: #111827;
+  --ink-navy: #0e1b2e;
+  --ink-soft: #4b5160;
+  --ink-muted: #767b86;
+
+  /* Brand — sampled from Arcaisys-Logo.png */
+  --brand-amber: #f89818;
+  --brand-orange: #f86810;
+  --brand-coral: #fc5454; /* wordmark; decorative only, fails AA as body text */
+  --brand-red: #d81018; /* accessible accent text on white */
+  --brand-deep: #a80818;
+  --brand-ember: #800010;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-navy: var(--ink-navy);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+
+  --color-brand-amber: var(--brand-amber);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-coral: var(--brand-coral);
+  --color-brand-red: var(--brand-red);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-ember: var(--brand-ember);
+
+  --font-display: var(--font-manrope);
+  --font-sans: var(--font-inter);
+
+  --ease-out-expo: var(--ease-out);
+  --ease-in-out-cubic: var(--ease-in-out);
+}
+
+@layer base {
+  html {
+    background: var(--surface);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--brand-orange) 22%, transparent);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand-red);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
