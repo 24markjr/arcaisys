@@ -13,14 +13,38 @@ export const interestOptions = [
 
 const interestValues = interestOptions.map((option) => option.value) as [string, ...string[]];
 
+/**
+ * Single-line fields (name, company) must not contain line breaks or other control
+ * characters: they end up in the email subject, where a line break could be used to
+ * inject extra mail headers. Browsers can't type them into a one-line input, so this
+ * only rejects crafted requests. (docs/audit/findings.md F-07)
+ */
+const SINGLE_LINE = /^[^\p{Cc}\u2028\u2029]*$/u;
+
+/** Collapse any control characters to spaces — a second guard for header values. */
+export function oneLine(value: string) {
+  return value.replace(/[\p{Cc}\u2028\u2029]+/gu, " ").trim();
+}
+
 export const contactSchema = z.object({
-  name: z.string().trim().min(2, "Please enter your name.").max(120, "Please shorten your name."),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Please enter your name.")
+    .max(120, "Please shorten your name.")
+    .regex(SINGLE_LINE, "Please enter your name on one line."),
   email: z
     .string()
     .trim()
     .max(200, "Please use a shorter email address.")
     .pipe(z.email("Please enter a valid email address.")),
-  company: z.string().trim().max(160, "Please shorten the company name.").optional().default(""),
+  company: z
+    .string()
+    .trim()
+    .max(160, "Please shorten the company name.")
+    .regex(SINGLE_LINE, "Please enter the company name on one line.")
+    .optional()
+    .default(""),
   interest: z.enum(interestValues, "Please choose what you would like to discuss."),
   message: z
     .string()

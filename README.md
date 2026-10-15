@@ -20,6 +20,8 @@ npm run content:audit  # list content still missing or awaiting approval
 npm run test:form    # end-to-end contact form tests (after npm run build)
 node scripts/test-motion.mjs http://localhost:3000   # motion + navigation checks (server running)
 node scripts/test-features.mjs http://localhost:3000 # theme, copy, WhatsApp, back-to-top, print
+node scripts/test-security.mjs http://localhost:3000 # headers, CSP, server-action origin, secrets
+npm run check:secrets  # scan tracked files for credentials (also runs before every commit)
 npm run audit:browser -- http://localhost:3000       # axe + links + privacy (THEME=dark for dark)
 node scripts/screenshot.mjs http://localhost:3000 screenshots   # visual QA + overflow check (uses installed Chrome)
 ```
@@ -58,6 +60,8 @@ must not be filled with invented text. Items with `confirmed: false` are not yet
 - Phase 7 — SEO and launch readiness: done — **deploy and launch steps in `docs/deployment.md`**
 - Audit phases 0–1 (discovery, baseline findings): done — `docs/audit/`
 - Audit phase 2 (minimal technical layer, dark mode) and 3 (copy, WhatsApp, back-to-top, print): done
+- Audit phase 4 (privacy policy and terms — drafts for legal review) and 5 (CSP, input
+  hardening, secret-scan hook): done
 
 Striped markers on the site are content still needed from Arcaisys.
 

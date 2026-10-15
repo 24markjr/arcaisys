@@ -6,6 +6,7 @@ import {
   MIN_FILL_MS,
   STARTED_FIELD,
   interestLabel,
+  oneLine,
   readValues,
   validateContact,
   type ContactState,
@@ -48,7 +49,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
 
   const { name, email, company, interest, message } = result.data;
   const sent = await sendEmail({
-    subject: `Website enquiry — ${interestLabel(interest)} — ${name}`,
+    subject: oneLine(`Website enquiry — ${interestLabel(interest)} — ${name}`),
     replyTo: email,
     text: [
       `Name: ${name}`,

@@ -14,7 +14,9 @@
     "content:audit": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/content-audit.mjs",
     "qa:screens": "node scripts/screenshot.mjs",
     "test:form": "node scripts/test-contact-form.mjs",
-    "audit:browser": "node scripts/audit/browser-audit.mjs"
+    "audit:browser": "node scripts/audit/browser-audit.mjs",
+    "prepare": "git config core.hooksPath .githooks || true",
+    "check:secrets": "node scripts/check-secrets.mjs --all"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

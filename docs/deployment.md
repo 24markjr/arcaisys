@@ -75,9 +75,14 @@ npm run content:audit    # outstanding content
 - **Rate limiting** of the contact form is per server instance (in memory). On serverless
   hosting it slows abuse rather than enforcing a hard global cap. If the form is ever targeted,
   move it to a shared store (e.g. Upstash Redis) — see `lib/rate-limit.ts`.
-- **Content-Security-Policy** is not set. Baseline security headers are (see `next.config.ts`).
-  A strict CSP needs nonces for Next.js inline scripts; add it together with any analytics
-  decision.
+- **Content-Security-Policy** is set (`next.config.ts`): same-origin only for scripts, styles,
+  images, fonts and connections; no plugins, framing or foreign form targets. Scripts also need
+  `'unsafe-inline'`: a strict hash-based policy was tested and blocks the inline scripts Next.js
+  uses to hydrate prerendered pages (nonces would make every page dynamic). If analytics are
+  added, extend `script-src`/`connect-src` for that provider only.
+- **Static export** (`OUTPUT_EXPORT=true`, optional `NEXT_PUBLIC_BASE_PATH`) builds plain files
+  for static hosts. In that mode response headers (including CSP) are not applied and the
+  contact form's server action cannot run — use it for previews only, not for production.
 - **Analytics** are not installed. If wanted, Vercel Web Analytics is cookie-free and needs no
   consent banner; anything that sets cookies needs the privacy policy updated first.
 - **Unknown product URLs** (e.g. `/products/xyz`) show the 404 page with `noindex` but return

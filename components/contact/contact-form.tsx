@@ -210,7 +210,7 @@ function ContactFormInner({ defaultInterest, onReset }: ContactFormProps & { onR
 
       <div className="flex flex-col gap-5 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-[46ch] text-small text-ink-muted">
-          Your details are used only to reply to this message. See the{" "}
+          We use these details only to reply to you, and never add you to a mailing list. How we handle them:{" "}
           <a href="/privacy" className="link-underline text-ink">
             privacy policy
           </a>

@@ -101,6 +101,28 @@ check(
   (await page.inputValue("#contact-message")).startsWith("I would like") &&
     (await page.inputValue("#contact-interest")) === "meridian",
 );
+
+// Header-injection attempt: a crafted request with a line break in the name must be
+// rejected by server-side validation (browsers can't type one into the field).
+await page.route("**/contact**", async (route) => {
+  const req = route.request();
+  if (req.method() === "POST" && req.headers()["next-action"]) {
+    const body = req
+      .postDataBuffer()
+      .toString("latin1")
+      .replace("Test Person", "Test Person\r\nBcc: attacker@example.com");
+    return route.continue({ postData: Buffer.from(body, "latin1") });
+  }
+  return route.continue();
+});
+await page.waitForTimeout(3200);
+await page.click("button[type=submit]");
+await page.waitForSelector("#contact-name-error");
+check(
+  "line break in name rejected server-side (header injection)",
+  (await page.textContent("#contact-name-error"))?.includes("one line"),
+);
+await page.unroute("**/contact**");
 await page.close();
 a.kill();
 

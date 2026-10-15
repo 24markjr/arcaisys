@@ -6,6 +6,7 @@
 import { existsSync } from "node:fs";
 import { companyFacts, homeCopy, sectors, aboutCopy, productsCopy, contactCopy } from "../content/company.ts";
 import { products } from "../content/products.ts";
+import { legalTerms, privacyPolicy, termsOfUse } from "../content/legal.ts";
 
 const missing = [];
 const drafts = [];
@@ -31,6 +32,12 @@ walk("sectors", sectors);
 walk("aboutCopy", aboutCopy);
 walk("productsCopy", productsCopy);
 walk("contactCopy", contactCopy);
+
+walk("legalTerms", legalTerms);
+for (const doc of [privacyPolicy, termsOfUse]) {
+  if (!doc.reviewed) drafts.push(`legal: ${doc.title} not yet reviewed by a lawyer`);
+  if (!doc.effectiveDate) missing.push(`legal: ${doc.title} effective date (set at launch)`);
+}
 
 for (const p of products) {
   for (const key of ["category", "summary", "audience", "problem"]) {

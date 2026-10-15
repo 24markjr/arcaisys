@@ -6,6 +6,7 @@
 | [decisions.md](decisions.md)               | 0     | Owner decisions (minimal design, dark mode, analytics, WhatsApp, retention) |
 | [findings.md](findings.md)                 | 1     | Findings register with severity, evidence and owner                         |
 | [baseline-results.md](baseline-results.md) | 1     | Measured Lighthouse, accessibility, security and test results               |
+| [data-inventory.md](data-inventory.md)     | 4     | Personal data, storage, processors, rights-request process                  |
 
 ## Baseline verdict (Phase 1)
 

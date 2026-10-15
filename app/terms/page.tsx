@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
+import { termsOfUse } from "@/content/legal";
 import { LegalPage } from "@/components/sections/legal-page";
 
 export const metadata: Metadata = pageMetadata({
@@ -9,14 +10,5 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function TermsPage() {
-  return (
-    <LegalPage
-      title="Terms of use"
-      needs={[
-        "Registered legal entity",
-        "Governing law and jurisdiction",
-        "Intellectual property notice for product names and logos",
-      ]}
-    />
-  );
+  return <LegalPage document={termsOfUse} />;
 }

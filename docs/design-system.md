@@ -10,7 +10,8 @@ The live reference is **`/styleguide`** (not linked from the site). Tokens live 
 2. **Editorial, not template.** Asymmetric 12-column grid: labels in columns 1–3, content from
    column 4. Lists and rows instead of card grids. Each section gets a different composition.
 3. **Nothing unverified looks verified.** Missing content renders through `<Pending>` (striped,
-   labelled). Planned-but-unbuilt blocks use `<Wireframe>`. Both must be gone before launch.
+   labelled), and must be gone before launch. Product imagery not yet supplied shows a labelled
+   outline inside a product frame.
 
 ## Colour
 
@@ -44,7 +45,7 @@ The live reference is **`/styleguide`** (not linked from the site). Tokens live 
 | `Heading`, `Lead`             | `ui/heading.tsx`         | Type scale with independent semantic level        |
 | `ButtonLink`, `ArrowLink`     | `ui/button.tsx`          | All calls to action are links; 3px corners        |
 | `Tagline`                     | `ui/tagline.tsx`         | Product taglines set as in the logos              |
-| `Pending`, `Wireframe`        | `ui/`                    | Content-not-yet-supplied markers                  |
+| `Pending`, `Copy`             | `ui/`                    | Content-not-yet-supplied markers                  |
 | `Logo`                        | `brand/logo.tsx`         | Horizontal lockup from the original artwork       |
 | `ProductTile`                 | `brand/product-tile.tsx` | Supplied app-icon tiles                           |
 | `AscentGraphic`, `RibbonLine` | `brand/ribbon.tsx`       | Signature graphics                                |
