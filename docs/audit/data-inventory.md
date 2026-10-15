@@ -13,20 +13,26 @@ form, integration, analytics tool or embed is added. Measured 2026-10-15 with
 | IP address, user agent, request path                     | Every page request        | Deliver pages; security                       | Hosting provider's request logs                                 | Per the hosting provider's policy                        | Inherent to any website                                               |
 | Anything sent by email, phone or WhatsApp                | Visitor-initiated         | Reply                                         | Mailbox provider / WhatsApp (Meta)                              | As above / WhatsApp's policy                             | Visitor's choice                                                      |
 
+| Page views, referrer, device class, country (aggregated) | Every page (Vercel Web Analytics, cookieless) | Understand use of the site | Vercel | Per Vercel's retention | Added in audit Phase 8 (D3) |
+| Page-speed measurements (Core Web Vitals) | Every page (Vercel Speed Insights) | Monitor real loading speed | Vercel | Per Vercel's retention | Added in audit Phase 8 |
+| Campaign tags (`utm_*`) of the arriving link | URL, kept in `sessionStorage` for the visit | Attribute enquiries to campaigns | Only inside a submitted enquiry email | With the enquiry | Describes the link, not the person |
+
 The website itself has **no database** and stores no submissions.
 
 ## Cookies and browser storage
 
-| Item             | Type             | Purpose                                   | Essential?              | Sent to us?                   |
-| ---------------- | ---------------- | ----------------------------------------- | ----------------------- | ----------------------------- |
-| `arcaisys-theme` | `sessionStorage` | Remembers light/dark choice for the visit | Preference (functional) | No — never leaves the browser |
+| Item                | Type             | Purpose                                           | Essential?              | Sent to us?                                |
+| ------------------- | ---------------- | ------------------------------------------------- | ----------------------- | ------------------------------------------ |
+| `arcaisys-theme`    | `sessionStorage` | Remembers light/dark choice for the visit         | Preference (functional) | No — never leaves the browser              |
+| `arcaisys-campaign` | `sessionStorage` | Campaign tags of the arriving link, for the visit | Functional              | Only inside an enquiry the visitor submits |
 
-**Cookies: none. Analytics: none. Advertising or tracking pixels: none. Third-party requests on
-page load: none** (measured on every route, both themes). Fonts are self-hosted.
+**Cookies: none. Analytics: Vercel Web Analytics + Speed Insights — cookieless, first-party
+(`/_vercel/*` on the same domain), aggregated. Advertising or tracking pixels: none. Third-party
+requests on page load: none** (measured on every route, both themes). Fonts are self-hosted.
 
-→ **No cookie banner or consent manager is required** for the site as built. If analytics are
-added (D3, Vercel Web Analytics is cookieless), update the privacy policy's "What we collect"
-and "Who receives it" sections first.
+→ **No cookie banner or consent manager is required** for the site as built: there are no
+cookies, and the analytics identify no one. The privacy policy describes both analytics tools
+and the campaign tags.
 
 ## Processors
 

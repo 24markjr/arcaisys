@@ -181,6 +181,7 @@ for (const p of report.pages) {
 console.log(`\naxe violations (${byRule.size} rules)`);
 for (const [k, v] of byRule)
   console.log(`  ${k}: ${v.help} — ${v.nodes} nodes on ${[...v.where].join(", ")} — e.g. ${v.sample}`);
+let pageIssues = 0;
 for (const p of report.pages) {
   const issues = [];
   if (p.h1Count !== 1) issues.push(`h1 count ${p.h1Count}`);
@@ -189,6 +190,7 @@ for (const p of report.pages) {
   if (p.emptyControls.length) issues.push(`unnamed controls: ${p.emptyControls.join(" | ")}`);
   if (p.consoleErrors.length) issues.push(`console: ${p.consoleErrors.join(" | ")}`);
   if (issues.length) console.log(`  ${p.route}@${p.width}: ${issues.join(" · ")}`);
+  pageIssues += issues.length;
 }
 console.log(
   `\npending markers per page: ${report.pages
@@ -203,3 +205,13 @@ console.log(
 console.log(
   `privacy: cookies=${JSON.stringify(report.privacy.cookies)} localStorage=${JSON.stringify(report.privacy.localStorage)} sessionStorage=${JSON.stringify(report.privacy.sessionStorage)} thirdParty=${JSON.stringify(report.privacy.thirdPartyOrigins)}`,
 );
+
+// Fail (for CI) on any accessibility violation, structural issue, console error or broken link.
+// Third-party requests and cookies are reported above; they are reviewed, not failed on.
+if (byRule.size || pageIssues || badLinks.length) {
+  console.error(
+    `\nbrowser audit FAILED: ${byRule.size} axe rule(s), ${pageIssues} page issue(s), ${badLinks.length} bad link(s)`,
+  );
+  process.exit(1);
+}
+console.log("\nbrowser audit passed");

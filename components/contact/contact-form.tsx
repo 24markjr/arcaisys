@@ -2,7 +2,9 @@
 
 import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowRight, Check, ChevronDown, LoaderCircle } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { submitContact } from "@/app/contact/actions";
+import { CAMPAIGN_FIELD, CAMPAIGN_STORAGE_KEY } from "@/lib/campaign";
 import {
   HONEYPOT_FIELD,
   STARTED_FIELD,
@@ -42,6 +44,7 @@ function ContactFormInner({ defaultInterest, onReset }: ContactFormProps & { onR
   const formRef = useRef<HTMLFormElement>(null);
   const startedRef = useRef<HTMLInputElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
+  const lastInterest = useRef("");
 
   // Record when the visitor started; written straight to the DOM, so no re-render.
   useEffect(() => {
@@ -54,7 +57,11 @@ function ContactFormInner({ defaultInterest, onReset }: ContactFormProps & { onR
 
   // Move focus to the outcome so keyboard and screen-reader users hear it.
   useEffect(() => {
-    if (state.status === "sent") successRef.current?.focus();
+    if (state.status === "sent") {
+      successRef.current?.focus();
+      // Conversion event for Vercel Analytics: the topic only, never personal details.
+      track("Enquiry sent", { interest: lastInterest.current });
+    }
     if (state.status === "invalid") focusFirstInvalid(formRef.current, state.errors);
   }, [state]);
 
@@ -72,6 +79,13 @@ function ContactFormInner({ defaultInterest, onReset }: ContactFormProps & { onR
     // sending fails. The form's `action` remains as the no-JavaScript fallback.
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    lastInterest.current = String(formData.get("interest") ?? "");
+    try {
+      const campaign = sessionStorage.getItem(CAMPAIGN_STORAGE_KEY);
+      if (campaign) formData.set(CAMPAIGN_FIELD, campaign);
+    } catch {
+      // No storage: send without campaign tags.
+    }
     startTransition(() => formAction(formData));
   }
 

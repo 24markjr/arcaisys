@@ -6,6 +6,9 @@ import { themeBootstrap } from "@/lib/theme";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { BackToTop } from "@/components/layout/back-to-top";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { CampaignCapture } from "@/components/analytics/campaign-capture";
 import { JsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
 
@@ -80,6 +83,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <SiteFooter />
         <BackToTop />
+        <CampaignCapture />
+        {/* Cookieless page views and real-visitor speed data. Only on Vercel, where the
+            /_vercel endpoints exist; elsewhere (local, CI) the scripts would 404. */}
+        {process.env.VERCEL === "1" ? (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        ) : null}
       </body>
     </html>
   );

@@ -135,7 +135,10 @@ const b = startServer(3202, {
 });
 await waitFor("http://localhost:3202/contact");
 page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-await page.goto("http://localhost:3202/contact", { waitUntil: "networkidle" });
+// Arrive from a tagged campaign link (e.g. a LinkedIn post): the tags must reach the email.
+await page.goto("http://localhost:3202/contact?utm_source=linkedin&utm_medium=social&utm_campaign=launch", {
+  waitUntil: "networkidle",
+});
 await fill(page);
 await page.click("button[type=submit]"); // too fast: < 3s after load
 await page.waitForSelector("[data-contact-alert]");
@@ -157,6 +160,10 @@ check(
     sent?.text.includes("Example Ltd") &&
     received[0].auth === "Bearer re_test",
   sent?.subject,
+);
+check(
+  "campaign tags from the landing link included in the email",
+  sent?.text.includes("Campaign: source=linkedin, medium=social, campaign=launch"),
 );
 check(
   "focus moves to success heading",

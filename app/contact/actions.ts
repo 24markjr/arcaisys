@@ -12,6 +12,7 @@ import {
   type ContactState,
 } from "@/lib/contact";
 import { sendEmail } from "@/lib/email";
+import { CAMPAIGN_FIELD, formatCampaign, parseCampaign } from "@/lib/campaign";
 import { rateLimit } from "@/lib/rate-limit";
 import { siteConfig } from "@/lib/site";
 import { companyFacts } from "@/content/company";
@@ -48,6 +49,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
   if (!result.ok) return { status: "invalid", errors: result.errors, values };
 
   const { name, email, company, interest, message } = result.data;
+  const campaign = parseCampaign(formData.get(CAMPAIGN_FIELD));
   const sent = await sendEmail({
     subject: oneLine(`Website enquiry — ${interestLabel(interest)} — ${name}`),
     replyTo: email,
@@ -59,6 +61,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
       "",
       message,
       "",
+      ...(campaign ? [`Campaign: ${formatCampaign(campaign)}`] : []),
       `— Sent from the contact form at ${siteConfig.url}/contact`,
     ].join("\n"),
   });

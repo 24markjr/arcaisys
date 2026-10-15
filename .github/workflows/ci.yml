@@ -1,0 +1,93 @@
+# Runs every check and test suite on each push to main and on pull requests.
+# A red run means something regressed — look at the failing step, and at the
+# "screenshots" artifact for visual problems.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      # Local production server over http: keeps canonical URLs local and leaves
+      # out upgrade-insecure-requests from the CSP (it only applies on https).
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Type check, lint, formatting
+        run: npm run check
+
+      - name: No secrets in the repository
+        run: npm run check:secrets
+
+      - name: Production dependencies have no known high-severity vulnerabilities
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Content status (informational — missing content does not fail CI)
+        run: npm run content:audit
+
+      - name: Build
+        run: npm run build
+
+      - name: Contact form end-to-end (own servers, mock email API)
+        run: npm run test:form
+
+      - name: Start production server
+        run: |
+          npm run start -- -p 3000 > server.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://localhost:3000 > /dev/null && exit 0; sleep 1; done
+          cat server.log; exit 1
+
+      - name: Security (headers, CSP, server-action origin, secrets)
+        run: node scripts/test-security.mjs http://localhost:3000
+
+      - name: Motion, navigation and keyboard
+        run: node scripts/test-motion.mjs http://localhost:3000
+
+      - name: Features (theme, copy, WhatsApp, back-to-top, print)
+        run: node scripts/test-features.mjs http://localhost:3000
+
+      - name: Accessibility — WCAG 2.2 checks beyond axe
+        run: node scripts/test-a11y.mjs http://localhost:3000
+
+      - name: Accessibility — axe, links, privacy inventory (light)
+        run: THEME=light node scripts/audit/browser-audit.mjs http://localhost:3000
+
+      - name: Accessibility — axe, links, privacy inventory (dark)
+        run: THEME=dark node scripts/audit/browser-audit.mjs http://localhost:3000
+
+      - name: Visual sweep — 10 pages × 6 widths × 2 themes
+        run: |
+          ROUTES="/ /about /products /products/hospio /products/restoqr /contact /styleguide /privacy /terms /missing-page"
+          WIDTHS=360,390,768,1024,1440,1920 THEME=light node scripts/screenshot.mjs http://localhost:3000 screenshots $ROUTES
+          WIDTHS=360,390,768,1024,1440,1920 THEME=dark node scripts/screenshot.mjs http://localhost:3000 screenshots $ROUTES
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/
+          retention-days: 14
+          if-no-files-found: ignore

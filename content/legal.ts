@@ -19,7 +19,8 @@ export const legalTerms = {
     "Enquiry retention period (decision D5 — proposed, needs confirmation)",
     "24 months after our last correspondence with you",
   ),
-  hosting: term("Hosting provider once chosen (Vercel recommended)", "our website hosting provider"),
+  // The site is deployed on Vercel (arcaisys-mu.vercel.app, 2026-10-15). Confirm it stays the host.
+  hosting: term("Confirm Vercel remains the production host", "Vercel"),
   // Confirmed 2026-10-15: arcaisys.com mail is hosted by Hostinger (public MX records).
   mailbox: term("Provider of the pm.teams@arcaisys.com mailbox", "Hostinger", true),
   responseTime: term("Time to respond to data requests (legal review)", "within 30 days"),
@@ -75,7 +76,9 @@ export const privacyPolicy: LegalDocument = {
         "When you visit any page: like every website, our hosting provider receives your IP address and basic browser information in order to deliver pages and protect the service. To stop abuse of the enquiry form, we keep your IP address in server memory for up to 10 minutes.",
       ],
       after: [
-        "We do not use cookies, analytics, advertising or tracking technologies, and you do not need an account. If you choose a light or dark theme, that preference is stored only in your own browser and is never sent to us.",
+        "To understand how the website is used, we use Vercel Web Analytics and Vercel Speed Insights. They count page visits and measure how fast pages load, without cookies and without identifying you; we see only aggregated figures.",
+        "If you reach us through a link carrying campaign tags (for example from one of our LinkedIn posts), those tags are added to your enquiry so we know which campaign brought you. They describe the link, not you.",
+        "We do not use cookies, advertising or cross-site tracking, and you do not need an account. If you switch to the dark theme, that choice is kept in your browser for your current visit only and is never sent to us.",
         "We do not sell your data, and we do not add you to any mailing list.",
       ],
     },
@@ -83,7 +86,7 @@ export const privacyPolicy: LegalDocument = {
       heading: "Who receives it",
       items: [
         "Resend, which delivers enquiry-form messages to our inbox on our behalf.",
-        "{hosting}, which runs this website.",
+        "{hosting}, which runs this website and provides the analytics described above.",
         "{mailbox}, which hosts the inbox where we read and answer your messages.",
         "WhatsApp (Meta), if you choose to contact us there — under WhatsApp's own privacy policy.",
       ],
@@ -137,7 +140,7 @@ export const privacyPolicy: LegalDocument = {
     {
       heading: "Changes to this policy",
       paragraphs: [
-        "If we change how we handle personal data — for example by adding analytics — we will update this policy first and change the “last updated” date above.",
+        "If we change how we handle personal data, we will update this policy first and change the “last updated” date above.",
       ],
     },
   ],
