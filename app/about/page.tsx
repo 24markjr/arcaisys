@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import { aboutCopy, companyFacts } from "@/content/company";
 import { products } from "@/content/products";
-import { siteConfig } from "@/lib/site";
 import { Grid } from "@/components/ui/container";
+import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { Pending } from "@/components/ui/pending";
@@ -16,25 +18,21 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  // Facts table: each value is either confirmed or explicitly pending.
-  const facts: { label: string; value: React.ReactNode }[] = [
-    { label: "Company", value: siteConfig.legalName ?? <Pending need="Registered legal name" /> },
-    { label: "Founded", value: <Pending need="Year founded" /> },
-    { label: "Headquarters", value: siteConfig.location ?? <Pending need="City, country" /> },
+  // Facts table: each value is either supplied or explicitly pending.
+  const facts: { label: string; value: ReactNode }[] = [
+    { label: "Company", value: companyFacts.legalName ?? <Pending need="Registered legal name (B4)" /> },
+    { label: "Founded", value: companyFacts.founded ?? <Pending need="Year founded (B2)" /> },
+    { label: "Headquarters", value: companyFacts.location ?? <Pending need="City, country (B3)" /> },
     { label: "Products", value: products.map((p) => p.name).join(", ") },
-    { label: "Sectors", value: <Pending need="Confirmed sectors" /> },
+    { label: "Sectors", value: <Copy field={aboutCopy.sectorsFact} /> },
   ];
 
   return (
     <>
       <PageHeader
         eyebrow="About"
-        title={
-          <Pending need="About page headline (draft shown)">
-            A software company built around its products.
-          </Pending>
-        }
-        lead={<Pending need="One-sentence company summary" />}
+        title={<Copy field={aboutCopy.headline} />}
+        lead={<Copy field={aboutCopy.lead} />}
       />
 
       <Section>
@@ -44,10 +42,10 @@ export default function AboutPage() {
           </div>
           <div className="col-span-4 space-y-6 text-lead text-ink-soft md:col-span-7">
             <p className="text-h3 font-medium text-ink">
-              <Pending need="Why Arcaisys exists — the problem the founders set out to solve (questionnaire B5)" />
+              <Copy field={aboutCopy.origin} />
             </p>
             <p>
-              <Pending need="Two short paragraphs of company story" />
+              <Copy field={aboutCopy.story} />
             </p>
           </div>
         </Grid>
@@ -82,7 +80,7 @@ export default function AboutPage() {
           <div className="col-span-4 md:col-span-7">
             <Heading>Where we are going.</Heading>
             <p className="mt-8 text-lead text-ink-soft">
-              <Pending need="Next 2–3 years, only what you are comfortable publishing (questionnaire B7)" />
+              <Copy field={aboutCopy.direction} />
             </p>
           </div>
         </Grid>

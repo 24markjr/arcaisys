@@ -8,7 +8,7 @@
 | `/about`             | Who, why, how, where next                      | Header · 01 Origin · 02 At a glance (facts table) · 03 Approach · 04 Direction · CTA                                                 |
 | `/products`          | Portfolio overview                             | Header · one alternating row per product · CTA                                                                                       |
 | `/products/[slug]`   | One page per product (4, statically generated) | Header (name, tagline, category, status, enquire) · 01 Problem · 02 Audience · 03 Capabilities · 04 Screenshots · Next product · CTA |
-| `/contact`           | The single conversion point                    | Header · details · enquiry form (Phase 4)                                                                                            |
+| `/contact`           | The single conversion point                    | Header · details · enquiry form (server action → Resend)                                                                             |
 | `/privacy`, `/terms` | Legal                                          | Awaiting legal text from Arcaisys                                                                                                    |
 | `/styleguide`        | Internal design-system review                  | Not linked, noindex                                                                                                                  |
 | 404                  | Custom not-found                               |                                                                                                                                      |
@@ -38,7 +38,7 @@ lib/                    site config, helpers
 ```
 
 - Server Components by default. Client components: `NavLinks` (active state via
-  `usePathname`) and `MobileMenu` only.
+  `usePathname`), `MobileMenu` and the contact form.
 - Every page is prerendered static HTML (`next build` output: ○).
 - With Cache Components, `usePathname` needs a `<Suspense>` boundary; the header renders a static
   link list as the fallback, so navigation works before hydration.

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import { products } from "@/content/products";
-import { siteConfig } from "@/lib/site";
+import { Suspense } from "react";
+import { companyFacts, contactCopy } from "@/content/company";
 import { Grid } from "@/components/ui/container";
+import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Pending } from "@/components/ui/pending";
 import { Section } from "@/components/ui/section";
-import { Wireframe } from "@/components/ui/wireframe";
 import { PageHeader } from "@/components/sections/page-header";
+import { ContactForm } from "@/components/contact/contact-form";
+import { ContactFormWithParams } from "@/components/contact/contact-form-with-params";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -16,11 +18,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Contact"
-        title="Start a conversation."
-        lead={<Pending need="Who should get in touch, and what happens after they do" />}
-      />
+      <PageHeader eyebrow="Contact" title="Start a conversation." lead={<Copy field={contactCopy.lead} />} />
 
       <Section>
         <Grid className="gap-y-16">
@@ -28,36 +26,28 @@ export default function ContactPage() {
             <div>
               <Eyebrow>Email</Eyebrow>
               <p className="mt-4 text-lead font-medium">
-                {siteConfig.contactEmail ? (
-                  <a href={`mailto:${siteConfig.contactEmail}`} className="link-underline">
-                    {siteConfig.contactEmail}
+                {companyFacts.contactEmail ? (
+                  <a href={`mailto:${companyFacts.contactEmail}`} className="link-underline">
+                    {companyFacts.contactEmail}
                   </a>
                 ) : (
-                  <Pending need="Public enquiry email" />
+                  <Pending need="Public enquiry email (G1)" />
                 )}
               </p>
             </div>
             <div>
               <Eyebrow>Location</Eyebrow>
               <p className="mt-4 text-lead font-medium">
-                {siteConfig.location ?? <Pending need="City, country" />}
+                {companyFacts.location ?? <Pending need="City, country (B3)" />}
               </p>
             </div>
           </aside>
 
           <div className="col-span-4 md:col-span-7 md:col-start-6">
-            <Wireframe
-              label="Enquiry form — built in Phase 4"
-              note="Server-validated, spam-protected, and only reports success once the email is actually delivered. Needs email-service credentials (see .env.example)."
-            >
-              <ul className="mt-2 space-y-1">
-                <li>Name — required</li>
-                <li>Business email — required</li>
-                <li>Company — optional</li>
-                <li>Interest — {[...products.map((p) => p.name), "Something else"].join(" / ")}</li>
-                <li>Message — required</li>
-              </ul>
-            </Wireframe>
+            {/* The fallback is the same form without ?interest= pre-selection. */}
+            <Suspense fallback={<ContactForm />}>
+              <ContactFormWithParams />
+            </Suspense>
           </div>
         </Grid>
       </Section>

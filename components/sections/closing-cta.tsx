@@ -1,10 +1,11 @@
+import { homeCopy } from "@/content/company";
 import { contactCta } from "@/content/navigation";
 import { RibbonLine } from "@/components/brand/ribbon";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Grid } from "@/components/ui/container";
+import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
-import { Pending } from "@/components/ui/pending";
 
 type ClosingCtaProps = {
   title?: string;
@@ -28,7 +29,7 @@ export function ClosingCta({ title = "Start a conversation.", interest }: Closin
           </div>
           <div className="col-span-4 flex flex-col justify-end gap-8 md:col-span-4">
             <p className="text-ink-inverse-soft">
-              <Pending need="Short line on who should get in touch and what happens next" />
+              <Copy field={homeCopy.ctaLine} />
             </p>
             <ButtonLink href={href} variant="inverse" className="self-start">
               {contactCta.label}

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { productsCopy } from "@/content/company";
 import { products } from "@/content/products";
 import { ArrowLink } from "@/components/ui/button";
 import { Container, Grid } from "@/components/ui/container";
+import { Copy } from "@/components/ui/copy";
 import { Pending } from "@/components/ui/pending";
 import { Tagline } from "@/components/ui/tagline";
 import { PageHeader } from "@/components/sections/page-header";
@@ -20,7 +22,7 @@ export default function ProductsPage() {
       <PageHeader
         eyebrow="Products"
         title="Four products, one company."
-        lead={<Pending need="Portfolio overview sentence" />}
+        lead={<Copy field={productsCopy.lead} />}
       />
 
       {products.map((product, i) => {

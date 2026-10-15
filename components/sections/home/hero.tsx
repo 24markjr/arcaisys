@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { homeCopy } from "@/content/company";
 import { products } from "@/content/products";
 import { AscentGraphic } from "@/components/brand/ribbon";
 import { ProductTile } from "@/components/brand/product-tile";
 import { ButtonLink, ArrowLink } from "@/components/ui/button";
 import { Container, Grid } from "@/components/ui/container";
+import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Pending } from "@/components/ui/pending";
 import { cn } from "@/lib/cn";
 
 export function HomeHero() {
@@ -16,11 +17,11 @@ export function HomeHero() {
           <div className="relative z-10 col-span-4 md:col-span-7 md:pb-24">
             <Eyebrow index="00">Arcaisys</Eyebrow>
             <h1 className="mt-8 text-display font-semibold">
-              <Pending need="Approved hero headline (draft shown)">Software that carries real work.</Pending>
+              <Copy field={homeCopy.heroHeadline} />
             </h1>
-            <div className="mt-8 max-w-[40ch] text-lead text-ink-soft">
-              <Pending need="One-sentence value proposition" />
-            </div>
+            <p className="mt-8 max-w-[40ch] text-lead text-ink-soft">
+              <Copy field={homeCopy.heroLead} />
+            </p>
             <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
               <ButtonLink href="/products">Explore the products</ButtonLink>
               <ArrowLink href="/contact">Start a conversation</ArrowLink>

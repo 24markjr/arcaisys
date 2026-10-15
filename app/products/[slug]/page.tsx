@@ -12,8 +12,8 @@ import { Heading } from "@/components/ui/heading";
 import { Pending } from "@/components/ui/pending";
 import { Section } from "@/components/ui/section";
 import { Tagline } from "@/components/ui/tagline";
-import { Wireframe } from "@/components/ui/wireframe";
 import { ClosingCta } from "@/components/sections/closing-cta";
+import { ProductGallery } from "@/components/sections/product-gallery";
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
@@ -149,16 +149,8 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
       <Section>
         <Eyebrow index="04">In use</Eyebrow>
-        <div className="mt-12 grid gap-6 md:grid-cols-12">
-          <Wireframe
-            label="Primary screenshot"
-            note={`Needs a ${product.name} screenshot (16:10, at least 2400px wide).`}
-            className="aspect-[16/10] md:col-span-8"
-          />
-          <div className="grid gap-6 md:col-span-4">
-            <Wireframe label="Detail screenshot" note="Optional." className="aspect-[4/3]" />
-            <Wireframe label="Detail screenshot" note="Optional." className="aspect-[4/3]" />
-          </div>
+        <div className="mt-12">
+          <ProductGallery product={product} />
         </div>
       </Section>
 

@@ -1,7 +1,8 @@
+import { homeCopy } from "@/content/company";
 import { ArrowLink } from "@/components/ui/button";
 import { Grid } from "@/components/ui/container";
+import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Pending } from "@/components/ui/pending";
 import { Section } from "@/components/ui/section";
 
 /** Single editorial statement: what Arcaisys is. No cards, no icons. */
@@ -14,10 +15,7 @@ export function CompanyIntro() {
         </div>
         <div className="col-span-4 md:col-span-9">
           <p className="text-h2 font-medium text-ink">
-            <Pending need="Two to three sentences: what Arcaisys does, for whom, and why — from the questionnaire, section B">
-              Arcaisys designs and builds software products. Statement to be written from your company
-              description.
-            </Pending>
+            <Copy field={homeCopy.intro} />
           </p>
           <ArrowLink href="/about" className="mt-12">
             About Arcaisys

@@ -1,21 +1,13 @@
 import Link from "next/link";
+import { homeCopy, sectors } from "@/content/company";
 import { getProduct } from "@/content/products";
 import type { Product } from "@/content/types";
 import { ProductTile } from "@/components/brand/product-tile";
 import { Grid } from "@/components/ui/container";
+import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
-import { Pending } from "@/components/ui/pending";
 import { Section } from "@/components/ui/section";
-
-/*
- * Sector grouping is INFERRED from product names and taglines and is not yet
- * confirmed (docs/content-inventory.md §3). Meridian is not assigned.
- */
-const sectors = [
-  { name: "Healthcare", products: ["hospio", "pacs"] },
-  { name: "Hospitality", products: ["restoqr"] },
-];
 
 export function Sectors() {
   return (
@@ -25,7 +17,7 @@ export function Sectors() {
           <Eyebrow index="04">Sectors</Eyebrow>
         </div>
         <div className="col-span-4 md:col-span-7">
-          <Heading>Where the products work.</Heading>
+          <Heading>{homeCopy.sectorsHeadline}</Heading>
         </div>
       </Grid>
 
@@ -36,15 +28,15 @@ export function Sectors() {
             .filter((p): p is Product => Boolean(p));
           return (
             <article
-              key={sector.name}
+              key={sector.name.need}
               className="flex flex-col justify-between gap-12 bg-surface p-8 md:min-h-[22rem] md:p-12"
             >
               <div>
                 <h3 className="text-h2 font-semibold">
-                  <Pending need={`Confirm sector: ${sector.name}`}>{sector.name}</Pending>
+                  <Copy field={sector.name} />
                 </h3>
                 <p className="mt-6 max-w-[40ch] text-ink-soft">
-                  <Pending need={`What Arcaisys offers the ${sector.name.toLowerCase()} sector`} />
+                  <Copy field={sector.description} />
                 </p>
               </div>
               <ul className="flex flex-wrap gap-x-8 gap-y-4">

@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { companyFacts, homeCopy } from "@/content/company";
 import { footerNav } from "@/content/navigation";
 import { siteConfig } from "@/lib/site";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui/container";
+import { Copy } from "@/components/ui/copy";
 import { Pending } from "@/components/ui/pending";
 
 export function SiteFooter() {
@@ -14,7 +16,7 @@ export function SiteFooter() {
             <Logo size="md" />
           </Link>
           <p className="mt-8 max-w-[34ch] text-small text-ink-inverse-soft">
-            <Pending need="One-line company descriptor for the footer" />
+            <Copy field={homeCopy.footerDescriptor} />
           </p>
         </div>
 
@@ -38,16 +40,26 @@ export function SiteFooter() {
         <div className="flex flex-col gap-4 border-t border-line-ink pt-8 text-[0.8125rem] text-ink-inverse-soft sm:flex-row sm:justify-between md:col-span-12">
           <p>
             © {siteConfig.copyrightYear}{" "}
-            {siteConfig.legalName ?? <Pending need="Registered company name">Arcaisys</Pending>}
+            {companyFacts.legalName ?? <Pending need="Registered company name (B4)">Arcaisys</Pending>}
           </p>
-          <p>
-            {siteConfig.contactEmail ? (
-              <a href={`mailto:${siteConfig.contactEmail}`} className="link-underline">
-                {siteConfig.contactEmail}
+          <p className="flex gap-6">
+            {companyFacts.contactEmail ? (
+              <a href={`mailto:${companyFacts.contactEmail}`} className="link-underline">
+                {companyFacts.contactEmail}
               </a>
             ) : (
-              <Pending need="Public contact email" />
+              <Pending need="Public contact email (G1)" />
             )}
+            {companyFacts.linkedin ? (
+              <a
+                href={companyFacts.linkedin}
+                className="link-underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+            ) : null}
           </p>
         </div>
       </Container>

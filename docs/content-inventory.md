@@ -2,6 +2,10 @@
 
 _Last updated: 2026-10-15 (Phase 0)_
 
+> **Phase 5 status (2026-10-15):** the site is fully wired for content — every field lives in
+> `content/company.ts` or `content/products.ts` (see `docs/content-guide.md`). No company content
+> has been supplied yet; `npm run content:audit` lists the 54 missing items and 9 drafts.
+
 This is the record of what has been supplied, what is confirmed, and what is still
 missing. Nothing marked **Missing** or **Unconfirmed** may appear on the live site as fact.
 

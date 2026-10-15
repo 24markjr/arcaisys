@@ -12,6 +12,16 @@ export type BrandImage = {
   alt: string;
 };
 
+/** A piece of site copy and its approval state. See content/company.ts. */
+export type CopyField = {
+  /** What Arcaisys needs to supply (shown on the Pending marker). */
+  need: string;
+  /** Supplied or draft text; null when nothing has been supplied. */
+  text: string | null;
+  /** Only approved text renders as normal copy. */
+  approved: boolean;
+};
+
 export type ProductStatus = "live" | "pilot" | "in-development" | "unknown";
 
 export type Product = {
@@ -33,6 +43,11 @@ export type Product = {
   symbol: BrandImage | null;
   /** White rounded app-icon tile, as supplied. */
   tile: BrandImage | null;
+  /**
+   * Product screenshots, first one shown largest. Put files in
+   * public/products/<slug>/ (PNG or JPG, at least 2400px wide for the primary).
+   */
+  screenshots: BrandImage[];
   /** Accent colour sampled from the product's own logo. */
   accent: string;
   confirmed: boolean;
