@@ -80,6 +80,27 @@ export default function ContactPage() {
                 </p>
               </div>
             ) : null}
+            {companyFacts.linkedin ? (
+              <div>
+                <Eyebrow>LinkedIn</Eyebrow>
+                <p className="mt-4 text-lead font-medium">
+                  <a
+                    href={companyFacts.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2"
+                  >
+                    <span className="link-underline pb-0.5">Follow Arcaisys on LinkedIn</span>
+                    <ArrowUpRight
+                      aria-hidden
+                      className="size-4 transition-transform duration-(--dur-base) ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      strokeWidth={1.75}
+                    />
+                    <span className="sr-only">(opens LinkedIn)</span>
+                  </a>
+                </p>
+              </div>
+            ) : null}
             <div>
               <Eyebrow>Office</Eyebrow>
               {companyFacts.address ? (

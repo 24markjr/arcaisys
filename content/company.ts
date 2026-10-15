@@ -44,7 +44,7 @@ export const companyFacts = {
   timeZone: "Asia/Kolkata",
   /** Business hours and expected response time — not supplied; nothing is shown until set. */
   hours: null as string | null,
-  linkedin: null as string | null,
+  linkedin: "https://www.linkedin.com/company/arcaisys-private-limited" as string | null,
 };
 
 /** The company's lines, as they appear across the site. */

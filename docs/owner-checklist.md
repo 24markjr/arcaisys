@@ -93,7 +93,7 @@ plans.
 
 ## 8. 🟢 Optional details
 
-- Company **LinkedIn** URL (added to the footer and search-engine data).
+- ~~Company **LinkedIn** URL~~ — done (footer, contact page, search-engine data).
 - **Business hours** / expected reply time for the contact page.
 - **Meta domain-verification code**, if you verify the business with Meta/WhatsApp: set
   `META_DOMAIN_VERIFICATION` in Vercel.
