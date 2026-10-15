@@ -2,46 +2,70 @@
 
 /*
  * Arcaisys design tokens.
- * Colour values are sampled from the supplied logo files (see docs/brand-notes.md).
- * Phase 1 values — refined and approved in Phase 2 via /styleguide.
+ * Colour values are sampled from the supplied logo files — see docs/brand-notes.md
+ * and docs/design-system.md. Rendered for review at /styleguide.
  */
 :root {
   /* Surfaces */
   --surface: #ffffff;
   --surface-alt: #faf9f7;
   --surface-sunken: #f3f1ee;
+  --surface-ink: #0e1726;
   --line: #eae7e3;
   --line-strong: #d9d5cf;
+  --line-ink: #263042;
 
   /* Ink — tinted toward the navy shared by the product logos (#0E1B2E) */
-  --ink: #111827;
+  --ink: #0f1622;
   --ink-navy: #0e1b2e;
-  --ink-soft: #4b5160;
-  --ink-muted: #767b86;
+  --ink-soft: #4a505c;
+  --ink-muted: #686d79;
+  --ink-inverse: #f5f3f0;
+  --ink-inverse-soft: #a3a9b4;
 
   /* Brand — sampled from Arcaisys-Logo.png */
   --brand-amber: #f89818;
   --brand-orange: #f86810;
   --brand-coral: #fc5454; /* wordmark; decorative only, fails AA as body text */
-  --brand-red: #d81018; /* accessible accent text on white */
+  --brand-red: #d81018; /* accessible accent text on white (5.2:1) */
   --brand-deep: #a80818;
   --brand-ember: #800010;
+  --brand-gradient: linear-gradient(
+    115deg,
+    var(--brand-amber) 0%,
+    var(--brand-orange) 30%,
+    var(--brand-red) 68%,
+    var(--brand-ember) 100%
+  );
 
+  /* Layout */
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --content-max: 88rem;
+  --header-h: 4.5rem;
+
+  /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 420ms;
+  --dur-slow: 900ms;
 }
 
 @theme inline {
   --color-surface: var(--surface);
   --color-surface-alt: var(--surface-alt);
   --color-surface-sunken: var(--surface-sunken);
+  --color-surface-ink: var(--surface-ink);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-line-ink: var(--line-ink);
 
   --color-ink: var(--ink);
   --color-ink-navy: var(--ink-navy);
   --color-ink-soft: var(--ink-soft);
   --color-ink-muted: var(--ink-muted);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-ink-inverse-soft: var(--ink-inverse-soft);
 
   --color-brand-amber: var(--brand-amber);
   --color-brand-orange: var(--brand-orange);
@@ -50,11 +74,37 @@
   --color-brand-deep: var(--brand-deep);
   --color-brand-ember: var(--brand-ember);
 
-  --font-display: var(--font-manrope);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-geist-mono);
 
   --ease-out-expo: var(--ease-out);
   --ease-in-out-cubic: var(--ease-in-out);
+
+  /* Type scale — fluid, from 360px to 1440px viewports */
+  --text-display: clamp(2.75rem, 1.6rem + 5.1vw, 6.5rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.045em;
+  --text-h1: clamp(2.25rem, 1.55rem + 3.1vw, 4.5rem);
+  --text-h1--line-height: 1.02;
+  --text-h1--letter-spacing: -0.035em;
+  --text-h2: clamp(1.875rem, 1.45rem + 1.9vw, 3.25rem);
+  --text-h2--line-height: 1.06;
+  --text-h2--letter-spacing: -0.03em;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.75vw, 1.875rem);
+  --text-h3--line-height: 1.18;
+  --text-h3--letter-spacing: -0.02em;
+  --text-lead: clamp(1.125rem, 1.03rem + 0.42vw, 1.4rem);
+  --text-lead--line-height: 1.5;
+  --text-lead--letter-spacing: -0.01em;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.55;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.16em;
+
+  --breakpoint-xs: 26rem;
 }
 
 @layer base {
@@ -63,20 +113,36 @@
     color: var(--ink);
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
   }
 
   body {
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: var(--text-body);
+    line-height: 1.65;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--brand-orange) 22%, transparent);
+    background: color-mix(in oklab, var(--brand-orange) 24%, transparent);
     color: var(--ink);
   }
 
   :focus-visible {
     outline: 2px solid var(--brand-red);
     outline-offset: 3px;
+    border-radius: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -88,5 +154,32 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer components {
+  /* Animated underline used by text links and nav items. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size var(--dur-base) var(--ease-out);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible,
+  .link-underline[aria-current="page"] {
+    background-size: 100% 1px;
+  }
+
+  /* Visible marker for content not yet supplied by Arcaisys. Removed in Phase 5. */
+  .pending {
+    background: repeating-linear-gradient(
+      -45deg,
+      color-mix(in oklab, var(--brand-amber) 10%, transparent) 0 6px,
+      transparent 6px 12px
+    );
+    outline: 1px dashed color-mix(in oklab, var(--brand-orange) 55%, transparent);
+    outline-offset: 2px;
   }
 }

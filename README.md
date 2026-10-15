@@ -16,6 +16,7 @@ npm run build        # production build
 npm run start        # serve the production build
 npm run check        # typecheck + lint + formatting check
 npm run format       # format all files
+node scripts/screenshot.mjs http://localhost:3000 screenshots   # visual QA + overflow check (uses installed Chrome)
 ```
 
 ## Environment
@@ -41,6 +42,10 @@ must not be filled with invented text. Items with `confirmed: false` are not yet
 
 ## Status
 
-- Phase 0 — content inventory: done (`docs/content-inventory.md`)
+- Phase 0 — content inventory: done (`docs/content-inventory.md`, `docs/content-questionnaire.md`)
 - Phase 1 — foundation: done
-- Phase 2 — brand system and `/styleguide`: next
+- Phase 2 — design system: done — review at `/styleguide` (`docs/design-system.md`)
+- Phase 3 — sitemap, architecture and page structure: done (`docs/sitemap.md`)
+- Phase 4 — core build (contact form, polish of components): next
+
+Striped markers on the site are content still needed from Arcaisys — see the questionnaire.

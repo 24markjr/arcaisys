@@ -1,0 +1,56 @@
+import Link from "next/link";
+import { footerNav } from "@/content/navigation";
+import { siteConfig } from "@/lib/site";
+import { Logo } from "@/components/brand/logo";
+import { Container } from "@/components/ui/container";
+import { Pending } from "@/components/ui/pending";
+
+export function SiteFooter() {
+  return (
+    <footer className="bg-surface-ink text-ink-inverse">
+      <Container className="grid gap-16 pt-20 pb-10 md:grid-cols-12 md:gap-8 md:pt-28">
+        <div className="md:col-span-5">
+          <Link href="/" aria-label="Arcaisys — home" className="inline-block">
+            <Logo size="md" />
+          </Link>
+          <p className="mt-8 max-w-[34ch] text-small text-ink-inverse-soft">
+            <Pending need="One-line company descriptor for the footer" />
+          </p>
+        </div>
+
+        <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-7">
+          {footerNav.map((group) => (
+            <div key={group.title}>
+              <h2 className="font-mono text-label text-ink-inverse-soft uppercase">{group.title}</h2>
+              <ul className="mt-5 space-y-3 text-small">
+                {group.items.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="link-underline pb-0.5">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        <div className="flex flex-col gap-4 border-t border-line-ink pt-8 text-[0.8125rem] text-ink-inverse-soft sm:flex-row sm:justify-between md:col-span-12">
+          <p>
+            © {siteConfig.copyrightYear}{" "}
+            {siteConfig.legalName ?? <Pending need="Registered company name">Arcaisys</Pending>}
+          </p>
+          <p>
+            {siteConfig.contactEmail ? (
+              <a href={`mailto:${siteConfig.contactEmail}`} className="link-underline">
+                {siteConfig.contactEmail}
+              </a>
+            ) : (
+              <Pending need="Public contact email" />
+            )}
+          </p>
+        </div>
+      </Container>
+    </footer>
+  );
+}

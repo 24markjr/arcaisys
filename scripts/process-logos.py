@@ -126,3 +126,31 @@ for name in ("Hospio", "Meridian", "PACS"):
 
 resto = remove_white(Image.open(src / "RestoQr-logo.png"))
 save(trim(resto), "restoqr-logo.png")
+
+
+# --- Reversed (for dark surfaces) ----------------------------------------
+def reverse_navy(im):
+    """Recolour the dark navy ink to white; keep gradient accents and greys.
+    Opaque white "gap" pixels (knock-outs drawn in white) become transparent,
+    via colour-to-alpha so their anti-aliased edges don't leave a light fringe."""
+    im = im.copy()
+    px = im.load()
+    for y in range(im.height):
+        for x in range(im.width):
+            r, g, b, a = px[x, y]
+            if not a:
+                continue
+            if max(r, g, b) < 90:
+                px[x, y] = (255, 255, 255, a)
+            elif min(r, g, b) >= 140 and max(r, g, b) - min(r, g, b) > 25 or min(r, g, b) >= 225:
+                alpha = max(255 - r, 255 - g, 255 - b) / 255
+                if alpha <= 0.02:
+                    px[x, y] = (0, 0, 0, 0)
+                    continue
+                un = lambda c: max(0, min(255, round(255 - (255 - c) / alpha)))
+                px[x, y] = (un(r), un(g), un(b), round(a * alpha))
+    return im
+
+
+for slug in ("hospio", "meridian", "pacs"):
+    save(reverse_navy(Image.open(out / f"{slug}-logo.png").convert("RGBA")), f"{slug}-logo-reversed.png")

@@ -1,17 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Geist_Mono, Manrope } from "next/font/google";
 import { siteConfig } from "@/lib/site";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 import "./globals.css";
 
-// Provisional pairing — confirmed in Phase 2 against the wordmark.
+// One family for headings and body (geometric, like the wordmark) plus a mono
+// for indices and labels. See docs/design-system.md.
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -34,8 +37,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang={siteConfig.locale} className={`${manrope.variable} ${inter.variable} antialiased`}>
-      <body className="flex min-h-dvh flex-col bg-surface text-ink">{children}</body>
+    <html lang={siteConfig.locale} className={`${manrope.variable} ${geistMono.variable} antialiased`}>
+      <body className="flex min-h-dvh flex-col bg-surface text-ink">
+        <SiteHeader />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }

@@ -1,0 +1,183 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getProduct, products } from "@/content/products";
+import type { ProductStatus } from "@/content/types";
+import { ProductTile } from "@/components/brand/product-tile";
+import { ButtonLink } from "@/components/ui/button";
+import { Container, Grid } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { Heading } from "@/components/ui/heading";
+import { Pending } from "@/components/ui/pending";
+import { Section } from "@/components/ui/section";
+import { Tagline } from "@/components/ui/tagline";
+import { Wireframe } from "@/components/ui/wireframe";
+import { ClosingCta } from "@/components/sections/closing-cta";
+
+export function generateStaticParams() {
+  return products.map((product) => ({ slug: product.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps<"/products/[slug]">): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getProduct(slug);
+  if (!product) return {};
+  return {
+    title: product.name,
+    description: product.summary ?? `${product.name} — ${product.tagline} A product by Arcaisys.`,
+  };
+}
+
+const statusLabel: Record<ProductStatus, string | null> = {
+  live: "Live",
+  pilot: "In pilot",
+  "in-development": "In development",
+  unknown: null,
+};
+
+export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
+  const { slug } = await params;
+  const product = getProduct(slug);
+  if (!product) notFound();
+
+  const index = products.indexOf(product);
+  const next = products[(index + 1) % products.length]!;
+  const status = statusLabel[product.status];
+
+  return (
+    <>
+      <header className="border-b border-line">
+        <Container className="pt-10 pb-20 md:pt-14 md:pb-28">
+          <nav aria-label="Breadcrumb" className="font-mono text-label text-ink-muted uppercase">
+            <ol className="flex gap-3">
+              <li>
+                <Link href="/products" className="link-underline">
+                  Products
+                </Link>
+              </li>
+              <li aria-hidden>/</li>
+              <li aria-current="page" className="text-ink">
+                {product.name}
+              </li>
+            </ol>
+          </nav>
+
+          <Grid className="mt-14 items-center gap-y-12 md:mt-20">
+            <div className="col-span-4 md:col-span-6">
+              <h1 className="text-display font-semibold">{product.name}</h1>
+              <Tagline text={product.tagline} accent={product.accent} className="mt-6 text-ink-soft" />
+              <p className="mt-10 max-w-[40ch] text-lead text-ink-soft">
+                {product.summary ?? <Pending need={`${product.name} one-sentence description`} />}
+              </p>
+              <dl className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-small">
+                <div>
+                  <dt className="font-mono text-label text-ink-muted uppercase">Category</dt>
+                  <dd className="mt-2 font-semibold">{product.category ?? <Pending need="Category" />}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-label text-ink-muted uppercase">Status</dt>
+                  <dd className="mt-2 font-semibold">
+                    {status ?? <Pending need="Live / pilot / in development" />}
+                  </dd>
+                </div>
+              </dl>
+              <div className="mt-12 flex flex-wrap gap-4">
+                <ButtonLink
+                  href={`/contact?interest=${product.slug}`}
+                >{`Enquire about ${product.name}`}</ButtonLink>
+                {product.externalUrl ? (
+                  <ButtonLink href={product.externalUrl} variant="secondary" external>
+                    Product website
+                  </ButtonLink>
+                ) : null}
+              </div>
+            </div>
+            <div className="col-span-4 flex aspect-square items-center justify-center rounded-[3px] border border-line bg-surface-alt p-12 md:col-span-5 md:col-start-8">
+              <Image
+                src={product.logo.src}
+                width={product.logo.width}
+                height={product.logo.height}
+                alt={product.logo.alt}
+                preload
+                sizes="(min-width: 768px) 35vw, 80vw"
+                className="h-auto w-auto max-w-[78%] object-contain"
+              />
+            </div>
+          </Grid>
+        </Container>
+      </header>
+
+      <Section>
+        <Grid className="gap-y-14">
+          <div className="col-span-4 md:col-span-5">
+            <Eyebrow index="01">The problem</Eyebrow>
+            <p className="mt-8 text-h3 font-medium">
+              {product.problem ?? <Pending need={`The problem ${product.name} solves, and for whom`} />}
+            </p>
+          </div>
+          <div className="col-span-4 md:col-span-6 md:col-start-7">
+            <Eyebrow index="02">Who it is for</Eyebrow>
+            <p className="mt-8 text-lead text-ink-soft">
+              {product.audience ?? <Pending need="Users: role and type of organisation" />}
+            </p>
+          </div>
+        </Grid>
+      </Section>
+
+      <Section tone="alt">
+        <Grid className="gap-y-12">
+          <div className="col-span-4 md:col-span-4">
+            <Eyebrow index="03">Capabilities</Eyebrow>
+            <Heading className="mt-8">What it does.</Heading>
+          </div>
+          <ul className="col-span-4 md:col-span-7 md:col-start-6">
+            {product.capabilities.length > 0
+              ? product.capabilities.map((capability) => (
+                  <li key={capability} className="border-t border-line-strong py-6 text-lead">
+                    {capability}
+                  </li>
+                ))
+              : Array.from({ length: 4 }, (_, i) => (
+                  <li key={i} className="border-t border-line-strong py-6 text-lead">
+                    <Pending need={`Capability ${i + 1}`} />
+                  </li>
+                ))}
+          </ul>
+        </Grid>
+      </Section>
+
+      <Section>
+        <Eyebrow index="04">In use</Eyebrow>
+        <div className="mt-12 grid gap-6 md:grid-cols-12">
+          <Wireframe
+            label="Primary screenshot"
+            note={`Needs a ${product.name} screenshot (16:10, at least 2400px wide).`}
+            className="aspect-[16/10] md:col-span-8"
+          />
+          <div className="grid gap-6 md:col-span-4">
+            <Wireframe label="Detail screenshot" note="Optional." className="aspect-[4/3]" />
+            <Wireframe label="Detail screenshot" note="Optional." className="aspect-[4/3]" />
+          </div>
+        </div>
+      </Section>
+
+      <Section tone="alt" spacing="compact">
+        <Link href={`/products/${next.slug}`} className="group flex items-center justify-between gap-6">
+          <span>
+            <span className="font-mono text-label text-ink-muted uppercase">Next product</span>
+            <span className="mt-3 block text-h2 font-semibold">
+              <span className="link-underline pb-1">{next.name}</span>
+            </span>
+          </span>
+          <ProductTile
+            product={next}
+            className="size-16 transition-transform duration-(--dur-base) ease-out-expo group-hover:-rotate-3 md:size-20"
+          />
+        </Link>
+      </Section>
+
+      <ClosingCta title={`Talk to us about ${product.name}.`} interest={product.slug} />
+    </>
+  );
+}
