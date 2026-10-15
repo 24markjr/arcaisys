@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { homeCopy, sectors } from "@/content/company";
+import { sectors } from "@/content/company";
 import { getProduct } from "@/content/products";
 import type { Product } from "@/content/types";
 import { ProductTile } from "@/components/brand/product-tile";
@@ -9,21 +9,22 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 
-export function Sectors() {
+/** The three industries Arcaisys serves, with the products in each. */
+export function Sectors({ index = "04" }: { index?: string }) {
   return (
-    <Section tone="alt">
+    <Section>
       <Grid className="mb-16 gap-y-8 md:mb-20">
         <div className="col-span-4 md:col-span-3">
-          <Eyebrow index="04">Sectors</Eyebrow>
+          <Eyebrow index={index}>Sectors</Eyebrow>
         </div>
         <div className="col-span-4 md:col-span-7">
-          <Heading>{homeCopy.sectorsHeadline}</Heading>
+          <Heading>Three industries. One standard.</Heading>
         </div>
       </Grid>
 
       <div
         data-reveal="stagger"
-        className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line md:grid-cols-2"
+        className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line md:grid-cols-3"
       >
         {sectors.map((sector) => {
           const items = sector.products
@@ -31,18 +32,18 @@ export function Sectors() {
             .filter((p): p is Product => Boolean(p));
           return (
             <article
-              key={sector.name.need}
-              className="flex flex-col justify-between gap-12 bg-surface p-8 md:min-h-[22rem] md:p-12"
+              key={sector.name.text}
+              className="flex flex-col justify-between gap-10 bg-surface p-8 md:min-h-[20rem] md:p-10"
             >
               <div>
-                <h3 className="text-h2 font-semibold">
+                <h3 className="text-h3 font-semibold">
                   <Copy field={sector.name} />
                 </h3>
-                <p className="mt-6 max-w-[40ch] text-ink-soft">
+                <p className="mt-5 text-ink-soft">
                   <Copy field={sector.description} />
                 </p>
               </div>
-              <ul className="flex flex-wrap gap-x-8 gap-y-4">
+              <ul className="flex flex-wrap gap-x-6 gap-y-4">
                 {items.map((product) => (
                   <li key={product.slug}>
                     <Link

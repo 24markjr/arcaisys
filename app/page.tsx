@@ -5,12 +5,12 @@ import { HomeHero } from "@/components/sections/home/hero";
 import { CompanyIntro } from "@/components/sections/home/company-intro";
 import { Portfolio } from "@/components/sections/home/portfolio";
 import { Approach } from "@/components/sections/home/approach";
-import { Sectors } from "@/components/sections/home/sectors";
+import { Capabilities } from "@/components/sections/home/capabilities";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { PageTransition } from "@/components/motion/page-transition";
 
 export const metadata: Metadata = {
-  // The root layout supplies the full "Arcaisys — Software products" title.
+  // The root layout supplies the full "Arcaisys — <motto>" title.
   ...pageMetadata({ description: siteConfig.description, path: "/" }),
 };
 
@@ -20,8 +20,8 @@ export default function HomePage() {
       <HomeHero />
       <CompanyIntro />
       <Portfolio />
+      <Capabilities />
       <Approach />
-      <Sectors />
       <ClosingCta />
     </PageTransition>
   );

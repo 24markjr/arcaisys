@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
   if (!product) return {};
   return pageMetadata({
     title: product.name,
-    description: product.summary ?? `${product.name} — ${product.tagline} A product by Arcaisys.`,
+    description: `${product.headline} ${product.summary?.split(". ")[0] ?? ""}.`.replace(/\.\.$/, "."),
     path: `/products/${product.slug}`,
   });
 }
@@ -89,11 +89,18 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
               <h1 {...intro(0, "headline")} className="text-display font-semibold">
                 {product.name}
               </h1>
-              <Tagline text={product.tagline} accent={product.accent} className="mt-6 text-ink-soft" />
+              <p {...intro(1)} className="mt-6 text-h3 font-medium text-ink">
+                {product.headline}
+              </p>
+              <Tagline text={product.tagline} accent={product.accent} className="mt-5 text-ink-muted" />
               <p {...intro(2)} className="mt-10 max-w-[40ch] text-lead text-ink-soft">
                 {product.summary ?? <Pending need={`${product.name} one-sentence description`} />}
               </p>
               <dl {...intro(3)} className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-small">
+                <div>
+                  <dt className="font-mono text-label text-ink-muted uppercase">Sector</dt>
+                  <dd className="mt-2 font-semibold">{product.sector}</dd>
+                </div>
                 <div>
                   <dt className="font-mono text-label text-ink-muted uppercase">Category</dt>
                   <dd className="mt-2 font-semibold">{product.category ?? <Pending need="Category" />}</dd>
@@ -111,7 +118,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 >{`Enquire about ${product.name}`}</ButtonLink>
                 {product.externalUrl ? (
                   <ButtonLink href={product.externalUrl} variant="secondary" external>
-                    Product website
+                    {`Open ${product.name}`}
                   </ButtonLink>
                 ) : null}
               </div>
@@ -155,20 +162,15 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         <Grid className="gap-y-12">
           <div className="col-span-4 md:col-span-4">
             <Eyebrow index="03">Capabilities</Eyebrow>
-            <Heading className="mt-8">What it does.</Heading>
+            <Heading className="mt-8">{product.capabilitiesHeading}</Heading>
           </div>
           <ul data-reveal="stagger" className="col-span-4 md:col-span-7 md:col-start-6">
-            {product.capabilities.length > 0
-              ? product.capabilities.map((capability) => (
-                  <li key={capability} className="border-t border-line-strong py-6 text-lead">
-                    {capability}
-                  </li>
-                ))
-              : Array.from({ length: 4 }, (_, i) => (
-                  <li key={i} className="border-t border-line-strong py-6 text-lead">
-                    <Pending need={`Capability ${i + 1}`} />
-                  </li>
-                ))}
+            {product.capabilities.map((capability) => (
+              <li key={capability.title} className="border-t border-line-strong py-6">
+                <h3 className="text-lead font-semibold text-ink">{capability.title}</h3>
+                <p className="mt-2 text-ink-soft">{capability.body}</p>
+              </li>
+            ))}
           </ul>
         </Grid>
       </Section>

@@ -25,7 +25,7 @@ function walk(where, value) {
 }
 
 for (const [key, value] of Object.entries(companyFacts)) {
-  if (value === null && key !== "linkedin") missing.push(`companyFacts.${key}`); // LinkedIn is optional
+  if (value === null && !["linkedin", "hours"].includes(key)) missing.push(`companyFacts.${key}`); // optional
 }
 walk("homeCopy", homeCopy);
 walk("sectors", sectors);

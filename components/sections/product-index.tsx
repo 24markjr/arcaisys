@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Product } from "@/content/types";
 import { ProductTile } from "@/components/brand/product-tile";
-import { Pending } from "@/components/ui/pending";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { Tagline } from "@/components/ui/tagline";
 
 /**
@@ -28,18 +28,22 @@ export function ProductIndex({ products }: { products: Product[] }) {
               product={product}
               className="size-14 transition-transform duration-(--dur-base) ease-out-expo group-hover:-rotate-3 md:col-span-1 md:size-16"
             />
-            <span className="md:col-span-4">
-              <span className="block text-h2 font-semibold">{product.name}</span>
+            <span className="flex flex-col gap-2 md:col-span-4">
+              <span className="text-h2 font-semibold">{product.name}</span>
+              <span className="font-mono text-label text-ink-muted uppercase">
+                {product.sector} · {product.category}
+              </span>
             </span>
             <ArrowRight
               aria-hidden
               strokeWidth={1.5}
               className="size-6 text-ink-muted transition-[transform,color] duration-(--dur-base) ease-out-expo group-hover:translate-x-1.5 group-hover:text-accent md:order-last md:col-span-1 md:justify-self-end"
             />
-            <span className="col-span-3 flex flex-col gap-2 md:col-span-5">
-              <Tagline text={product.tagline} accent={product.accent} className="text-ink-soft" />
-              <span className="text-small text-ink-muted">
-                {product.category ?? <Pending need={`${product.name} category`} />}
+            <span className="col-span-3 flex flex-col gap-3 md:col-span-5">
+              <span className="text-lead text-ink">{product.headline}</span>
+              <span className="flex flex-wrap items-center gap-x-5 gap-y-2">
+                <StatusBadge status={product.status} />
+                <Tagline text={product.tagline} accent={product.accent} className="text-ink-muted" />
               </span>
             </span>
           </Link>

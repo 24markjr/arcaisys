@@ -5,21 +5,22 @@ import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Section } from "@/components/ui/section";
 
-/** Single editorial statement: what Arcaisys is. No cards, no icons. */
+/** The company statement and why it exists. No cards, no icons. */
 export function CompanyIntro() {
   return (
     <Section>
       <Grid className="gap-y-10">
         <div className="col-span-4 md:col-span-3">
-          <Eyebrow index="01" as="h2">
-            Company
-          </Eyebrow>
+          <Eyebrow index="01">Company</Eyebrow>
         </div>
         <div className="col-span-4 md:col-span-9">
-          <p data-reveal-lines className="text-h2 font-medium text-ink">
+          <h2 data-reveal-lines className="text-h2 font-medium text-ink">
+            <Copy field={homeCopy.introHeading} />
+          </h2>
+          <p data-reveal className="mt-8 max-w-[62ch] text-lead text-ink-soft">
             <Copy field={homeCopy.intro} />
           </p>
-          <ArrowLink href="/about" data-reveal className="mt-12">
+          <ArrowLink href="/about" data-reveal className="mt-10">
             About Arcaisys
           </ArrowLink>
         </div>

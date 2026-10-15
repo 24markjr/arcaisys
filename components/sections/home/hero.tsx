@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { homeCopy } from "@/content/company";
+import { brand, homeCopy } from "@/content/company";
 import { products } from "@/content/products";
 import { AscentGraphic } from "@/components/brand/ribbon";
 import { ProductTile } from "@/components/brand/product-tile";
@@ -18,7 +18,7 @@ export function HomeHero() {
         <Grid className="gap-y-14">
           <div className="relative z-10 col-span-4 md:col-span-7 md:pb-24">
             <Eyebrow index="00" intro={0}>
-              Arcaisys
+              {brand.tagline}
             </Eyebrow>
             <h1 {...intro(1, "headline")} className="mt-8 text-display font-semibold">
               <Copy field={homeCopy.heroHeadline} />

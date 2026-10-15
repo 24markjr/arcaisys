@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { companyFacts } from "@/content/company";
+import { brand, companyFacts } from "@/content/company";
 import { products } from "@/content/products";
 import { siteConfig } from "./site";
 
@@ -37,6 +37,9 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: siteConfig.name,
+    slogan: brand.motto,
+    description: siteConfig.description,
+    foundingDate: companyFacts.foundedIso,
     ...(companyFacts.legalName ? { legalName: companyFacts.legalName } : {}),
     url: siteConfig.url,
     logo: `${siteConfig.url}/brand/arcaisys-lockup.png`,

@@ -1,12 +1,14 @@
 # Production-readiness audit
 
-| Document                                   | Phase | Contents                                                                    |
-| ------------------------------------------ | ----- | --------------------------------------------------------------------------- |
-| [discovery.md](discovery.md)               | 0     | Architecture, routes, data flows, tooling, what doesn't apply               |
-| [decisions.md](decisions.md)               | 0     | Owner decisions (minimal design, dark mode, analytics, WhatsApp, retention) |
-| [findings.md](findings.md)                 | 1     | Findings register with severity, evidence and owner                         |
-| [baseline-results.md](baseline-results.md) | 1     | Measured Lighthouse, accessibility, security and test results               |
-| [data-inventory.md](data-inventory.md)     | 4     | Personal data, storage, processors, rights-request process                  |
+| Document                                       | Phase | Contents                                                                    |
+| ---------------------------------------------- | ----- | --------------------------------------------------------------------------- |
+| [discovery.md](discovery.md)                   | 0     | Architecture, routes, data flows, tooling, what doesn't apply               |
+| [decisions.md](decisions.md)                   | 0     | Owner decisions (minimal design, dark mode, analytics, WhatsApp, retention) |
+| [findings.md](findings.md)                     | 1     | Findings register with severity, evidence and owner                         |
+| [baseline-results.md](baseline-results.md)     | 1     | Measured Lighthouse, accessibility, security and test results               |
+| [data-inventory.md](data-inventory.md)         | 4     | Personal data, storage, processors, rights-request process                  |
+| [final-report.md](final-report.md)             | 11    | Executive summary, test results, readiness verdict                          |
+| [../owner-checklist.md](../owner-checklist.md) | 11    | Everything Arcaisys needs to provide before launch                          |
 
 ## Baseline verdict (Phase 1)
 

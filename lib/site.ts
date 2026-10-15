@@ -5,9 +5,10 @@ export const siteConfig = {
   name: "Arcaisys",
   /** Production domain confirmed by Arcaisys on 2026-10-15. Override per environment. */
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://arcaisys.com").replace(/\/$/, ""),
-  tagline: "Software products",
-  // Meta description fallback — replace with approved copy once supplied.
-  description: "Arcaisys is a software company based in Mumbai, building Hospio, Meridian, PACS and RestoQR.",
+  /** The company motto — used in the default page title. */
+  tagline: "Intelligent software, built for the real world.",
+  description:
+    "Arcaisys builds AI-powered operating systems for hospitality, healthcare and software engineering — RestoQR, PACS, Hospio and Meridian.",
   locale: "en",
   /** Static so pages stay fully prerendered; update yearly or at launch. */
   copyrightYear: 2026,

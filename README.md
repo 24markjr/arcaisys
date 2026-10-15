@@ -65,6 +65,9 @@ must not be filled with invented text. Items with `confirmed: false` are not yet
   hardening, secret-scan hook): done
 - Audit phase 6 (accessibility re-audit) and 7 (strict 404s, breadcrumbs, performance
   evidence): done
+- Audit phases 8 (analytics), 9 (CI), 10 (live verification), 11 (final report): done —
+  **see `docs/audit/final-report.md` and `docs/owner-checklist.md`**
+- Content: all page copy published (from the company brief); product screenshots pending
 
 Striped markers on the site are content still needed from Arcaisys.
 

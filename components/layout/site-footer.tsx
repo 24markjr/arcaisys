@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { companyFacts, homeCopy } from "@/content/company";
+import { brand, companyFacts, homeCopy } from "@/content/company";
+import { Tagline } from "@/components/ui/tagline";
 import { footerNav } from "@/content/navigation";
 import { siteConfig } from "@/lib/site";
 import { Logo } from "@/components/brand/logo";
@@ -19,6 +20,7 @@ export function SiteFooter() {
           <p className="mt-8 max-w-[34ch] text-small text-ink-inverse-soft">
             <Copy field={homeCopy.footerDescriptor} />
           </p>
+          <Tagline text={brand.tagline} className="mt-6 text-ink-inverse" accent="var(--brand-orange)" />
           <StudioLine coordinates={companyFacts.coordinates} className="mt-6 text-ink-inverse-soft" />
         </div>
 

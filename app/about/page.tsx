@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/seo";
 import type { ReactNode } from "react";
-import { aboutCopy, companyFacts } from "@/content/company";
+import { pageMetadata } from "@/lib/seo";
+import { aboutCopy, brand, companyFacts, pillars } from "@/content/company";
 import { products } from "@/content/products";
 import { Grid } from "@/components/ui/container";
 import { Copy } from "@/components/ui/copy";
@@ -9,25 +9,27 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { Pending } from "@/components/ui/pending";
 import { Section } from "@/components/ui/section";
+import { Tagline } from "@/components/ui/tagline";
 import { PageHeader } from "@/components/sections/page-header";
-import { Approach } from "@/components/sections/home/approach";
+import { Sectors } from "@/components/sections/home/sectors";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { PageTransition } from "@/components/motion/page-transition";
 
 export const metadata: Metadata = pageMetadata({
   title: "About",
-  description: "Who Arcaisys is, why the company exists and how it builds software.",
+  description:
+    "Arcaisys Private Limited is an AI-powered software company in Mumbai, founded in 2026, building operating systems for hospitality, healthcare and software engineering.",
   path: "/about",
 });
 
 export default function AboutPage() {
-  // Facts table: each value is either supplied or explicitly pending.
   const facts: { label: string; value: ReactNode }[] = [
-    { label: "Company", value: companyFacts.legalName ?? <Pending need="Registered legal name (B4)" /> },
-    { label: "Founded", value: companyFacts.founded ?? <Pending need="Year founded (B2)" /> },
-    { label: "Headquarters", value: companyFacts.location ?? <Pending need="City, country (B3)" /> },
-    { label: "Products", value: products.map((p) => p.name).join(", ") },
+    { label: "Company", value: companyFacts.legalName ?? <Pending need="Registered legal name" /> },
+    { label: "Founded", value: companyFacts.founded ?? <Pending need="Founding date" /> },
+    { label: "Headquarters", value: companyFacts.location ?? <Pending need="City, country" /> },
+    { label: "Markets", value: companyFacts.markets },
     { label: "Sectors", value: <Copy field={aboutCopy.sectorsFact} /> },
+    { label: "Products", value: products.map((p) => p.name).join(", ") },
   ];
 
   return (
@@ -44,20 +46,49 @@ export default function AboutPage() {
             <Eyebrow index="01">Origin</Eyebrow>
           </div>
           <div className="col-span-4 space-y-6 text-lead text-ink-soft md:col-span-7">
-            <p className="text-h3 font-medium text-ink">
+            <h2 data-reveal-lines className="text-h2 font-medium text-ink">
               <Copy field={aboutCopy.origin} />
-            </p>
-            <p>
+            </h2>
+            <p data-reveal>
               <Copy field={aboutCopy.story} />
+            </p>
+            <p data-reveal>
+              <Copy field={aboutCopy.story2} />
             </p>
           </div>
         </Grid>
       </Section>
 
       <Section tone="alt">
+        <Grid className="mb-14 gap-y-8">
+          <div className="col-span-4 md:col-span-3">
+            <Eyebrow index="02">What we stand for</Eyebrow>
+          </div>
+          <div className="col-span-4 md:col-span-8">
+            <Heading>Three commitments behind every product.</Heading>
+            <Tagline text={brand.tagline} className="mt-6 text-ink-soft" />
+          </div>
+        </Grid>
+        <ol
+          data-reveal="stagger"
+          className="grid gap-px overflow-hidden rounded-[3px] border border-line bg-line md:grid-cols-3"
+        >
+          {pillars.map((pillar, i) => (
+            <li key={pillar.title} className="flex flex-col gap-4 bg-surface-alt p-8 md:p-10">
+              <span aria-hidden className="font-mono text-label text-accent tabular-nums">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-h3 font-semibold">{pillar.title}</h3>
+              <p className="text-ink-soft">{pillar.body}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section>
         <Grid className="gap-y-10">
           <div className="col-span-4 md:col-span-3">
-            <Eyebrow index="02">At a glance</Eyebrow>
+            <Eyebrow index="03">At a glance</Eyebrow>
           </div>
           <dl className="col-span-4 md:col-span-9">
             {facts.map((fact) => (
@@ -73,16 +104,16 @@ export default function AboutPage() {
         </Grid>
       </Section>
 
-      <Approach />
+      <Sectors index="04" />
 
       <Section tone="alt">
         <Grid className="gap-y-10">
           <div className="col-span-4 md:col-span-3">
-            <Eyebrow index="04">Direction</Eyebrow>
+            <Eyebrow index="05">Direction</Eyebrow>
           </div>
           <div className="col-span-4 md:col-span-7">
             <Heading>Where we are going.</Heading>
-            <p className="mt-8 text-lead text-ink-soft">
+            <p data-reveal className="mt-8 text-lead text-ink-soft">
               <Copy field={aboutCopy.direction} />
             </p>
           </div>

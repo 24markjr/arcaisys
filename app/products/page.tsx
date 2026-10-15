@@ -11,6 +11,8 @@ import { Tagline } from "@/components/ui/tagline";
 import { PageHeader } from "@/components/sections/page-header";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { cn } from "@/lib/cn";
+import { ArrowUpRight } from "lucide-react";
+import { StatusBadge } from "@/components/ui/status-badge";
 import { ProductFrame, FrameSkeleton } from "@/components/brand/product-frame";
 import { ProductLogo, productPlate } from "@/components/brand/product-logo";
 import { PageTransition } from "@/components/motion/page-transition";
@@ -83,13 +85,36 @@ export default function ProductsPage() {
                     {String(i + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}
                   </p>
                   <h2 className="mt-6 text-h1 font-semibold">{product.name}</h2>
-                  <Tagline text={product.tagline} accent={product.accent} className="mt-5 text-ink-soft" />
-                  <p className="mt-8 text-lead text-ink-soft">
+                  <p className="mt-4 text-h3 font-medium text-ink">{product.headline}</p>
+                  <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+                    <StatusBadge status={product.status} />
+                    <span className="font-mono text-label text-ink-muted uppercase">
+                      {product.sector} · {product.category}
+                    </span>
+                  </div>
+                  <p className="mt-8 text-ink-soft">
                     {product.summary ?? <Pending need={`${product.name} one-paragraph description`} />}
                   </p>
-                  <ArrowLink href={`/products/${product.slug}`} className="mt-10">
-                    {`Explore ${product.name}`}
-                  </ArrowLink>
+                  <Tagline text={product.tagline} accent={product.accent} className="mt-6 text-ink-muted" />
+                  <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+                    <ArrowLink href={`/products/${product.slug}`}>{`Explore ${product.name}`}</ArrowLink>
+                    {product.externalUrl ? (
+                      <a
+                        href={product.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-2 text-small font-semibold text-ink"
+                      >
+                        <span className="link-underline pb-0.5">{`Open ${product.name}`}</span>
+                        <ArrowUpRight
+                          aria-hidden
+                          strokeWidth={1.75}
+                          className="size-4 transition-transform duration-(--dur-base) ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                        <span className="sr-only">(opens in a new tab)</span>
+                      </a>
+                    ) : null}
+                  </div>
                 </div>
               </Grid>
             </Container>

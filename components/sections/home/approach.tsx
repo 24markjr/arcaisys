@@ -1,25 +1,28 @@
-import { homeCopy } from "@/content/company";
+import { brand, homeCopy } from "@/content/company";
 import { Grid } from "@/components/ui/container";
 import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 
-/**
- * How Arcaisys builds. Sticky heading on the left, numbered principles on the right.
- * Principles must be concrete practices supplied by Arcaisys (questionnaire B6).
- */
-export function Approach({ index = "03" }: { index?: string }) {
+/** How Arcaisys builds. Sticky heading and principle on the left, numbered steps on the right. */
+export function Approach({ index = "04" }: { index?: string }) {
   return (
-    <Section>
+    <Section tone="alt">
       <Grid className="gap-y-14">
         <div className="col-span-4 md:col-span-5">
           <div className="md:sticky md:top-[calc(var(--header-h)+3rem)]">
             <Eyebrow index={index}>Approach</Eyebrow>
-            <Heading className="mt-8">How we build.</Heading>
-            <p className="mt-6 max-w-[36ch] text-ink-soft">
+            <Heading className="mt-8">{homeCopy.approachHeading}</Heading>
+            <p data-reveal className="mt-6 max-w-[38ch] text-ink-soft">
               <Copy field={homeCopy.approachIntro} />
             </p>
+            <figure data-reveal className="mt-10 border-l-2 border-accent pl-5">
+              <blockquote className="text-h3 font-semibold">“{brand.principle}”</blockquote>
+              <figcaption className="mt-3 text-small text-ink-muted">
+                The principle behind everything we ship.
+              </figcaption>
+            </figure>
           </div>
         </div>
         <ol data-reveal="stagger" className="col-span-4 md:col-span-6 md:col-start-7">

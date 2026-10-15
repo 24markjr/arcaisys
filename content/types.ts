@@ -27,15 +27,21 @@ export type ProductStatus = "live" | "pilot" | "in-development" | "unknown";
 export type Product = {
   slug: string;
   name: string;
-  /** Tagline exactly as it appears in the product logo. */
+  /** Tagline exactly as it appears in the product logo (brand action marks). */
   tagline: string;
+  /** One-line positioning statement, e.g. "The operating system for the modern hospital." */
+  headline: string;
+  /** Industry the product serves (matches a sector in content/company.ts). */
+  sector: string;
   /** Short category label, e.g. "Hospital management". */
   category: string | null;
-  /** One-paragraph description supplied by Arcaisys. */
+  /** One-paragraph description. */
   summary: string | null;
   audience: string | null;
   problem: string | null;
-  capabilities: string[];
+  /** Heading for the capabilities section on the product page. */
+  capabilitiesHeading: string;
+  capabilities: { title: string; body: string }[];
   status: ProductStatus;
   externalUrl: string | null;
   logo: BrandImage;
