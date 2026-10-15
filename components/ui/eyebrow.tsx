@@ -9,6 +9,8 @@ type EyebrowProps = {
   tone?: "default" | "inverse";
   /** Part of the opening sequence (CSS entrance at this step) instead of a scroll reveal. */
   intro?: number;
+  /** Render as a heading when the section has no other heading (screen-reader navigation). */
+  as?: "p" | "h2";
   className?: string;
 };
 
@@ -16,9 +18,16 @@ type EyebrowProps = {
  * Section label: index, hairline rule, uppercase label.
  * Echoes the rule-flanked taglines of the product logos.
  */
-export function Eyebrow({ children, index, tone = "default", intro, className }: EyebrowProps) {
+export function Eyebrow({
+  children,
+  index,
+  tone = "default",
+  intro,
+  as: Tag = "p",
+  className,
+}: EyebrowProps) {
   return (
-    <p
+    <Tag
       {...(intro === undefined ? { "data-reveal": "" } : introProps(intro))}
       className={cn(
         "flex items-center gap-3 font-mono text-label uppercase",
@@ -26,9 +35,13 @@ export function Eyebrow({ children, index, tone = "default", intro, className }:
         className,
       )}
     >
-      {index ? <span className="text-accent tabular-nums">{index}</span> : null}
+      {index ? (
+        <span aria-hidden className="text-accent tabular-nums">
+          {index}
+        </span>
+      ) : null}
       <span aria-hidden className="h-px w-8 bg-current opacity-50" />
       <span>{children}</span>
-    </p>
+    </Tag>
   );
 }

@@ -17,7 +17,7 @@ function copy(need: string, text: string | null = null, approved = false): CopyF
 
 /** Company facts. null = not yet supplied (shown as Pending). Supplied by Arcaisys 2026-10-15. */
 export const companyFacts = {
-  legalName: null as string | null, // B4
+  legalName: "Arcaisys Private Limited" as string | null, // B4 — confirmed 2026-10-15
   founded: null as string | null, // B2
   location: "Mumbai, India" as string | null, // B3
   contactEmail: "pm.teams@arcaisys.com" as string | null, // G1

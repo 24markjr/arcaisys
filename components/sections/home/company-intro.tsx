@@ -11,7 +11,9 @@ export function CompanyIntro() {
     <Section>
       <Grid className="gap-y-10">
         <div className="col-span-4 md:col-span-3">
-          <Eyebrow index="01">Company</Eyebrow>
+          <Eyebrow index="01" as="h2">
+            Company
+          </Eyebrow>
         </div>
         <div className="col-span-4 md:col-span-9">
           <p data-reveal-lines className="text-h2 font-medium text-ink">

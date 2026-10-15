@@ -89,7 +89,7 @@ export function LegalPage({ document }: { document: LegalDocument }) {
               {document.sections.map((section, i) => (
                 <li key={section.heading} className="border-t border-line pt-8">
                   <h2 className="flex gap-4 text-h3 font-semibold">
-                    <span className="mt-1.5 font-mono text-label text-accent tabular-nums">
+                    <span aria-hidden className="mt-1.5 font-mono text-label text-accent tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {section.heading}

@@ -36,7 +36,8 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: companyFacts.legalName ?? siteConfig.name,
+    name: siteConfig.name,
+    ...(companyFacts.legalName ? { legalName: companyFacts.legalName } : {}),
     url: siteConfig.url,
     logo: `${siteConfig.url}/brand/arcaisys-lockup.png`,
     ...(companyFacts.contactEmail ? { email: companyFacts.contactEmail } : {}),
@@ -44,5 +45,19 @@ export function organizationJsonLd() {
     ...(companyFacts.address ? { address: { "@type": "PostalAddress", ...companyFacts.postalAddress } } : {}),
     ...(companyFacts.linkedin ? { sameAs: [companyFacts.linkedin] } : {}),
     brand: products.map((product) => ({ "@type": "Brand", name: product.name })),
+  };
+}
+
+/** BreadcrumbList structured data, matching the visible breadcrumb on the page. */
+export function breadcrumbJsonLd(trail: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${siteConfig.url}${item.path}`,
+    })),
   };
 }

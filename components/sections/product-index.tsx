@@ -18,7 +18,10 @@ export function ProductIndex({ products }: { products: Product[] }) {
             href={`/products/${product.slug}`}
             className="group grid grid-cols-[auto_1fr_auto] items-center gap-x-5 gap-y-3 py-8 md:grid-cols-12 md:gap-x-8 md:py-10"
           >
-            <span className="hidden font-mono text-label text-ink-muted tabular-nums md:col-span-1 md:block">
+            <span
+              aria-hidden
+              className="hidden font-mono text-label text-ink-muted tabular-nums md:col-span-1 md:block"
+            >
               {String(i + 1).padStart(2, "0")}
             </span>
             <ProductTile

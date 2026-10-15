@@ -20,10 +20,8 @@ export const legalTerms = {
     "24 months after our last correspondence with you",
   ),
   hosting: term("Hosting provider once chosen (Vercel recommended)", "our website hosting provider"),
-  mailbox: term(
-    "Provider of the pm.teams@arcaisys.com mailbox (e.g. Google Workspace, Microsoft 365, Zoho)",
-    "our email provider",
-  ),
+  // Confirmed 2026-10-15: arcaisys.com mail is hosted by Hostinger (public MX records).
+  mailbox: term("Provider of the pm.teams@arcaisys.com mailbox", "Hostinger", true),
   responseTime: term("Time to respond to data requests (legal review)", "within 30 days"),
   grievance: term(
     "Named grievance officer or team for DPDP purposes (legal review)",

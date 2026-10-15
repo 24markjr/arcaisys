@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { THEME_STORAGE_KEY, type Theme } from "@/lib/theme";
 import { cn } from "@/lib/cn";
@@ -14,15 +14,6 @@ function subscribe(onChange: () => void) {
 const getTheme = (): Theme => (document.documentElement.dataset.theme === "dark" ? "dark" : "light");
 const getServerTheme = (): Theme | null => null;
 
-function storedTheme(): Theme | null {
-  try {
-    const value = localStorage.getItem(THEME_STORAGE_KEY);
-    return value === "dark" || value === "light" ? value : null;
-  } catch {
-    return null;
-  }
-}
-
 function applyTheme(next: Theme) {
   const set = () => {
     document.documentElement.dataset.theme = next;
@@ -35,26 +26,17 @@ function applyTheme(next: Theme) {
 
 /**
  * Light/dark switch. Both icons are rendered and CSS shows the right one, so the
- * server HTML always matches the client. Until the visitor chooses, the site
- * follows (and keeps following) the system setting.
+ * server HTML always matches the client. Light is the default; the device's
+ * dark-mode setting is not followed.
  */
 export function ThemeToggle({ className }: { className?: string }) {
   const theme = useSyncExternalStore(subscribe, getTheme, getServerTheme);
-
-  useEffect(() => {
-    const media = matchMedia("(prefers-color-scheme: dark)");
-    const follow = () => {
-      if (!storedTheme()) document.documentElement.dataset.theme = media.matches ? "dark" : "light";
-    };
-    media.addEventListener("change", follow);
-    return () => media.removeEventListener("change", follow);
-  }, []);
 
   function toggle() {
     const next: Theme = getTheme() === "dark" ? "light" : "dark";
     applyTheme(next);
     try {
-      localStorage.setItem(THEME_STORAGE_KEY, next);
+      sessionStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {
       // Storage blocked (private mode): the switch still works for this visit.
     }

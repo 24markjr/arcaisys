@@ -21,7 +21,7 @@ for (const width of widths) {
   });
   // THEME=dark|light pre-sets the stored theme choice before any page script runs.
   if (process.env.THEME) {
-    await page.addInitScript((t) => localStorage.setItem("arcaisys-theme", t), process.env.THEME);
+    await page.addInitScript((t) => sessionStorage.setItem("arcaisys-theme", t), process.env.THEME);
   }
   const errors = [];
   let current = "";

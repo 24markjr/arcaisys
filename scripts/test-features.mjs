@@ -16,7 +16,7 @@ const watch = (page) => {
 };
 
 // ---- Theme ----------------------------------------------------------------
-// 1. Follows the system setting when nothing is stored, from the very first paint.
+// 1. Light by default even when the device is set to dark (owner decision).
 let ctx = await browser.newContext({ colorScheme: "dark" });
 let page = await ctx.newPage();
 watch(page);
@@ -27,23 +27,15 @@ await page.addInitScript(() => {
 });
 await page.goto(base + "/", { waitUntil: "networkidle" });
 check(
-  "system dark → dark theme before first paint",
-  (await page.evaluate(() => window.__themeAtDomReady)) === "dark",
+  "device set to dark → site still light before first paint",
+  (await page.evaluate(() => window.__themeAtDomReady)) === "light",
 );
 check(
-  "dark surface actually applied",
-  (await page.evaluate(() => getComputedStyle(document.body).backgroundColor)) === "rgb(11, 17, 25)",
+  "light surface actually applied",
+  (await page.evaluate(() => getComputedStyle(document.body).backgroundColor)) === "rgb(255, 255, 255)",
 );
 
-// 2. Follows a live system change while no choice is stored.
-await page.emulateMedia({ colorScheme: "light" });
-await page.waitForTimeout(200);
-check(
-  "live system change followed (no stored choice)",
-  (await page.evaluate(() => document.documentElement.dataset.theme)) === "light",
-);
-
-// 3. Toggle, aria-pressed, persistence across reload, and stored choice beats system.
+// 2. Toggle, aria-pressed, persistence across reload.
 const toggle = page.locator("header nav button[aria-pressed]");
 await toggle.click();
 await page.waitForTimeout(400);
@@ -54,12 +46,34 @@ check(
 check("toggle reports aria-pressed=true", (await toggle.getAttribute("aria-pressed")) === "true");
 await page.reload({ waitUntil: "networkidle" });
 check("choice persists after reload", (await page.evaluate(() => window.__themeAtDomReady)) === "dark");
-await page.emulateMedia({ colorScheme: "light" });
-await page.waitForTimeout(200);
 check(
-  "stored choice not overridden by system change",
-  (await page.evaluate(() => document.documentElement.dataset.theme)) === "dark",
+  "dark surface actually applied",
+  (await page.evaluate(() => getComputedStyle(document.body).backgroundColor)) === "rgb(11, 17, 25)",
 );
+await toggle.click();
+await page.waitForTimeout(400);
+await page.reload({ waitUntil: "networkidle" });
+check("switching back to light persists", (await page.evaluate(() => window.__themeAtDomReady)) === "light");
+await toggle.click();
+await page.waitForTimeout(400);
+// A new visit (fresh tab/session) must open in light even after choosing dark.
+const visit2 = await ctx.newPage();
+await visit2.goto(base + "/", { waitUntil: "networkidle" });
+check(
+  "a new visit always opens in light",
+  (await visit2.evaluate(() => document.documentElement.dataset.theme)) === "light",
+);
+await visit2.close();
+// A preference saved by the old version (localStorage) is ignored and cleared.
+await page.evaluate(() => localStorage.setItem("arcaisys-theme", "dark"));
+const visit3 = await ctx.newPage();
+await visit3.goto(base + "/", { waitUntil: "networkidle" });
+check(
+  "old saved dark preference ignored and cleared",
+  (await visit3.evaluate(() => document.documentElement.dataset.theme)) === "light" &&
+    (await visit3.evaluate(() => localStorage.getItem("arcaisys-theme"))) === null,
+);
+await visit3.close();
 await ctx.close();
 
 // 4. Storage blocked: toggle still works for the visit.
@@ -67,7 +81,7 @@ ctx = await browser.newContext();
 page = await ctx.newPage();
 watch(page);
 await page.addInitScript(() => {
-  Object.defineProperty(window, "localStorage", {
+  Object.defineProperty(window, "sessionStorage", {
     get() {
       throw new Error("blocked");
     },

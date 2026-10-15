@@ -17,9 +17,9 @@ The website itself has **no database** and stores no submissions.
 
 ## Cookies and browser storage
 
-| Item             | Type           | Purpose                     | Essential?              | Sent to us?                   |
-| ---------------- | -------------- | --------------------------- | ----------------------- | ----------------------------- |
-| `arcaisys-theme` | `localStorage` | Remembers light/dark choice | Preference (functional) | No — never leaves the browser |
+| Item             | Type             | Purpose                                   | Essential?              | Sent to us?                   |
+| ---------------- | ---------------- | ----------------------------------------- | ----------------------- | ----------------------------- |
+| `arcaisys-theme` | `sessionStorage` | Remembers light/dark choice for the visit | Preference (functional) | No — never leaves the browser |
 
 **Cookies: none. Analytics: none. Advertising or tracking pixels: none. Third-party requests on
 page load: none** (measured on every route, both themes). Fonts are self-hosted.

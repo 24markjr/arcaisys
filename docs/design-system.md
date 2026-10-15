@@ -60,10 +60,10 @@ the Phase 6 animation.
 
 ## Themes (Phase 2)
 
-Light is the designed default; dark is offered through the header toggle and follows the
-system setting until the visitor chooses. The choice is stored in `localStorage`
-(`arcaisys-theme`) — a preference, not tracking. An inline script applies it before first
-paint (`lib/theme.ts`), so there is no flash; without JavaScript the site stays light.
+Every visit opens in the light theme — the device's dark-mode setting is deliberately not
+followed (owner decision D2). Dark is available from the header toggle and lasts for that
+visit (`sessionStorage`, key `arcaisys-theme`); an inline script applies it before first paint
+(`lib/theme.ts`), so there is no flash.
 
 Components use **role tokens**, never raw colours, so both themes stay correct:
 

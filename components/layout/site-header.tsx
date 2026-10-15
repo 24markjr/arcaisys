@@ -23,7 +23,7 @@ export function SiteHeader() {
       </a>
       <Container className="flex h-(--header-h) items-center justify-between gap-8">
         <Link href="/" aria-label="Arcaisys — home" className="shrink-0">
-          <Logo size="sm" preload />
+          <Logo size="nav" preload />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-10 md:flex">

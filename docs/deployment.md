@@ -45,6 +45,20 @@ sends from its test address (`onboarding@resend.dev`) and only to the account ow
 3. Wait for **Verified**, then set `CONTACT_FROM_EMAIL` to an address on that domain and redeploy.
 4. Submit the contact form once on the live site and confirm the email arrives.
 
+### Mail DNS already in place (checked 2026-10-15)
+
+`arcaisys.com` mail is hosted by **Hostinger** (MX `mx1/mx2.hostinger.com`, SPF
+`v=spf1 include:_spf.mail.hostinger.com ~all`). A domain may have only **one** SPF record:
+keep Resend on its default `send.arcaisys.com` subdomain records so the root SPF and the
+Hostinger mailbox are untouched. If you ever send from the root domain via Resend, merge
+both `include:` entries into the single existing SPF record instead of adding a second one.
+
+### Current Vercel project
+
+A Vercel deployment exists at `arcaisys-mu.vercel.app` (seen 2026-10-15). Set the environment
+variables above in that project, then redeploy; until they are set the contact form reports
+that email is not connected.
+
 ## 5. Launch checklist
 
 - [ ] `npm run content:audit -- --strict` passes (no missing content, no unapproved drafts)

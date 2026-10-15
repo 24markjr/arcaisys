@@ -48,11 +48,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1119" },
-  ],
-  colorScheme: "light dark",
+  // Light by default regardless of the device setting; dark only via the toggle.
+  themeColor: "#ffffff",
+  colorScheme: "light",
 };
 
 /**

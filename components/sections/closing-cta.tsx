@@ -19,7 +19,9 @@ export function ClosingCta({ title = "Start a conversation.", interest }: Closin
   return (
     <section className="relative overflow-hidden bg-surface-ink text-ink-inverse">
       <RibbonLine className="absolute inset-x-0 top-0 opacity-90" />
-      <Container className="relative pt-40 pb-24 md:pt-56 md:pb-32">
+      {/* The ribbon is 15% of the viewport width tall; start the content below it so
+          the label never sits on the stroke. */}
+      <Container className="relative pt-[max(9rem,calc(15vw+3.5rem))] pb-24 md:pb-32">
         <Grid className="gap-y-10">
           <div className="col-span-4 md:col-span-8">
             <Eyebrow tone="inverse">Contact</Eyebrow>

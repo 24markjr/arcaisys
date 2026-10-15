@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
 import { intro } from "@/lib/motion";
 import { getProduct, products } from "@/content/products";
 import type { ProductStatus } from "@/content/types";
@@ -59,6 +60,13 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
   return (
     <PageTransition>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Products", path: "/products" },
+          { name: product.name, path: `/products/${product.slug}` },
+        ])}
+      />
       <header className="relative overflow-hidden border-b border-line">
         <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
         <Container className="relative pt-10 pb-20 md:pt-14 md:pb-28">

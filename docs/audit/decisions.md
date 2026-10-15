@@ -1,12 +1,12 @@
 # Decisions log
 
-| ID  | Date       | Decision                                                                                                     | Source   | Consequence                                                                                                             |
-| --- | ---------- | ------------------------------------------------------------------------------------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------- |
-| D1  | 2026-10-15 | **Keep the design minimal.** Add a technical character without adding much.                                  | Owner    | Phase 2 uses a reduced set — see below. WebGL ribbon dropped.                                                           |
-| D2  | 2026-10-15 | **Add a light/dark theme toggle.**                                                                           | Owner    | Defaults to the visitor's system setting, remembers their choice, no flash on load. Light remains the designed default. |
-| D3  | 2026-10-15 | **Analytics: Vercel Web Analytics (cookieless)** — recommended; owner unsure. Confirm before Phase 8.        | Proposed | No consent banner needed. Meta _Pixel_ not added (would need consent).                                                  |
-| D4  | 2026-10-15 | **WhatsApp Business** on +91 91378 15600.                                                                    | Owner    | Add a click-to-chat link (`wa.me/919137815600`) on contact page and footer.                                             |
-| D5  | 2026-10-15 | **Enquiry retention: 24 months** from last correspondence, then deleted — proposed default; owner undecided. | Proposed | Goes into the privacy-policy draft, marked for legal review.                                                            |
+| ID  | Date       | Decision                                                                                                                              | Source   | Consequence                                                                  |
+| --- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------- |
+| D1  | 2026-10-15 | **Keep the design minimal.** Add a technical character without adding much.                                                           | Owner    | Phase 2 uses a reduced set — see below. WebGL ribbon dropped.                |
+| D2  | 2026-10-15 | **Light/dark toggle; every visit opens in light.** Device dark setting ignored; the toggle's choice lasts for the current visit only. | Owner    | `sessionStorage`, applied before first paint; old saved preferences cleared. |
+| D3  | 2026-10-15 | **Analytics: Vercel Web Analytics (cookieless)** — recommended; owner unsure. Confirm before Phase 8.                                 | Proposed | No consent banner needed. Meta _Pixel_ not added (would need consent).       |
+| D4  | 2026-10-15 | **WhatsApp Business** on +91 91378 15600.                                                                                             | Owner    | Add a click-to-chat link (`wa.me/919137815600`) on contact page and footer.  |
+| D5  | 2026-10-15 | **Enquiry retention: 24 months** from last correspondence, then deleted — proposed default; owner undecided.                          | Proposed | Goes into the privacy-policy draft, marked for legal review.                 |
 
 ## D1 — what "minimal" means for Phase 2 (implemented 2026-10-15)
 

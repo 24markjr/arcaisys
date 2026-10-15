@@ -3,14 +3,14 @@ import { arcaisysBrand } from "@/content/brand";
 import { cn } from "@/lib/cn";
 
 type LogoProps = {
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "nav" | "md" | "lg";
   /** Preload in the header, where it is above the fold on every page. */
   preload?: boolean;
   className?: string;
 };
 
-const markHeights = { sm: "h-7", md: "h-9", lg: "h-14" } as const;
-const wordHeights = { sm: "h-[11px]", md: "h-[14px]", lg: "h-[22px]" } as const;
+const markHeights = { sm: "h-7", nav: "h-10", md: "h-9", lg: "h-14" } as const;
+const wordHeights = { sm: "h-[11px]", nav: "h-[16px]", md: "h-[14px]", lg: "h-[22px]" } as const;
 
 /**
  * Horizontal Arcaisys lockup built from the supplied artwork: mark + wordmark.

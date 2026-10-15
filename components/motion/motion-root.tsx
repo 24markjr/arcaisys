@@ -100,6 +100,18 @@ export function MotionRoot() {
                 delay: firstLoad ? 0.35 : 0.1,
               }),
           });
+          // Keyboard focus must never land on a still-transparent element (WCAG 2.4.7):
+          // reveal a block immediately when focus enters it.
+          const blockSet = new Set<Element>(blocks);
+          const revealOnFocus = (event: FocusEvent) => {
+            for (let el = event.target as Element | null; el; el = el.parentElement) {
+              if (blockSet.has(el)) {
+                gsap.to(el, { opacity: 1, y: 0, duration: 0.15, overwrite: true });
+                return;
+              }
+            }
+          };
+          document.addEventListener("focusin", revealOnFocus);
 
           // 4. Signature graphic: construction lines draw, ribbon sweeps, chevron settles.
           gsap.utils.toArray<SVGSVGElement>("[data-ascent]").forEach((svg) => {
@@ -166,6 +178,8 @@ export function MotionRoot() {
               );
             });
           }
+
+          return () => document.removeEventListener("focusin", revealOnFocus);
         },
       );
 
