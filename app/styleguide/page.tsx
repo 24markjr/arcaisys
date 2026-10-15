@@ -5,6 +5,9 @@ import { products } from "@/content/products";
 import { AscentGraphic, RibbonLine } from "@/components/brand/ribbon";
 import { Logo } from "@/components/brand/logo";
 import { ProductTile } from "@/components/brand/product-tile";
+import { FrameSkeleton, ProductFrame } from "@/components/brand/product-frame";
+import { StudioLine } from "@/components/brand/studio-line";
+import { companyFacts } from "@/content/company";
 import { ArrowLink, ButtonLink } from "@/components/ui/button";
 import { Container, Grid } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -340,6 +343,33 @@ export default function StyleguidePage() {
         <p className="mt-6 max-w-[60ch] text-small text-ink-soft">
           Striped markers flag everything not yet supplied or approved. None may remain at launch.
         </p>
+      </Block>
+
+      <Block index="11" title="Technical detail">
+        <div className="grid gap-8 md:grid-cols-2">
+          <ProductFrame label="Hospio" bodyClassName="aspect-[16/10]">
+            <FrameSkeleton />
+          </ProductFrame>
+          <div className="relative overflow-hidden rounded-[3px] border border-line">
+            <div aria-hidden className="blueprint absolute inset-0" />
+            <p className="relative p-6 text-small text-ink-soft">
+              Blueprint grid — behind the hero and page headers only, fading toward the edges.
+            </p>
+          </div>
+        </div>
+        <StudioLine coordinates={companyFacts.coordinates} className="mt-8 text-ink-muted" />
+        <ul className="mt-8 max-w-[64ch] space-y-2 text-small text-ink-soft">
+          <li>
+            Product frame: thin border, three hollow marks, the product name. Shows real screenshots once
+            supplied; until then an outline labelled “Screenshots to come”.
+          </li>
+          <li>Corner ticks mark where sections meet. A hairline under the header shows reading progress.</li>
+          <li>Studio line: Mumbai, office coordinates and the live time in IST.</li>
+          <li>
+            Theme: light by default, dark on request or by system setting (toggle in the header). Form fields
+            use a dedicated border colour that meets the 3:1 non-text contrast requirement in both themes.
+          </li>
+        </ul>
       </Block>
     </PageTransition>
   );

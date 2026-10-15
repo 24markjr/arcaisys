@@ -16,8 +16,9 @@ type PageHeaderProps = {
 /** Opening block for inner pages. The homepage has its own hero. */
 export function PageHeader({ eyebrow, title, lead, aside, children }: PageHeaderProps) {
   return (
-    <header className="border-b border-line bg-surface pt-16 pb-20 md:pt-24 md:pb-28">
-      <Container>
+    <header className="relative overflow-hidden border-b border-line bg-surface pt-16 pb-20 md:pt-24 md:pb-28">
+      <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
+      <Container className="relative">
         <Grid className="items-end gap-y-12">
           <div className={aside ? "col-span-4 md:col-span-7" : "col-span-4 md:col-span-10"}>
             <Eyebrow intro={0}>{eyebrow}</Eyebrow>

@@ -26,7 +26,7 @@ export function Eyebrow({ children, index, tone = "default", intro, className }:
         className,
       )}
     >
-      {index ? <span className="text-brand-red tabular-nums">{index}</span> : null}
+      {index ? <span className="text-accent tabular-nums">{index}</span> : null}
       <span aria-hidden className="h-px w-8 bg-current opacity-50" />
       <span>{children}</span>
     </p>

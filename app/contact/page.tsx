@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import { companyFacts, contactCopy } from "@/content/company";
+import { ArrowUpRight } from "lucide-react";
 import { Grid } from "@/components/ui/container";
+import { CopyButton } from "@/components/ui/copy-button";
+import { StudioLine } from "@/components/brand/studio-line";
 import { Copy } from "@/components/ui/copy";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Pending } from "@/components/ui/pending";
@@ -28,11 +31,14 @@ export default function ContactPage() {
           <aside className="col-span-4 space-y-10 md:col-span-4">
             <div>
               <Eyebrow>Email</Eyebrow>
-              <p className="mt-4 text-lead font-medium">
+              <p className="mt-4 flex flex-wrap items-center gap-x-2 text-lead font-medium">
                 {companyFacts.contactEmail ? (
-                  <a href={`mailto:${companyFacts.contactEmail}`} className="link-underline">
-                    {companyFacts.contactEmail}
-                  </a>
+                  <>
+                    <a href={`mailto:${companyFacts.contactEmail}`} className="link-underline">
+                      {companyFacts.contactEmail}
+                    </a>
+                    <CopyButton value={companyFacts.contactEmail} label="email address" />
+                  </>
                 ) : (
                   <Pending need="Public enquiry email (G1)" />
                 )}
@@ -40,26 +46,53 @@ export default function ContactPage() {
             </div>
             <div>
               <Eyebrow>Phone</Eyebrow>
-              <p className="mt-4 text-lead font-medium">
+              <p className="mt-4 flex flex-wrap items-center gap-x-2 text-lead font-medium">
                 {companyFacts.phone ? (
-                  <a href={companyFacts.phoneHref} className="link-underline">
-                    {companyFacts.phone}
-                  </a>
+                  <>
+                    <a href={companyFacts.phoneHref} className="link-underline">
+                      {companyFacts.phone}
+                    </a>
+                    <CopyButton value={companyFacts.phoneHref.replace("tel:", "")} label="phone number" />
+                  </>
                 ) : (
                   <Pending need="Phone number (G2)" />
                 )}
               </p>
             </div>
+            {companyFacts.whatsapp ? (
+              <div>
+                <Eyebrow>WhatsApp</Eyebrow>
+                <p className="mt-4 text-lead font-medium">
+                  <a
+                    href={`https://wa.me/${companyFacts.whatsapp}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2"
+                  >
+                    <span className="link-underline pb-0.5">Message us on WhatsApp</span>
+                    <ArrowUpRight
+                      aria-hidden
+                      className="size-4 transition-transform duration-(--dur-base) ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      strokeWidth={1.75}
+                    />
+                    <span className="sr-only">(opens WhatsApp)</span>
+                  </a>
+                </p>
+              </div>
+            ) : null}
             <div>
               <Eyebrow>Office</Eyebrow>
               {companyFacts.address ? (
-                <address className="mt-4 text-lead leading-relaxed font-medium not-italic">
-                  {companyFacts.address.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </address>
+                <>
+                  <address className="mt-4 text-lead leading-relaxed font-medium not-italic">
+                    {companyFacts.address.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </address>
+                  <StudioLine coordinates={companyFacts.coordinates} className="mt-5 text-ink-muted" />
+                </>
               ) : (
                 <p className="mt-4 text-lead font-medium">
                   <Pending need="Office address (G3)" />

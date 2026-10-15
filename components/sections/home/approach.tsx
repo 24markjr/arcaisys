@@ -28,7 +28,7 @@ export function Approach({ index = "03" }: { index?: string }) {
               key={principle.title.need}
               className="grid grid-cols-[3rem_1fr] border-t border-line py-10 first:border-t-0 first:pt-0"
             >
-              <span className="font-mono text-label text-brand-red tabular-nums">
+              <span className="font-mono text-label text-accent tabular-nums">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>

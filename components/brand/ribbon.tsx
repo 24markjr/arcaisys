@@ -79,7 +79,7 @@ export function AscentGraphic({ className }: { className?: string }) {
       <path data-ribbon d={RIBBON} fill={`url(#${grad})`} />
 
       {/* The floating chevron from the mark */}
-      <path data-chevron d="M842 420 L 878 393 L 912 452 Z" fill="var(--brand-deep)" />
+      <path data-chevron d="M842 420 L 878 393 L 912 452 Z" fill="var(--chevron)" />
     </svg>
   );
 }

@@ -1,11 +1,11 @@
 import Image from "next/image";
 import type { Product } from "@/content/types";
-import { Wireframe } from "@/components/ui/wireframe";
+import { FrameSkeleton, ProductFrame } from "@/components/brand/product-frame";
 import { cn } from "@/lib/cn";
 
 /**
- * Product screenshots: the first image large, up to two more beside it.
- * Shows labelled slots until screenshots are added to content/products.ts.
+ * Product screenshots in application frames: the first large, up to two more beside it.
+ * Until screenshots are added to content/products.ts, the frames show a labelled outline.
  */
 export function ProductGallery({ product }: { product: Product }) {
   const [primary, ...details] = product.screenshots;
@@ -13,23 +13,24 @@ export function ProductGallery({ product }: { product: Product }) {
   if (!primary) {
     return (
       <div className="grid gap-6 md:grid-cols-12">
-        <Wireframe
-          label="Primary screenshot"
-          note={`Needs a ${product.name} screenshot (16:10, at least 2400px wide) in public/products/${product.slug}/.`}
-          className="aspect-[16/10] md:col-span-8"
-        />
-        <div className="grid gap-6 md:col-span-4">
-          <Wireframe label="Detail screenshot" note="Optional." className="aspect-[4/3]" />
-          <Wireframe label="Detail screenshot" note="Optional." className="aspect-[4/3]" />
+        <ProductFrame label={product.name} className="md:col-span-8" bodyClassName="aspect-[16/10]">
+          <FrameSkeleton />
+        </ProductFrame>
+        <div className="hidden gap-6 md:col-span-4 md:grid">
+          <ProductFrame label="Detail" bodyClassName="aspect-[4/3]">
+            <FrameSkeleton caption="" />
+          </ProductFrame>
+          <ProductFrame label="Detail" bodyClassName="aspect-[4/3]">
+            <FrameSkeleton caption="" />
+          </ProductFrame>
         </div>
       </div>
     );
   }
 
-  const frame = "overflow-hidden rounded-[3px] border border-line bg-surface-alt";
   return (
     <div className="grid gap-6 md:grid-cols-12">
-      <figure className={cn(frame, details.length ? "md:col-span-8" : "md:col-span-12")}>
+      <ProductFrame label={product.name} className={details.length ? "md:col-span-8" : "md:col-span-12"}>
         <Image
           src={primary.src}
           width={primary.width}
@@ -38,11 +39,11 @@ export function ProductGallery({ product }: { product: Product }) {
           sizes="(min-width: 768px) 66vw, 100vw"
           className="h-auto w-full"
         />
-      </figure>
+      </ProductFrame>
       {details.length ? (
-        <div className="grid content-start gap-6 md:col-span-4">
+        <div className={cn("grid content-start gap-6 md:col-span-4")}>
           {details.slice(0, 2).map((shot) => (
-            <figure key={shot.src} className={frame}>
+            <ProductFrame key={shot.src} label="Detail">
               <Image
                 src={shot.src}
                 width={shot.width}
@@ -51,7 +52,7 @@ export function ProductGallery({ product }: { product: Product }) {
                 sizes="(min-width: 768px) 33vw, 100vw"
                 className="h-auto w-full"
               />
-            </figure>
+            </ProductFrame>
           ))}
         </div>
       ) : null}

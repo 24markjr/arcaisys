@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/seo";
@@ -7,6 +6,8 @@ import { intro } from "@/lib/motion";
 import { getProduct, products } from "@/content/products";
 import type { ProductStatus } from "@/content/types";
 import { ProductTile } from "@/components/brand/product-tile";
+import { ProductLogo, productPlate } from "@/components/brand/product-logo";
+import { cn } from "@/lib/cn";
 import { ButtonLink } from "@/components/ui/button";
 import { Container, Grid } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -58,8 +59,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
   return (
     <PageTransition>
-      <header className="border-b border-line">
-        <Container className="pt-10 pb-20 md:pt-14 md:pb-28">
+      <header className="relative overflow-hidden border-b border-line">
+        <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
+        <Container className="relative pt-10 pb-20 md:pt-14 md:pb-28">
           <nav aria-label="Breadcrumb" className="font-mono text-label text-ink-muted uppercase">
             <ol className="flex gap-3">
               <li>
@@ -108,13 +110,13 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             </div>
             <div
               {...intro(2)}
-              className="col-span-4 flex aspect-square items-center justify-center rounded-[3px] border border-line bg-surface-alt p-12 md:col-span-5 md:col-start-8"
+              className={cn(
+                "col-span-4 flex aspect-square items-center justify-center rounded-[3px] border border-line p-12 md:col-span-5 md:col-start-8",
+                productPlate(product),
+              )}
             >
-              <Image
-                src={product.logo.src}
-                width={product.logo.width}
-                height={product.logo.height}
-                alt={product.logo.alt}
+              <ProductLogo
+                product={product}
                 preload
                 sizes="(min-width: 768px) 35vw, 80vw"
                 className="h-auto w-auto max-w-[78%] object-contain"

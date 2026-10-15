@@ -3,6 +3,7 @@ import { companyFacts, homeCopy } from "@/content/company";
 import { footerNav } from "@/content/navigation";
 import { siteConfig } from "@/lib/site";
 import { Logo } from "@/components/brand/logo";
+import { StudioLine } from "@/components/brand/studio-line";
 import { Container } from "@/components/ui/container";
 import { Copy } from "@/components/ui/copy";
 import { Pending } from "@/components/ui/pending";
@@ -18,6 +19,7 @@ export function SiteFooter() {
           <p className="mt-8 max-w-[34ch] text-small text-ink-inverse-soft">
             <Copy field={homeCopy.footerDescriptor} />
           </p>
+          <StudioLine coordinates={companyFacts.coordinates} className="mt-6 text-ink-inverse-soft" />
         </div>
 
         <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-7">
@@ -53,6 +55,16 @@ export function SiteFooter() {
             {companyFacts.phone ? (
               <a href={companyFacts.phoneHref} className="link-underline">
                 {companyFacts.phone}
+              </a>
+            ) : null}
+            {companyFacts.whatsapp ? (
+              <a
+                href={`https://wa.me/${companyFacts.whatsapp}`}
+                className="link-underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp
               </a>
             ) : null}
             {companyFacts.linkedin ? (

@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
 import { NavLinks, NavList } from "./nav-links";
 import { MobileMenu } from "./mobile-menu";
+import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
   return (
@@ -16,7 +17,7 @@ export function SiteHeader() {
     >
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-ink-inverse"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-action focus:px-4 focus:py-2 focus:text-on-action"
       >
         Skip to content
       </a>
@@ -29,13 +30,21 @@ export function SiteHeader() {
           <Suspense fallback={<NavList items={primaryNav} className="flex gap-8 text-small font-medium" />}>
             <NavLinks items={primaryNav} className="flex gap-8 text-small font-medium" />
           </Suspense>
-          <ButtonLink href={contactCta.href} className="h-10 px-5">
-            {contactCta.label}
-          </ButtonLink>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <ButtonLink href={contactCta.href} className="h-10 px-5">
+              {contactCta.label}
+            </ButtonLink>
+          </div>
         </nav>
 
-        <MobileMenu items={primaryNav} cta={contactCta} />
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <MobileMenu items={primaryNav} cta={contactCta} />
+        </div>
       </Container>
+      {/* Reading progress: a hairline in the ribbon gradient, driven by CSS scroll timelines. */}
+      <div aria-hidden className="scroll-progress" />
     </header>
   );
 }

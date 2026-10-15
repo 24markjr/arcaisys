@@ -93,7 +93,7 @@ function ContactFormInner({ defaultInterest, onReset }: ContactFormProps & { onR
         data-contact-success
         className="rounded-[3px] border border-line bg-surface-alt p-8 md:p-12"
       >
-        <span className="inline-flex size-10 items-center justify-center rounded-full bg-ink text-ink-inverse">
+        <span className="inline-flex size-10 items-center justify-center rounded-full bg-action text-on-action">
           <Check aria-hidden className="size-5" strokeWidth={2} />
         </span>
         <h2 ref={successRef} tabIndex={-1} className="mt-8 text-h3 font-semibold outline-none">
@@ -125,7 +125,7 @@ function ContactFormInner({ defaultInterest, onReset }: ContactFormProps & { onR
     className: cn(
       "mt-3 block w-full rounded-[3px] border bg-surface px-4 py-3.5 text-body text-ink transition-colors duration-(--dur-fast)",
       "placeholder:text-ink-muted hover:border-ink-muted focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2",
-      errors[name] ? "border-brand-red" : "border-line-strong",
+      errors[name] ? "border-accent" : "border-field",
     ),
   });
 
@@ -141,7 +141,7 @@ function ContactFormInner({ defaultInterest, onReset }: ContactFormProps & { onR
         <div
           role="alert"
           data-contact-alert
-          className="border-l-2 border-brand-red bg-surface-alt px-5 py-4 text-small sm:col-span-2"
+          className="border-l-2 border-accent bg-surface-alt px-5 py-4 text-small sm:col-span-2"
         >
           {state.message}
         </div>
@@ -220,7 +220,7 @@ function ContactFormInner({ defaultInterest, onReset }: ContactFormProps & { onR
           type="submit"
           disabled={pending}
           aria-disabled={pending}
-          className="group inline-flex h-12 shrink-0 items-center justify-center gap-3 rounded-[3px] bg-ink px-7 text-small font-semibold text-ink-inverse transition-colors duration-(--dur-fast) hover:bg-ink-navy disabled:cursor-progress disabled:opacity-70"
+          className="group inline-flex h-12 shrink-0 items-center justify-center gap-3 rounded-[3px] bg-action px-7 text-small font-semibold text-on-action transition-colors duration-(--dur-fast) hover:bg-action-hover disabled:cursor-progress disabled:opacity-70"
         >
           {pending ? "Sending…" : "Send message"}
           {pending ? (
@@ -267,7 +267,7 @@ function Field({
       </label>
       {children}
       {error ? (
-        <p id={`contact-${name}-error`} className="mt-2 text-small text-brand-red">
+        <p id={`contact-${name}-error`} className="mt-2 text-small text-accent">
           {error}
         </p>
       ) : null}

@@ -13,6 +13,7 @@ import { intro } from "@/lib/motion";
 export function HomeHero() {
   return (
     <section className="relative overflow-hidden border-b border-line">
+      <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
       <Container className="relative pt-14 md:pt-24">
         <Grid className="gap-y-14">
           <div className="relative z-10 col-span-4 md:col-span-7 md:pb-24">

@@ -39,6 +39,8 @@ export type Product = {
   status: ProductStatus;
   externalUrl: string | null;
   logo: BrandImage;
+  /** Logo with a white wordmark for the dark theme. Null when none exists (RestoQR). */
+  logoReversed: BrandImage | null;
   /** Symbol-only mark (transparent). Null when no separate icon was supplied. */
   symbol: BrandImage | null;
   /** White rounded app-icon tile, as supplied. */

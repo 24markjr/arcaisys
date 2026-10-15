@@ -57,6 +57,34 @@ gradient, and the floating chevron is kept. Used in the hero and on the 404 page
 alone (`RibbonLine`) opens every closing CTA. Paths carry `data-draw` / `data-ribbon` hooks for
 the Phase 6 animation.
 
+## Themes (Phase 2)
+
+Light is the designed default; dark is offered through the header toggle and follows the
+system setting until the visitor chooses. The choice is stored in `localStorage`
+(`arcaisys-theme`) — a preference, not tracking. An inline script applies it before first
+paint (`lib/theme.ts`), so there is no flash; without JavaScript the site stays light.
+
+Components use **role tokens**, never raw colours, so both themes stay correct:
+
+| Token                  | Role                                     | Light             | Dark              |
+| ---------------------- | ---------------------------------------- | ----------------- | ----------------- |
+| `accent`               | Accent text, focus ring, errors          | `#D81018` (5.2:1) | `#FF5C61` (6.3:1) |
+| `action` / `on-action` | Primary button                           | ink / off-white   | off-white / ink   |
+| `on-inverse`           | Text on light buttons in the dark panels | `#0F1622`         | `#0F1622`         |
+| `field-border`         | Form field outlines (WCAG 1.4.11, 3:1)   | `#8A8F99`         | `#5F6876`         |
+| `panel-art`            | Panel behind product artwork             | white             | `#0F1620`         |
+| `chevron`              | Floating chevron in the hero mark        | brand deep        | brand red         |
+
+Product logos switch to their reversed (white wordmark) versions in dark mode
+(`components/brand/product-logo.tsx`). RestoQR has none yet, so it keeps a white plate.
+
+## Technical detail (Phase 2, minimal by decision D1)
+
+Blueprint grid behind the hero and page headers (`.blueprint`); corner ticks where sections
+meet (`.section-ticks`); a reading-progress hairline under the header (CSS scroll timeline, no
+JavaScript); product frames with a labelled outline until screenshots exist; the studio line
+(Mumbai, coordinates, live IST). Nothing else was added.
+
 ## Motion (Phase 6)
 
 One vocabulary, two engines, never both on the same element.

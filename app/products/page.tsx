@@ -11,6 +11,8 @@ import { Tagline } from "@/components/ui/tagline";
 import { PageHeader } from "@/components/sections/page-header";
 import { ClosingCta } from "@/components/sections/closing-cta";
 import { cn } from "@/lib/cn";
+import { ProductFrame, FrameSkeleton } from "@/components/brand/product-frame";
+import { ProductLogo, productPlate } from "@/components/brand/product-logo";
 import { PageTransition } from "@/components/motion/page-transition";
 
 export const metadata: Metadata = pageMetadata({
@@ -37,23 +39,42 @@ export default function ProductsPage() {
           >
             <Container className="py-20 md:py-28">
               <Grid className="items-center gap-y-12">
-                <div
-                  data-reveal
-                  className={cn(
-                    "col-span-4 flex aspect-[4/3] items-center justify-center rounded-[3px] border border-line bg-white p-10 md:col-span-6 md:p-16",
-                    reversed && "md:order-last md:col-start-7",
-                  )}
+                <ProductFrame
+                  label={product.name}
+                  data-reveal=""
+                  className={cn("col-span-4 md:col-span-6", reversed && "md:order-last md:col-start-7")}
+                  bodyClassName="aspect-[16/10]"
                 >
-                  <Image
-                    src={product.logo.src}
-                    width={product.logo.width}
-                    height={product.logo.height}
-                    alt={product.logo.alt}
-                    sizes="(min-width: 768px) 40vw, 80vw"
-                    data-parallax="0.12"
-                    className="h-auto max-h-full w-auto max-w-[70%] object-contain"
-                  />
-                </div>
+                  {product.screenshots[0] ? (
+                    <Image
+                      src={product.screenshots[0].src}
+                      width={product.screenshots[0].width}
+                      height={product.screenshots[0].height}
+                      alt={product.screenshots[0].alt}
+                      sizes="(min-width: 768px) 45vw, 90vw"
+                      className="h-full w-full object-cover object-top"
+                    />
+                  ) : (
+                    <>
+                      <FrameSkeleton />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div
+                          data-parallax="0.12"
+                          className={cn(
+                            "flex w-[46%] items-center justify-center rounded-[3px] border border-line p-[5%] shadow-[0_1px_0_var(--line)]",
+                            productPlate(product),
+                          )}
+                        >
+                          <ProductLogo
+                            product={product}
+                            sizes="(min-width: 768px) 20vw, 40vw"
+                            className="h-auto w-full"
+                          />
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </ProductFrame>
                 <div
                   data-reveal
                   className={cn("col-span-4 md:col-span-5", reversed ? "md:col-start-1" : "md:col-start-8")}

@@ -19,6 +19,10 @@ for (const width of widths) {
     viewport: { width, height: 900 },
     reducedMotion: process.env.REDUCED ? "reduce" : "no-preference",
   });
+  // THEME=dark|light pre-sets the stored theme choice before any page script runs.
+  if (process.env.THEME) {
+    await page.addInitScript((t) => localStorage.setItem("arcaisys-theme", t), process.env.THEME);
+  }
   const errors = [];
   let current = "";
   page.on("pageerror", (e) => errors.push(`${current}: ${e.message}`));
@@ -48,7 +52,7 @@ for (const width of widths) {
       console.log(`  broken images on ${route}: ${broken.join(", ")}`);
     }
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-    const name = `${route === "/" ? "home" : route.slice(1).replaceAll("/", "_")}-${width}.png`;
+    const name = `${route === "/" ? "home" : route.slice(1).replaceAll("/", "_")}-${width}${process.env.THEME ? `-${process.env.THEME}` : ""}.png`;
     await page.screenshot({ path: join(out, name), fullPage: true });
     const status = overflow > 0 ? `OVERFLOW ${overflow}px` : "ok";
     if (overflow > 0) failures++;

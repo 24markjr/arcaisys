@@ -19,6 +19,8 @@ npm run format       # format all files
 npm run content:audit  # list content still missing or awaiting approval
 npm run test:form    # end-to-end contact form tests (after npm run build)
 node scripts/test-motion.mjs http://localhost:3000   # motion + navigation checks (server running)
+node scripts/test-features.mjs http://localhost:3000 # theme, copy, WhatsApp, back-to-top, print
+npm run audit:browser -- http://localhost:3000       # axe + links + privacy (THEME=dark for dark)
 node scripts/screenshot.mjs http://localhost:3000 screenshots   # visual QA + overflow check (uses installed Chrome)
 ```
 
@@ -54,6 +56,8 @@ must not be filled with invented text. Items with `confirmed: false` are not yet
   copy still to come** — see `docs/content-guide.md` and run `npm run content:audit`
 - Phase 6 — motion: done (`docs/design-system.md` → Motion)
 - Phase 7 — SEO and launch readiness: done — **deploy and launch steps in `docs/deployment.md`**
+- Audit phases 0–1 (discovery, baseline findings): done — `docs/audit/`
+- Audit phase 2 (minimal technical layer, dark mode) and 3 (copy, WhatsApp, back-to-top, print): done
 
 Striped markers on the site are content still needed from Arcaisys.
 

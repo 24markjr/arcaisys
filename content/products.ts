@@ -21,6 +21,7 @@ export const products: Product[] = [
     externalUrl: null,
     screenshots: [],
     logo: { src: "/brand/hospio-logo.png", width: 1200, height: 1011, alt: "Hospio" },
+    logoReversed: { src: "/brand/hospio-logo-reversed.png", width: 1200, height: 1011, alt: "Hospio" },
     symbol: { src: "/brand/hospio-symbol.png", width: 640, height: 503, alt: "" },
     tile: { src: "/brand/hospio-tile.png", width: 512, height: 512, alt: "" },
     accent: "#CC1E30",
@@ -39,6 +40,7 @@ export const products: Product[] = [
     externalUrl: null,
     screenshots: [],
     logo: { src: "/brand/meridian-logo.png", width: 1200, height: 949, alt: "Meridian" },
+    logoReversed: { src: "/brand/meridian-logo-reversed.png", width: 1200, height: 949, alt: "Meridian" },
     symbol: { src: "/brand/meridian-symbol.png", width: 592, height: 592, alt: "" },
     tile: { src: "/brand/meridian-tile.png", width: 512, height: 512, alt: "" },
     accent: "#EA541E",
@@ -57,6 +59,7 @@ export const products: Product[] = [
     externalUrl: null,
     screenshots: [],
     logo: { src: "/brand/pacs-logo.png", width: 1200, height: 878, alt: "PACS" },
+    logoReversed: { src: "/brand/pacs-logo-reversed.png", width: 1200, height: 878, alt: "PACS" },
     symbol: { src: "/brand/pacs-symbol.png", width: 594, height: 594, alt: "" },
     tile: { src: "/brand/pacs-tile.png", width: 512, height: 512, alt: "" },
     accent: "#F6721E",
@@ -75,6 +78,7 @@ export const products: Product[] = [
     externalUrl: null,
     screenshots: [],
     logo: { src: "/brand/restoqr-logo.png", width: 933, height: 724, alt: "RestoQR" },
+    logoReversed: null, // needs a redraw first (docs/audit/findings.md F-11)
     symbol: null, // no separate icon supplied
     tile: null,
     accent: "#FC6C00",

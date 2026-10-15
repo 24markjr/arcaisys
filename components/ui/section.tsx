@@ -43,6 +43,7 @@ export function Section({
       )}
       {...props}
     >
+      <span aria-hidden className="section-ticks" />
       {bleed ? children : <Container>{children}</Container>}
     </section>
   );

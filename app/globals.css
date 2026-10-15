@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* `dark:` follows the site theme (html[data-theme]), not only the OS setting. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /*
  * Arcaisys design tokens.
  * Colour values are sampled from the supplied logo files — see docs/brand-notes.md
@@ -22,6 +25,17 @@
   --ink-muted: #686d79;
   --ink-inverse: #f5f3f0;
   --ink-inverse-soft: #a3a9b4;
+
+  /* Roles — what a colour is for, so both themes stay correct */
+  --accent: #d81018; /* accent text, focus ring, errors — 5.2:1 on white */
+  --action: #0f1622; /* primary button */
+  --action-hover: #0e1b2e;
+  --on-action: #f5f3f0;
+  --on-inverse: #0f1622; /* text on light buttons inside the always-dark panels */
+  --field-border: #8a8f99; /* form fields — 3.25:1 on white (WCAG 1.4.11) */
+  --panel-art: #ffffff; /* panel behind product artwork */
+  --grid-line: rgb(15 22 34 / 0.045); /* blueprint grid */
+  --chevron: var(--brand-deep); /* the mark's floating chevron in the hero graphic */
 
   /* Brand — sampled from Arcaisys-Logo.png */
   --brand-amber: #f89818;
@@ -49,6 +63,41 @@
   --dur-fast: 180ms;
   --dur-base: 420ms;
   --dur-slow: 900ms;
+
+  color-scheme: light;
+}
+
+/*
+ * Dark theme. Set on <html data-theme="dark"> by the inline script in app/layout.tsx
+ * (stored choice, otherwise the system setting) before first paint. Surfaces keep the
+ * navy cast of the product family; the closing panel and footer go a step darker than
+ * the page so they still read as a separate band. Contrast checked: ink 16.5:1,
+ * soft 9.2:1, muted 6.3:1, accent 6.3:1 on the page surface.
+ */
+:root[data-theme="dark"] {
+  --surface: #0b1119;
+  --surface-alt: #0f1620;
+  --surface-sunken: #151d29;
+  --surface-ink: #060a10;
+  --line: #1c2531;
+  --line-strong: #2a3442;
+  --line-ink: #1c2531;
+
+  --ink: #edeff2;
+  --ink-navy: #e3e7ed;
+  --ink-soft: #aeb5c0;
+  --ink-muted: #8d95a2;
+
+  --accent: #ff5c61;
+  --action: #edeff2;
+  --action-hover: #ffffff;
+  --on-action: #0b1119;
+  --field-border: #5f6876;
+  --panel-art: #0f1620;
+  --grid-line: rgb(237 239 242 / 0.04);
+  --chevron: var(--brand-red);
+
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -66,6 +115,14 @@
   --color-ink-muted: var(--ink-muted);
   --color-ink-inverse: var(--ink-inverse);
   --color-ink-inverse-soft: var(--ink-inverse-soft);
+
+  --color-accent: var(--accent);
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
+  --color-on-action: var(--on-action);
+  --color-on-inverse: var(--on-inverse);
+  --color-field: var(--field-border);
+  --color-panel-art: var(--panel-art);
 
   --color-brand-amber: var(--brand-amber);
   --color-brand-orange: var(--brand-orange);
@@ -140,7 +197,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--brand-red);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -299,5 +356,121 @@ dialog[open].menu-panel li:nth-child(3) {
   from {
     opacity: 0;
     translate: 0 16px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Technical detail (Phase 2) — kept deliberately faint.
+ * ------------------------------------------------------------------------- */
+
+/* Blueprint grid behind the hero and page headers. Fades out toward the edges. */
+.blueprint {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-position: -1px -1px;
+  mask-image: radial-gradient(ellipse 85% 75% at 30% 40%, #000 35%, transparent 100%);
+}
+
+/* Corner ticks where one section meets the next, aligned to the content edges. */
+.section-ticks {
+  position: absolute;
+  top: -4.5px;
+  inset-inline: max(var(--gutter), calc((100% - var(--content-max)) / 2 + var(--gutter)));
+  height: 9px;
+  pointer-events: none;
+}
+.section-ticks::before,
+.section-ticks::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  background:
+    linear-gradient(var(--line-strong), var(--line-strong)) center / 1px 100% no-repeat,
+    linear-gradient(var(--line-strong), var(--line-strong)) center / 100% 1px no-repeat;
+}
+.section-ticks::before {
+  left: -4.5px;
+}
+.section-ticks::after {
+  right: -4.5px;
+}
+
+/* Reading progress under the header: a CSS scroll timeline, no JavaScript.
+   Hidden where scroll timelines aren't supported, and for reduced motion. */
+.scroll-progress {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      display: block;
+      position: absolute;
+      inset-inline: 0;
+      bottom: -1px;
+      height: 1px;
+      background: var(--brand-gradient);
+      transform-origin: 0 50%;
+      animation: scroll-progress linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Print (Phase 3): legal pages and anything else print as plain documents.
+ * ------------------------------------------------------------------------- */
+@media print {
+  :root,
+  :root[data-theme="dark"] {
+    --surface: #fff;
+    --surface-alt: #fff;
+    --ink: #000;
+    --ink-soft: #222;
+    --ink-muted: #444;
+    color-scheme: light;
+  }
+  [data-site-header],
+  footer,
+  [data-print-hide],
+  .section-ticks,
+  .scroll-progress,
+  [data-ascent],
+  [data-sweep] {
+    display: none !important;
+  }
+  [data-intro],
+  [data-reveal],
+  [data-reveal] > *,
+  [data-reveal-lines] {
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
+  .blueprint {
+    background: none;
+  }
+  main a[href^="http"]::after,
+  main a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+  }
+  section,
+  header {
+    break-inside: avoid-page;
+    padding-block: 1rem !important;
   }
 }

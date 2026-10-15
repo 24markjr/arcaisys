@@ -4,9 +4,9 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const variants = {
-  primary: "bg-ink text-ink-inverse hover:bg-ink-navy",
+  primary: "bg-action text-on-action hover:bg-action-hover",
   secondary: "border border-line-strong text-ink hover:border-ink",
-  inverse: "bg-ink-inverse text-ink hover:bg-white",
+  inverse: "bg-ink-inverse text-on-inverse hover:bg-white",
   "inverse-outline": "border border-line-ink text-ink-inverse hover:border-ink-inverse",
 } as const;
 

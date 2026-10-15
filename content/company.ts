@@ -34,6 +34,13 @@ export const companyFacts = {
     addressRegion: "Maharashtra",
     addressCountry: "IN",
   },
+  /** WhatsApp Business number, digits only with country code (confirmed 2026-10-15). */
+  whatsapp: "919137815600" as string | null,
+  /** Approximate office coordinates (Bhandup West, Mumbai) for the studio line. */
+  coordinates: "19.14° N, 72.94° E",
+  timeZone: "Asia/Kolkata",
+  /** Business hours and expected response time — not supplied; nothing is shown until set. */
+  hours: null as string | null,
   linkedin: null as string | null, // G4
 };
 

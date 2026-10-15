@@ -31,7 +31,7 @@ export function ProductIndex({ products }: { products: Product[] }) {
             <ArrowRight
               aria-hidden
               strokeWidth={1.5}
-              className="size-6 text-ink-muted transition-[transform,color] duration-(--dur-base) ease-out-expo group-hover:translate-x-1.5 group-hover:text-brand-red md:order-last md:col-span-1 md:justify-self-end"
+              className="size-6 text-ink-muted transition-[transform,color] duration-(--dur-base) ease-out-expo group-hover:translate-x-1.5 group-hover:text-accent md:order-last md:col-span-1 md:justify-self-end"
             />
             <span className="col-span-3 flex flex-col gap-2 md:col-span-5">
               <Tagline text={product.tagline} accent={product.accent} className="text-ink-soft" />

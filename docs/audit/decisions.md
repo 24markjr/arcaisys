@@ -8,7 +8,7 @@
 | D4  | 2026-10-15 | **WhatsApp Business** on +91 91378 15600.                                                                    | Owner    | Add a click-to-chat link (`wa.me/919137815600`) on contact page and footer.                                             |
 | D5  | 2026-10-15 | **Enquiry retention: 24 months** from last correspondence, then deleted — proposed default; owner undecided. | Proposed | Goes into the privacy-policy draft, marked for legal review.                                                            |
 
-## D1 — what "minimal" means for Phase 2 (proposed)
+## D1 — what "minimal" means for Phase 2 (implemented 2026-10-15)
 
 Keep — quiet, structural, true:
 

@@ -24,7 +24,7 @@ export default function Error({ error, retry }: { error: Error & { digest?: stri
           <button
             type="button"
             onClick={() => retry()}
-            className="inline-flex h-12 items-center gap-3 rounded-[3px] bg-ink px-6 text-small font-semibold text-ink-inverse transition-colors hover:bg-ink-navy"
+            className="inline-flex h-12 items-center gap-3 rounded-[3px] bg-action px-6 text-small font-semibold text-on-action transition-colors hover:bg-action-hover"
           >
             Try again
             <RotateCw aria-hidden className="size-4" strokeWidth={1.75} />

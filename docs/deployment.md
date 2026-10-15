@@ -15,13 +15,14 @@ Next.js without configuration); any Node.js 20.9+ host that supports Next.js als
 
 ## 2. Environment variables
 
-| Variable               | Production value                          | Notes                                                                            |
-| ---------------------- | ----------------------------------------- | -------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL` | `https://arcaisys.com`                    | Canonical URLs, sitemap, social images. No trailing slash.                       |
-| `RESEND_API_KEY`       | from resend.com                           | Secret. **Create a new key before launch** — the current one was shared in chat. |
-| `CONTACT_TO_EMAIL`     | `pm.teams@arcaisys.com`                   | Where enquiries arrive. Comma-separate to add more.                              |
-| `CONTACT_FROM_EMAIL`   | `Arcaisys Website <website@arcaisys.com>` | Only works after the domain is verified in Resend (step 4).                      |
-| `SITE_INDEXABLE`       | `true` — **only at launch**               | Until set, every page is `noindex` and robots.txt disallows all.                 |
+| Variable                   | Production value                          | Notes                                                                                 |
+| -------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`     | `https://arcaisys.com`                    | Canonical URLs, sitemap, social images. No trailing slash.                            |
+| `RESEND_API_KEY`           | from resend.com                           | Secret. **Create a new key before launch** — the current one was shared in chat.      |
+| `CONTACT_TO_EMAIL`         | `pm.teams@arcaisys.com`                   | Where enquiries arrive. Comma-separate to add more.                                   |
+| `CONTACT_FROM_EMAIL`       | `Arcaisys Website <website@arcaisys.com>` | Only works after the domain is verified in Resend (step 4).                           |
+| `META_DOMAIN_VERIFICATION` | code from Meta Business Suite             | Optional. Adds the `facebook-domain-verification` tag for Meta business verification. |
+| `SITE_INDEXABLE`           | `true` — **only at launch**               | Until set, every page is `noindex` and robots.txt disallows all.                      |
 
 Never commit these values. Locally they live in `.env.local` (git-ignored).
 

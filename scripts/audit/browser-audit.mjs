@@ -39,6 +39,10 @@ const internalLinks = new Set();
 
 const browser = await chromium.launch({ channel: "chrome" });
 const context = await browser.newContext();
+// THEME=dark|light audits that theme (stored choice set before any page script runs).
+if (process.env.THEME) {
+  await context.addInitScript((t) => localStorage.setItem("arcaisys-theme", t), process.env.THEME);
+}
 
 for (const width of widths) {
   for (const route of routes) {
