@@ -71,6 +71,21 @@ confirm or correct, in particular:
   It names no clients, numbers or certifications. Add any only if they are verifiable.
 - **Direction** (About page): growing RestoQR and bringing the other three into production.
 
+### SaaS positioning (added 16 Oct 2026)
+
+The site now presents Arcaisys as a product (SaaS) company, not a development agency, and
+says so explicitly ("we don't take on custom development or consulting work"). Please confirm
+the subscription details in `content/saas.ts`:
+
+- Billing **monthly or annually**; pricing **on request** (no prices are published).
+- Every subscription **includes** hosting and maintenance, continuous updates, onboarding and
+  support, and security (role-based access, encryption, tenant isolation, audit trails).
+- PACS, Hospio and Meridian are offered as **early access** with launch pricing for early
+  subscribers.
+- The new **"Our products and subscriptions"** section of the Terms (auto-renewal, billing in
+  advance, cancellation at period end) — include it in the lawyer review. Your actual customer
+  subscription agreement / order form is a separate document Arcaisys needs to have.
+
 ## 5. ✅ Product screenshots — not needed
 
 Decision (15 Oct 2026): the site presents products through information only. The screenshot

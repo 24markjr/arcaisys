@@ -8,7 +8,7 @@ export const siteConfig = {
   /** The company motto — used in the default page title. */
   tagline: "Intelligent software, built for the real world.",
   description:
-    "Arcaisys builds AI-powered operating systems for hospitality, healthcare and software engineering — RestoQR, PACS, Hospio and Meridian.",
+    "Arcaisys is an AI-powered SaaS company. Its subscription platforms (RestoQR, PACS, Hospio and Meridian) run restaurants, hospitals, imaging centres and engineering teams.",
   locale: "en",
   /** Static so pages stay fully prerendered; update yearly or at launch. */
   copyrightYear: 2026,

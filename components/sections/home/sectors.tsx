@@ -12,7 +12,7 @@ import { Section } from "@/components/ui/section";
 /** The three industries Arcaisys serves, with the products in each. */
 export function Sectors({ index = "04" }: { index?: string }) {
   return (
-    <Section>
+    <Section divided>
       <Grid className="mb-16 gap-y-8 md:mb-20">
         <div className="col-span-4 md:col-span-3">
           <Eyebrow index={index}>Sectors</Eyebrow>

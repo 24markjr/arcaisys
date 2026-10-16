@@ -61,7 +61,7 @@ export const homeCopy = {
   heroHeadline: final("Hero headline", brand.motto),
   heroLead: final(
     "Value proposition",
-    "Arcaisys builds AI-powered operating systems for hospitality, healthcare and software engineering — dependable software for work that can't stop, with intelligence where it measurably helps.",
+    "Arcaisys builds and runs AI-powered software platforms for hospitality, healthcare and software engineering, delivered by subscription and dependable enough for work that can't stop.",
   ),
   introHeading: final("Company statement", brand.statement),
   intro: final(
@@ -70,12 +70,12 @@ export const homeCopy = {
   ),
   portfolioIntro: final(
     "Portfolio introduction",
-    "Each product is built for one industry, designed with the people who use it, and uses AI only where it earns its place.",
+    "Four subscription platforms, each built for one industry's real workflow, with AI only where it earns its place.",
   ),
-  capabilitiesHeading: "AI at the core. Engineering all the way through.",
+  capabilitiesHeading: "One platform beneath every product.",
   capabilitiesIntro: final(
     "Capabilities introduction",
-    "Great AI products are, first, great software. We bring both: the intelligence, and the reliable systems it needs to be useful.",
+    "Every Arcaisys product runs on the same foundation, so every subscriber gets the same reliability, security and intelligence, whichever product they use.",
   ),
   approachHeading: "Practical by design. Intelligent by default.",
   approachIntro: final(
@@ -114,39 +114,39 @@ export const homeCopy = {
   ],
   ctaLine: final(
     "Closing call to action",
-    "Running a restaurant, hospital, imaging centre or engineering team? Tell us where the work slows down — we'll show you what a better system looks like.",
+    "See RestoQR in action, ask about subscription pricing, or register for early access to PACS, Hospio and Meridian.",
   ),
   footerDescriptor: final(
     "Footer descriptor",
-    "AI-powered operating systems for hospitality, healthcare and software engineering.",
+    "AI-powered SaaS platforms for hospitality, healthcare and software engineering.",
   ),
 };
 
-/** What Arcaisys can build — its engineering capabilities. */
+/** The shared platform every Arcaisys product runs on. */
 export const capabilities = [
   {
-    title: "Applied AI",
-    body: "Forecasting, summarisation, triage, computer vision and autonomous agents — built into everyday workflows, not bolted on as a chat box.",
+    title: "AI inside the workflow",
+    body: "Forecasting, summaries, triage and verification built into the screens people already use, not bolted on as a chat box.",
   },
   {
-    title: "Grounded, verifiable intelligence",
+    title: "Verified intelligence",
     body: "AI output is checked against real data, live telemetry and the code itself before anyone acts on it. Confidence is earned, not assumed.",
   },
   {
-    title: "Real-time systems",
+    title: "Real-time by default",
     body: "Sub-second synchronisation for high-pressure environments — kitchens at rush hour, scanning suites mid-study, wards mid-shift.",
   },
   {
-    title: "End-to-end product engineering",
-    body: "Web applications, native mobile apps for staff on the ground, distributed backends and administrative control planes, designed as one system.",
+    title: "Every role, every device",
+    body: "Browser apps for the desk, native apps for staff on the move and a control panel for owners, all on one live record.",
   },
   {
-    title: "Security and auditability",
-    body: "Role-based access, encryption, multi-tenancy and complete audit trails from day one — ready for sensitive, regulated data.",
+    title: "Secure multi-tenant cloud",
+    body: "Role-based access, encryption, tenant isolation and complete audit trails as standard, ready for sensitive, regulated data.",
   },
   {
-    title: "Cloud and on-premise",
-    body: "Run as a hosted multi-tenant service or inside a private network. The data lives where it needs to.",
+    title: "Managed for you",
+    body: "We host, monitor and update every product, so subscribers have nothing to install or maintain. Private deployment is available for those who need it.",
   },
 ];
 
@@ -198,7 +198,7 @@ export const aboutCopy = {
   headline: final("About headline", "Software for work that can't stop."),
   lead: final(
     "About lead",
-    "Arcaisys is an AI-powered software company building complete operating systems for industries where work has to run on time, every time.",
+    "Arcaisys is a product company. We build and run AI-powered software platforms, offered by subscription, for industries where work has to run on time, every time.",
   ),
   origin: final(
     "Why Arcaisys exists",
@@ -214,20 +214,24 @@ export const aboutCopy = {
   ),
   direction: final(
     "Direction",
-    "RestoQR is live today. Our focus now is to grow it, and to bring PACS, Hospio and Meridian from development into production — held to the same standard of verification, and serving clients across India and internationally.",
+    "RestoQR is live today. Our focus now is to grow its subscriber base, and to bring PACS, Hospio and Meridian from development into production, held to the same standard of verification, for customers across India and internationally.",
+  ),
+  model: final(
+    "Business model",
+    "We build and run our own products; we don't take on custom development or consulting work. Every customer subscribes to the same continuously improving platforms, configured for their organisation, so every improvement reaches everyone.",
   ),
 };
 
 export const productsCopy = {
   lead: final(
     "Products lead",
-    "Four operating systems across hospitality, healthcare and software engineering — each built around one industry's real workflow.",
+    "Four subscription platforms across hospitality, healthcare and software engineering, each built around one industry's real workflow.",
   ),
 };
 
 export const contactCopy = {
   lead: final(
     "Contact lead",
-    "Tell us about your operation, or the problem you want solved. A member of our team will reply personally.",
+    "Book a RestoQR demo, ask about subscription pricing, or register for early access to PACS, Hospio or Meridian. A member of our team will reply personally.",
   ),
 };

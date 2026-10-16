@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { Check } from "lucide-react";
+import { breadcrumbJsonLd, pageMetadata, softwareJsonLd } from "@/lib/seo";
+import { subscriptionIncludes, subscriptionModel } from "@/content/saas";
 import { JsonLd } from "@/components/seo/json-ld";
 import { intro } from "@/lib/motion";
 import { getProduct, products } from "@/content/products";
 import type { ProductStatus } from "@/content/types";
 import { ProductLogo, productPlate } from "@/components/brand/product-logo";
 import { cn } from "@/lib/cn";
-import { ButtonLink } from "@/components/ui/button";
+import { ArrowLink, ButtonLink } from "@/components/ui/button";
 import { Container, Grid } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Heading } from "@/components/ui/heading";
@@ -57,6 +59,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
   return (
     <PageTransition>
+      <JsonLd data={softwareJsonLd(product)} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", path: "/" },
@@ -110,9 +113,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 </div>
               </dl>
               <div {...intro(4)} className="mt-12 flex flex-wrap gap-4">
-                <ButtonLink
-                  href={`/contact?interest=${product.slug}`}
-                >{`Enquire about ${product.name}`}</ButtonLink>
+                <ButtonLink href={`/contact?interest=${product.slug}`}>
+                  {product.status === "live" ? "Request pricing" : "Join early access"}
+                </ButtonLink>
                 {product.externalUrl ? (
                   <ButtonLink href={product.externalUrl} variant="secondary" external>
                     {`Open ${product.name}`}
@@ -172,9 +175,56 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         </Grid>
       </Section>
 
+      <Section>
+        <div className="relative overflow-hidden rounded-[4px] border border-line-strong bg-surface">
+          <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-[image:var(--brand-gradient)]" />
+          <Grid className="gap-y-10 p-6 sm:p-8 md:p-12">
+            <div className="col-span-4 md:col-span-12 lg:col-span-6">
+              <Eyebrow index="04">Subscription</Eyebrow>
+              <Heading className="mt-8">
+                {product.status === "live"
+                  ? `${product.name} is available by subscription.`
+                  : `${product.name} is coming soon. Get early access.`}
+              </Heading>
+              <p data-reveal className="mt-6 max-w-[48ch] text-ink-soft">
+                {product.status === "live"
+                  ? `${subscriptionModel.billing}, ${subscriptionModel.pricing.toLowerCase()}.`
+                  : "Register now to be among the first organisations onboarded, with launch pricing for early subscribers."}
+              </p>
+              <div data-reveal className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+                <ButtonLink href={`/contact?interest=${product.slug}`}>
+                  {product.status === "live" ? "Request pricing" : "Join early access"}
+                </ButtonLink>
+                <ArrowLink href="/pricing">How pricing works</ArrowLink>
+              </div>
+            </div>
+            <ul
+              data-reveal="stagger"
+              className="col-span-4 flex flex-col md:col-span-12 lg:col-span-5 lg:col-start-8"
+            >
+              {subscriptionIncludes.map((item) => (
+                <li
+                  key={item.title}
+                  className="flex gap-4 border-t border-line py-5 first:border-t-0 lg:first:pt-0"
+                >
+                  <Check aria-hidden className="mt-1 size-4 shrink-0" style={{ color: product.accent }} />
+                  <span>
+                    <span className="block font-semibold text-ink">{item.title}</span>
+                    <span className="mt-1 block text-small text-ink-soft">{item.body}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Grid>
+        </div>
+      </Section>
+
       <ProductLineup current={product.slug} />
 
-      <ClosingCta title={`Talk to us about ${product.name}.`} interest={product.slug} />
+      <ClosingCta
+        title={product.status === "live" ? `See ${product.name} in action.` : `Be first on ${product.name}.`}
+        interest={product.slug}
+      />
     </PageTransition>
   );
 }

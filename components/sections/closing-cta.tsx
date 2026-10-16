@@ -14,7 +14,7 @@ type ClosingCtaProps = {
 };
 
 /** Dark closing panel shared by every page — the single conversion point. */
-export function ClosingCta({ title = "Start a conversation.", interest }: ClosingCtaProps) {
+export function ClosingCta({ title = "See it in action.", interest }: ClosingCtaProps) {
   const href = interest ? `${contactCta.href}?interest=${interest}` : contactCta.href;
   return (
     <section className="relative overflow-hidden bg-surface-ink text-ink-inverse">

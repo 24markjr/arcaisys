@@ -8,10 +8,11 @@ import { products } from "./products";
  */
 export const primaryNav: NavItem[] = [
   { label: "Products", href: "/products" },
+  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
 ];
 
-export const contactCta: NavItem = { label: "Start a conversation", href: "/contact" };
+export const contactCta: NavItem = { label: "Book a demo", href: "/contact" };
 
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
@@ -22,6 +23,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     title: "Company",
     items: [
       { label: "About", href: "/about" },
+      { label: "Pricing", href: "/pricing" },
       { label: "Contact", href: "/contact" },
     ],
   },

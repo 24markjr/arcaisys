@@ -6,9 +6,9 @@ import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 
 /** How Arcaisys builds. Sticky heading and principle on the left, numbered steps on the right. */
-export function Approach({ index = "04" }: { index?: string }) {
+export function Approach({ index = "04", tone = "alt" }: { index?: string; tone?: "default" | "alt" }) {
   return (
-    <Section tone="alt">
+    <Section tone={tone}>
       <Grid className="gap-y-14">
         <div className="col-span-4 md:col-span-12 lg:col-span-5">
           <div className="lg:sticky lg:top-[calc(var(--header-h)+3rem)]">

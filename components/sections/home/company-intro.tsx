@@ -7,12 +7,12 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Section } from "@/components/ui/section";
 
 /** The company statement, why it exists, and the idea as a diagram. */
-export function CompanyIntro() {
+export function CompanyIntro({ index = "02" }: { index?: string }) {
   return (
     <Section>
       <Grid className="items-center gap-y-12">
         <div className="col-span-4 md:col-span-12 lg:col-span-3 lg:self-start">
-          <Eyebrow index="01">Company</Eyebrow>
+          <Eyebrow index={index}>Why Arcaisys</Eyebrow>
         </div>
         <div className="col-span-4 md:col-span-7 lg:col-span-5">
           <h2 data-reveal-lines className="text-h2 font-medium text-ink">

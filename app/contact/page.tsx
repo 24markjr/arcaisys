@@ -17,14 +17,15 @@ import { PageTransition } from "@/components/motion/page-transition";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
-  description: "Start a conversation with Arcaisys about its products or a project.",
+  description:
+    "Book a demo, ask about subscription pricing or register for early access to Arcaisys products.",
   path: "/contact",
 });
 
 export default function ContactPage() {
   return (
     <PageTransition>
-      <PageHeader eyebrow="Contact" title="Start a conversation." lead={<Copy field={contactCopy.lead} />} />
+      <PageHeader eyebrow="Contact" title="Talk to Arcaisys." lead={<Copy field={contactCopy.lead} />} />
 
       <Section>
         <Grid className="gap-y-16">

@@ -109,14 +109,16 @@ for (let i = 0; i < 40 && !reached; i++) {
   await page.keyboard.press("Tab");
   reached = await page.evaluate(() => {
     const el = document.activeElement;
-    return el?.closest("ol[data-reveal=stagger]") ? el.textContent.trim().slice(0, 30) : null;
+    return el?.closest("ol[data-reveal=stagger], [role=tablist]") ? el.textContent.trim().slice(0, 30) : null;
   });
 }
 check("keyboard: Tab reaches product links below the fold", Boolean(reached), reached ?? "never focused");
 await page.waitForTimeout(1500);
 check(
   "keyboard: focused row is revealed",
-  await page.evaluate(() => Number(getComputedStyle(document.activeElement.closest("li")).opacity) > 0.99),
+  await page.evaluate(
+    () => Number(getComputedStyle(document.activeElement.closest("li, [data-reveal]")).opacity) > 0.99,
+  ),
 );
 await page.close();
 

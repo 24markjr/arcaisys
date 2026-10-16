@@ -8,6 +8,9 @@ import { products } from "@/content/products";
 
 export const interestOptions = [
   ...products.map((product) => ({ value: product.slug, label: product.name })),
+  { value: "pricing", label: "Pricing and subscriptions" },
+  { value: "early-access", label: "Early access" },
+  { value: "partnership", label: "Partnerships" },
   { value: "general", label: "Something else" },
 ] as const;
 

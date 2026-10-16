@@ -36,7 +36,10 @@ export function Eyebrow({
       )}
     >
       {index ? (
-        <span aria-hidden className="text-accent tabular-nums">
+        <span
+          aria-hidden
+          className={cn("tabular-nums", tone === "inverse" ? "text-brand-orange" : "text-accent")}
+        >
           {index}
         </span>
       ) : null}

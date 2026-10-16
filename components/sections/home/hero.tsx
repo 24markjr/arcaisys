@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { brand, homeCopy } from "@/content/company";
 import { products } from "@/content/products";
 import { AscentGraphic } from "@/components/brand/ribbon";
@@ -11,16 +12,38 @@ import { cn } from "@/lib/cn";
 import { intro } from "@/lib/motion";
 
 export function HomeHero() {
+  const live = products.find((product) => product.status === "live" && product.externalUrl);
   return (
     <section className="relative overflow-hidden border-b border-line">
       <div aria-hidden className="blueprint pointer-events-none absolute inset-0" />
       <Container className="relative pt-14 md:pt-24">
         <Grid className="gap-y-14">
           <div className="relative z-10 col-span-4 md:col-span-7 md:pb-24">
-            <Eyebrow index="00" intro={0}>
-              {brand.tagline}
+            {live ? (
+              <a
+                {...intro(0)}
+                href={live.externalUrl ?? undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 rounded-full border border-line-strong bg-surface py-1.5 pr-4 pl-1.5 text-small shadow-[0_10px_30px_-24px_rgb(15_22_34/0.6)] transition-colors duration-(--dur-base) hover:border-ink"
+              >
+                <span className="inline-flex items-center gap-2 rounded-full bg-surface-ink px-2.5 py-1 font-mono text-[0.625rem] tracking-[0.14em] text-ink-inverse uppercase">
+                  <span aria-hidden className="live-dot size-1.5 rounded-full bg-[#22c55e]" />
+                  Live
+                </span>
+                <span className="font-semibold">{live.name} is in production</span>
+                <ArrowUpRight
+                  aria-hidden
+                  strokeWidth={1.75}
+                  className="size-4 text-ink-muted transition-transform duration-(--dur-base) ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+                <span className="sr-only">(opens {live.name})</span>
+              </a>
+            ) : null}
+            <Eyebrow index="00" intro={1} className="mt-10">
+              {`AI-powered SaaS · ${brand.tagline}`}
             </Eyebrow>
-            <h1 {...intro(1, "headline")} className="mt-8 text-display font-semibold">
+            <h1 {...intro(2, "headline")} className="mt-8 text-display font-semibold">
               <Copy field={homeCopy.heroHeadline} />
             </h1>
             <p {...intro(3)} className="mt-8 max-w-[40ch] text-lead text-ink-soft">
@@ -28,7 +51,7 @@ export function HomeHero() {
             </p>
             <div {...intro(4)} className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-5">
               <ButtonLink href="/products">Explore the products</ButtonLink>
-              <ArrowLink href="/contact">Start a conversation</ArrowLink>
+              <ArrowLink href="/contact">Book a demo</ArrowLink>
             </div>
           </div>
 
@@ -58,8 +81,13 @@ export function HomeHero() {
                   className="group flex items-center gap-4 px-5 py-6 md:py-8"
                 >
                   <ProductTile product={product} className="size-11" />
-                  <span className="text-small font-semibold">
-                    <span className="link-underline pb-0.5">{product.name}</span>
+                  <span className="flex min-w-0 flex-col gap-1">
+                    <span className="text-small font-semibold">
+                      <span className="link-underline pb-0.5">{product.name}</span>
+                    </span>
+                    <span className="hidden truncate text-[0.8125rem] text-ink-muted sm:block">
+                      {product.category}
+                    </span>
                   </span>
                 </Link>
               </li>

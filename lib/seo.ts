@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { brand, companyFacts } from "@/content/company";
 import { products } from "@/content/products";
+import type { Product } from "@/content/types";
 import { siteConfig } from "./site";
 
 /**
@@ -48,6 +49,25 @@ export function organizationJsonLd() {
     ...(companyFacts.address ? { address: { "@type": "PostalAddress", ...companyFacts.postalAddress } } : {}),
     ...(companyFacts.linkedin ? { sameAs: [companyFacts.linkedin] } : {}),
     brand: products.map((product) => ({ "@type": "Brand", name: product.name })),
+  };
+}
+
+/** SoftwareApplication structured data for a product page. No price: Arcaisys quotes per customer. */
+export function softwareJsonLd(product: Product) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: product.name,
+    description: product.summary ?? product.headline,
+    applicationCategory: "BusinessApplication",
+    applicationSubCategory: product.category ?? undefined,
+    operatingSystem: "Web",
+    url: `${siteConfig.url}/products/${product.slug}`,
+    publisher: {
+      "@type": "Organization",
+      name: companyFacts.legalName ?? siteConfig.name,
+      url: siteConfig.url,
+    },
   };
 }
 

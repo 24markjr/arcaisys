@@ -148,7 +148,7 @@ export const privacyPolicy: LegalDocument = {
 
 export const termsOfUse: LegalDocument = {
   title: "Terms of use",
-  lastUpdated: "2026-10-15",
+  lastUpdated: "2026-10-16",
   effectiveDate: null,
   reviewed: false,
   intro: [
@@ -158,7 +158,7 @@ export const termsOfUse: LegalDocument = {
     {
       heading: "Using this website",
       items: [
-        "Use the website lawfully and only for its intended purpose: learning about Arcaisys and contacting us.",
+        "Use the website lawfully and only for its intended purpose: learning about Arcaisys and its products and contacting us.",
         "Do not attempt to disrupt, overload or gain unauthorised access to the website or its systems.",
         "Do not send automated or bulk submissions through the enquiry form.",
       ],
@@ -172,7 +172,21 @@ export const termsOfUse: LegalDocument = {
     {
       heading: "Information on this website",
       paragraphs: [
-        "The website describes Arcaisys and its products for general information. It is not an offer or a contract. Product features and availability may change, and use of any product is governed by a separate agreement.",
+        "The website describes Arcaisys and its products for general information. It is not an offer or a contract. Product features and availability may change.",
+      ],
+    },
+    {
+      heading: "Our products and subscriptions",
+      paragraphs: [
+        "Arcaisys products (RestoQR, PACS, Hospio and Meridian) are provided as software as a service, on a subscription basis. They are not sold as licences or as custom development.",
+      ],
+      items: [
+        "Use of a product is governed by the subscription agreement or order form for that product, together with any product terms accepted in the product itself. Where those differ from these terms, they take precedence for the product.",
+        "Subscriptions are billed in advance for the agreed period, monthly or annually, at the price stated in your order. Taxes are charged as applicable.",
+        "Unless your agreement says otherwise, a subscription renews automatically for the same period until cancelled before the renewal date. Cancellation takes effect at the end of the paid period.",
+        "We host, maintain and update the products. Updates are included in the subscription and may change or improve features over time.",
+        "You remain responsible for the data you put into a product and for the people you give access to it. We process that data only to provide the service, as set out in your agreement.",
+        "Products described as “in development” or offered as “early access” are not yet generally available. Registering interest does not create a subscription or any obligation for either party.",
       ],
     },
     {
