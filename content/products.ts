@@ -12,9 +12,9 @@ export const products: Product[] = [
     tagline: "Scan. Order. Serve. Grow.",
     headline: "The operating system for the modern restaurant.",
     sector: "Hospitality",
-    category: "Restaurant operations",
+    category: "Restaurant operations SaaS",
     summary:
-      "A complete restaurant operating system that unites guests, floor staff, kitchen crews and owners on one real-time, multi-tenant platform. Guests order from a QR code at the table, the kitchen sees tickets instantly, staff run the floor, and owners watch the business live.",
+      "A complete restaurant operating system, delivered as a SaaS product, that unites guests, floor staff, kitchen crews and owners on one real-time, multi-tenant platform. Guests order from a QR code at the table, the kitchen sees tickets instantly, staff run the floor, and owners watch the business live.",
     audience: "Restaurants, cafés, cloud kitchens, food courts and multi-outlet dining chains.",
     problem:
       "During a rush, orders are shouted, re-keyed and lost between the table, the pass and the till. Owners see the night's numbers only after it is over. RestoQR replaces those hand-offs with one live system that every role works from.",
@@ -57,9 +57,9 @@ export const products: Product[] = [
     tagline: "Capture. Store. View. Report.",
     headline: "Imaging infrastructure for modern diagnostics.",
     sector: "Healthcare",
-    category: "Medical imaging",
+    category: "Medical imaging SaaS",
     summary:
-      "A browser-based picture archiving and communication system that connects imaging equipment, radiologists, referring physicians and patients through a single, secure imaging workflow.",
+      "A browser-based picture archiving and communication system, delivered as a SaaS product, that connects imaging equipment, radiologists, referring physicians and patients through a single, secure imaging workflow.",
     audience: "Diagnostic imaging centres, hospitals, radiology chains and teleradiology providers.",
     problem:
       "Studies sit on scanner workstations, reports travel by courier and CD, and referring doctors wait. PACS moves every study from the modality to the radiologist, the physician and the patient — securely, in the browser.",
@@ -102,9 +102,9 @@ export const products: Product[] = [
     tagline: "Admit. Care. Heal.",
     headline: "The operating system for the modern hospital.",
     sector: "Healthcare",
-    category: "Hospital management",
+    category: "Hospital management SaaS",
     summary:
-      "An AI-assisted hospital management system that brings clinical care, beds, billing and operations into one synchronised record — so care teams spend less time on paperwork and more time with patients.",
+      "An AI-assisted hospital management system, delivered as a SaaS product, that brings clinical care, beds, billing and operations into one synchronised record — so care teams spend less time on paperwork and more time with patients.",
     audience: "Multi-specialty hospitals, nursing homes, clinics and healthcare networks.",
     problem:
       "Admissions run on phone calls, bed status lives on a whiteboard, and a patient's history is split across departments. Hospio gives every team the same live picture, from registration to discharge.",
@@ -147,9 +147,9 @@ export const products: Product[] = [
     tagline: "Ask. Verify. Trust.",
     headline: "AI engineering answers you can verify.",
     sector: "Software engineering",
-    category: "Developer tools",
+    category: "Developer tools SaaS",
     summary:
-      "An evidence-grounded AI engineering assistant. Meridian answers questions about your codebase, then checks every claim against the code, dependency manifests, database schema and live runtime telemetry before you read it.",
+      "An evidence-grounded AI engineering assistant, offered as a SaaS product by subscription. Meridian answers questions about your codebase, then checks every claim against the code, dependency manifests, database schema and live runtime telemetry before you read it.",
     audience:
       "Software engineering teams, platform and SRE engineers, AI-assisted developers and code reviewers.",
     problem:

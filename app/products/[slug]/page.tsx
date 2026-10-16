@@ -106,6 +106,10 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                   <dd className="mt-2 font-semibold">{product.category ?? <Pending need="Category" />}</dd>
                 </div>
                 <div>
+                  <dt className="font-mono text-label text-ink-muted uppercase">Model</dt>
+                  <dd className="mt-2 font-semibold">SaaS · subscription</dd>
+                </div>
+                <div>
                   <dt className="font-mono text-label text-ink-muted uppercase">Status</dt>
                   <dd className="mt-2 font-semibold">
                     {status ?? <Pending need="Live / pilot / in development" />}

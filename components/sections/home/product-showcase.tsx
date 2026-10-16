@@ -111,7 +111,9 @@ export function ProductShowcase() {
         >
           <div className="flex flex-col">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-              <span className="font-mono text-label text-ink-muted uppercase">{product.sector} · SaaS</span>
+              <span className="font-mono text-label text-ink-muted uppercase">
+                {product.sector} · SaaS product
+              </span>
               <StatusBadge status={product.status} />
             </div>
             <h3 className="mt-6 text-[clamp(1.625rem,1.3rem+1vw,2.25rem)] leading-[1.1] font-semibold tracking-[-0.025em]">
